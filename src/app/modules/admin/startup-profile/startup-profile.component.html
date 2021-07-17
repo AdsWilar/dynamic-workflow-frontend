@@ -1,0 +1,51 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="dark bg-card dark:border-b">
+        <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
+            <div class="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 my-8 sm:my-12">
+                <!-- Avatar and name -->
+                <div class="flex flex-auto items-center min-w-0">
+                    <div class="flex-0 w-16 h-16 rounded-full overflow-hidden">
+                        <img class="w-full h-full object-cover"
+                             src="../../../../assets/images/avatars/brian-hughes.jpg">
+                    </div>
+                    <div class="flex flex-col min-w-0 ml-4">
+                        <div class="text-2xl md:text-5xl font-semibold tracking-tight leading-7 md:leading-10 truncate">
+                            Información del usuario
+                        </div>
+                        <div class="flex items-center">
+                            <div class="ml-1.5 leading-6 truncate text-secondary" *ngIf="userData.names">
+                                <span class="leading-none">Nombre: {{userData | userFullName}}</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="ml-1.5 leading-6 truncate text-secondary">
+                                <span class="leading-none">Correo: {{userData.email}}</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="ml-1.5 leading-6 truncate text-secondary">
+                                <span class="leading-none">Teléfono: {{userData.phone}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Actions -->
+                <div class="flex items-center mt-6 sm:mt-0 sm:ml-2 space-x-3">
+                    <button class="fuse-mat-button-rounded bg-accent-600" mat-flat-button [color]="'accent'">
+                        <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:pencil'">
+                        </mat-icon>
+                        <span class="ml-2">Editar perfil</span>
+                    </button>
+                    <button class="fuse-mat-button-rounded" mat-flat-button [color]="'primary'">
+                        <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:lock-closed'">
+                        </mat-icon>
+                        <span class="ml-2">Editar contraseña</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
