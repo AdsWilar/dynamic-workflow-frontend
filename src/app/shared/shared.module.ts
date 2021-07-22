@@ -2,10 +2,15 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {UserFullNamePipe} from '../pipes/user-full-name.pipe';
+import {UserStatusPipe} from '../pipes/user-status.pipe';
+import {RoleNamePipe} from '../pipes/role-name.pipe';
+import {Toaster} from './toaster';
 
 @NgModule({
     declarations: [
-        UserFullNamePipe
+        UserFullNamePipe,
+        UserStatusPipe,
+        RoleNamePipe
     ],
     imports: [
         CommonModule,
@@ -16,7 +21,12 @@ import {UserFullNamePipe} from '../pipes/user-full-name.pipe';
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        UserFullNamePipe
+        UserFullNamePipe,
+        UserStatusPipe,
+        RoleNamePipe
+    ],
+    providers: [
+        Toaster
     ]
 })
 export class SharedModule {
