@@ -47,6 +47,7 @@ export class LogInComponent implements OnInit {
             username: this.logInForm.value.username,
             password: this.logInForm.value.password
         };
+        
         this.accessService.logIn(accessRequest).subscribe((response) => {
             if (response.success) {
                 this.authManager.setAuthData(response.data);
