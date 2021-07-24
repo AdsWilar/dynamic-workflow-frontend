@@ -5,12 +5,16 @@ import {UserFullNamePipe} from '../pipes/user-full-name.pipe';
 import {UserStatusPipe} from '../pipes/user-status.pipe';
 import {RoleNamePipe} from '../pipes/role-name.pipe';
 import {Toaster} from './toaster';
+import {DepartmentStatusPipe} from '../pipes/department-status.pipe';
+import {UserFullInfoPipe} from '../pipes/user-full-info.pipe';
 
 @NgModule({
     declarations: [
         UserFullNamePipe,
         UserStatusPipe,
-        RoleNamePipe
+        RoleNamePipe,
+        DepartmentStatusPipe,
+        UserFullInfoPipe
     ],
     imports: [
         CommonModule,
@@ -23,7 +27,9 @@ import {Toaster} from './toaster';
         ReactiveFormsModule,
         UserFullNamePipe,
         UserStatusPipe,
-        RoleNamePipe
+        RoleNamePipe,
+        DepartmentStatusPipe,
+        UserFullInfoPipe
     ],
     providers: [
         Toaster

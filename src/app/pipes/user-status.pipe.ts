@@ -3,6 +3,7 @@ import {UserStatus} from '../shared/types/user-status.type';
 
 @Pipe({name: 'userStatus'})
 export class UserStatusPipe implements PipeTransform {
+
     transform(userStatus: UserStatus): string {
         switch (userStatus) {
             case 'ENABLED':
@@ -13,4 +14,5 @@ export class UserStatusPipe implements PipeTransform {
                 return 'RESTAURAR CONTRASEÑA';
         }
     }
+
 }
