@@ -13,6 +13,7 @@ import {RoleService} from '../../../services/role-service.service';
 export class RoleComponent implements OnInit {
     roles: RoleResponse[] = [];
 
+    // updateListRoles: void = this.updateListRoles;
     constructor(private dialog: MatDialog, private rolesService: RoleService) {
     }
 
@@ -22,7 +23,6 @@ export class RoleComponent implements OnInit {
 
     private listRoles(): void {
         this.rolesService.getAllRoles().subscribe(resp => {
-            console.log(resp);
             this.roles = resp.data;
         });
     }
@@ -31,7 +31,7 @@ export class RoleComponent implements OnInit {
         // this.dialog.open();
     }
 
-    openDialog(): void {
+    newRoleDialog(): void {
         this.dialog.open(NewRoleComponent, {
             data: {
                 onRoleCreated: this.onRoleCreated
@@ -42,5 +42,10 @@ export class RoleComponent implements OnInit {
     onRoleCreated = (): void => {
         this.listRoles();
     }
+
+    updateListRoles = () => {
+        this.listRoles();
+    }
+
 
 }

@@ -23,7 +23,6 @@ export class UserComponent implements OnInit {
 
     private listUsers(): void {
         this.userService.getAllUsers().subscribe(resp => {
-            console.log(resp);
             this.users = resp.data;
         });
     }
@@ -38,6 +37,10 @@ export class UserComponent implements OnInit {
 
     onUserCreated = (): void => {
         this.listUsers();
-    }
+    };
+
+    updateListUser = () => {
+        this.listUsers();
+    };
 
 }

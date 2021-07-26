@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 import {FuseAlertType} from '@fuse/components/alert';
 import {Action} from 'app/interfaces/action.interface';
 import {RoleRequest} from 'app/interfaces/requests/role-request.interface';
-import {RoleWithActionsIdRequest} from 'app/interfaces/requests/role-with-actions-id-request.interface';
+import {CompleteRoleRequest} from 'app/interfaces/requests/complete-role-request.interface';
 import {ActionService} from 'app/services/action-service.service';
 import {RoleService} from 'app/services/role-service.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
@@ -16,8 +16,6 @@ import {FuseAnimations} from '../../../../../@fuse/animations';
 })
 export class NewRoleComponent implements OnInit {
     @ViewChild('newRoleNgForm') newRoleNgForm: NgForm;
-    @Input()
-    onRoleCreated: void;
     showAlert: boolean = false;
     newRoleForm: FormGroup;
     alert: { type: FuseAlertType, message: string } = {
@@ -55,7 +53,7 @@ export class NewRoleComponent implements OnInit {
             name: this.newRoleForm.value.name,
             description: this.newRoleForm.value.description
         };
-        const roleWithActionsIdRequest: RoleWithActionsIdRequest = {
+        const roleWithActionsIdRequest: CompleteRoleRequest = {
             role: roleRequest,
             actionsId: this.actionsId
         };

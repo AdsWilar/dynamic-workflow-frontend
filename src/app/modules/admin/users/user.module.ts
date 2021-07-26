@@ -18,12 +18,14 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatInputModule} from '@angular/material/input';
 import {MatOptionModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
+import {EditUserComponent} from './edit-user/edit-user.component';
 
 @NgModule({
     declarations: [
         UserComponent,
         ListUserComponent,
-        NewUserComponent
+        NewUserComponent,
+        EditUserComponent
     ],
     imports: [
         RouterModule.forChild(userRoutes),

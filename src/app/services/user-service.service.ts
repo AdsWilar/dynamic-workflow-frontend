@@ -35,4 +35,8 @@ export class UserService {
         return this.baseService.get<UserResponse[]>(this.USERS_PATH + 'all');
     }
 
+    public getUserActionByUserId(userId: number): Observable<GeneralResponse<UserActionResponse>>{
+        return this.baseService.get<UserActionResponse>(this.USERS_PATH + userId + '/actions');
+    }
+
 }

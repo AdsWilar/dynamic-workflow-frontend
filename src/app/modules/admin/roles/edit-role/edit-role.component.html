@@ -13,7 +13,7 @@
                 {{alert.message}}
             </fuse-alert>
 
-            <form class="mt-8" [formGroup]="editRoleForm" #newRoleNgForm="ngForm">
+            <form class="mt-8" [formGroup]="editRoleForm" #editRoleNgForm="ngForm">
 
                 <mat-form-field class="w-full">
                     <mat-label>Nombre</mat-label>
@@ -34,17 +34,16 @@
                 <mat-divider class="my-2"></mat-divider>
 
 
-
                 <div class="inline-flex items-end w-full mt-1.5">
                     <div class="flex flex-col">
                         <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0"> Listado
                             de
                             acciones</span>
 
-                        <div *ngFor="let action of actions">
-                            <mat-checkbox class="mb-2" [checked]="false" [color]="'primary'"
-                                          (change)="checkAction($event, action.id)">
-                                {{action.description}}
+                        <div *ngFor="let actionChecked of actionsChecked">
+                            <mat-checkbox class="mb-2" [checked]="actionChecked.isChecked" [color]="'primary'"
+                                          (change)="checkAction($event, actionChecked.action.id)">
+                                {{actionChecked.action.description}}
                             </mat-checkbox>
 
                         </div>
@@ -64,8 +63,8 @@
                 Cerrar
             </span>
         </button>
-        <button mat-flat-button [color]="'primary'" [disabled]="editRoleForm.disabled || actionsId.length==0"
-                (click)="registerNewRole() " style="float: right;">
+        <button mat-flat-button [color]="'primary'" [disabled]="editRoleForm.disabled || thereIsNoActionChecked()"
+                (click)="editNewRole() " style="float: right;">
             <span *ngIf="!editRoleForm.disabled">
                 Editar
             </span>

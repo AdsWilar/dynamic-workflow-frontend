@@ -12,7 +12,7 @@ import {UserStatus} from '../../../../shared/types/user-status.type';
 import {RoleResponse} from '../../../../interfaces/responses/role-response.interface';
 import {RoleService} from '../../../../services/role-service.service';
 import {MatSelectChange} from '@angular/material/select';
-import {UserActionChecked} from '../../../../interfaces/data/user-action-checked.interface';
+import {DataActionChecked} from '../../../../interfaces/data/data-action-checked.interface';
 import {Toaster} from '../../../../shared/toaster';
 import {UserActionResponse} from '../../../../interfaces/responses/user-action-response.interface';
 
@@ -33,7 +33,7 @@ export class NewUserComponent implements OnInit {
     };
     userStatuses: UserStatus[] = ['ENABLED', 'DISABLED', 'RESTORE_PASSWORD'];
     roles: RoleResponse[] = [];
-    actionsChecked: UserActionChecked[] = [];
+    actionsChecked: DataActionChecked[] = [];
 
 
     constructor(private formBuilder: FormBuilder, private actionService: ActionService, private userService: UserService,
@@ -134,7 +134,7 @@ export class NewUserComponent implements OnInit {
                     }
                 }
                 if (containAction === false) {
-                    const actionChecked: UserActionChecked = {
+                    const actionChecked: DataActionChecked = {
                         action: action,
                         isChecked: false
                     };
@@ -145,7 +145,7 @@ export class NewUserComponent implements OnInit {
     }
 
     private purgeUncheckedActions(): void {
-        const userActionChecked: UserActionChecked[] = [];
+        const userActionChecked: DataActionChecked[] = [];
         for (const actionChecked of this.actionsChecked) {
             if (actionChecked.isChecked === true) {
                 userActionChecked.push(actionChecked);

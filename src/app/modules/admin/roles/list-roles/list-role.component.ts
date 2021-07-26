@@ -5,6 +5,7 @@ import {RoleResponse} from 'app/interfaces/responses/role-response.interface';
 import {RoleService} from 'app/services/role-service.service';
 import {ViewRoleActionComponent} from '../view-role-actions/view-role-actions.component';
 import {EditRoleComponent} from '../edit-role/edit-role.component';
+import {MainRoles} from '../../../../shared/constans';
 
 @Component({
     selector: 'list-role',
@@ -15,8 +16,10 @@ export class ListRoleComponent implements OnInit {
     displayedColumns: string[] = ['name', 'description', 'actions', 'options'];
     @Input()
     roles: RoleResponse[];
+    @Input()
+    updateListRoles;
 
-    constructor(private router: Router, private dialog: MatDialog, private rolesService: RoleService) {
+    constructor(private router: Router, private dialog: MatDialog) {
 
     }
 
@@ -24,19 +27,10 @@ export class ListRoleComponent implements OnInit {
 
     }
 
-
-    onGoToEdit(item: any): void {
-        this.router.navigate(['role/edit']);
-    }
-
-    onGoToDelete(item: any): void {
-        alert('Eliminardo');
-    }
-
     viewRoleActionsDialog(roleId: number): void {
         this.dialog.open(ViewRoleActionComponent, {
             data: {
-               roleId: roleId
+                roleId: roleId
             }
         });
     }
@@ -44,23 +38,19 @@ export class ListRoleComponent implements OnInit {
     editRoleDialog(roleId: number): void {
         this.dialog.open(EditRoleComponent, {
             data: {
-                roleId: roleId
+                roleId: roleId,
+                onRoleEdited: this.onRoleEdited
             }
         });
     }
 
-
-    showRoleActions(roleId: number): void {
-        //   this.rolesService.getRoleActionsByRoleId(roleId).subscribe(resp => {s
-        //     console.log(resp);
-        //     let action: Action[] = resp.data.actions;
-        //     this.dialog.open(ViewRoleComponent, {
-        //       data: {
-        //         actions: action
-        //       }
-        //     });
-        //   })
-
+    isMainRole(roleName: string): boolean {
+        return MainRoles.includes(roleName);
     }
+
+    onRoleEdited = (): void => {
+        this.updateListRoles();
+    }
+
 
 }

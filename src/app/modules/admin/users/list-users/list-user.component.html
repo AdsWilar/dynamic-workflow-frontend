@@ -41,7 +41,7 @@
         <ng-container matColumnDef="options">
             <th mat-header-cell *matHeaderCellDef style="font-size: 100%;"> Operaciones </th>
             <td mat-cell *matCellDef="let element" class="btn-group d-none d-sm-block">
-                <button mat-icon-button color="accent">
+                <button mat-icon-button color="accent" (click)="editUserDialog(element.id)">
                     <mat-icon class="icon-size-5" [svgIcon]="'feather:edit-2'"></mat-icon>
                 </button>
 

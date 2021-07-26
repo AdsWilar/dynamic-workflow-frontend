@@ -18,14 +18,14 @@
                     <!-- Actions -->
                     <div class="mt-4 sm:mt-0">
                         <!-- Upload button -->
-                        <button mat-flat-button [color]="'primary'" (click)="openDialog()">
+                        <button mat-flat-button [color]="'primary'" (click)="newRoleDialog()">
                             <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
                             <span class="ml-2 mr-1">Nuevo rol</span>
                         </button>
                     </div>
                 </div>
 
-                <list-role [roles]="roles"></list-role>
+                <list-role [roles]="roles" [updateListRoles]="updateListRoles"></list-role>
 
             </div>
 
