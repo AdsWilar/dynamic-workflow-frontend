@@ -1,32 +1,31 @@
-import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {FuseAnimations} from '../../../../../@fuse/animations';
 import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 import {FuseAlertType} from '../../../../../@fuse/components/alert';
-import {Action} from '../../../../interfaces/action.interface';
-import {ActionService} from '../../../../services/action-service.service';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {UserService} from '../../../../services/user-service.service';
-import {UserRequest} from '../../../../interfaces/requests/user-request.interface';
-import {CompleteUserRequest} from '../../../../interfaces/requests/complete-user-request.interface';
 import {UserStatus} from '../../../../shared/types/user-status.type';
 import {RoleResponse} from '../../../../interfaces/responses/role-response.interface';
+import {DataActionChecked} from '../../../../interfaces/data/data-action-checked.interface';
+import {ActionService} from '../../../../services/action-service.service';
+import {UserService} from '../../../../services/user-service.service';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {RoleService} from '../../../../services/role-service.service';
 import {MatSelectChange} from '@angular/material/select';
-import {DataActionChecked} from '../../../../interfaces/data/data-action-checked.interface';
-import {Toaster} from '../../../../shared/toaster';
+import {Action} from '../../../../interfaces/action.interface';
+import {UserResponse} from '../../../../interfaces/responses/user-response.interface';
+import {UserRequest} from '../../../../interfaces/requests/user-request.interface';
+import {CompleteUserRequest} from '../../../../interfaces/requests/complete-user-request.interface';
 import {UserActionResponse} from '../../../../interfaces/responses/user-action-response.interface';
 
 @Component({
-    selector: 'new-user',
-    templateUrl: './new-user.component.html',
+    selector: 'edit-user',
+    templateUrl: './edit-user.component.html',
     animations: FuseAnimations
 })
-export class NewUserComponent implements OnInit {
-    @ViewChild('newUserNgForm') newUserNgForm: NgForm;
-    @Input()
-    onUserCreated: void;
+export class EditUserComponent implements OnInit {
+    @ViewChild('editUserNgForm') editUserNgForm: NgForm;
+
     showAlert: boolean = false;
-    newUserForm: FormGroup;
+    editUserForm: FormGroup;
     alert: { type: FuseAlertType, message: string } = {
         type: 'success',
         message: ''
@@ -37,16 +36,16 @@ export class NewUserComponent implements OnInit {
 
 
     constructor(private formBuilder: FormBuilder, private actionService: ActionService, private userService: UserService,
-                @Inject(MAT_DIALOG_DATA) private data: any, private dialogRef: MatDialogRef<NewUserComponent>,
-                private roleService: RoleService, private toaster: Toaster) {
+                @Inject(MAT_DIALOG_DATA) private data: any, private dialogRef: MatDialogRef<EditUserComponent>,
+                private roleService: RoleService) {
     }
 
     ngOnInit(): void {
 
-        this.newUserForm = this.formBuilder.group({
+        this.editUserForm = this.formBuilder.group({
             username: ['', Validators.required],
-            password: ['', Validators.required],
-            passwordConfirmation: ['', Validators.required],
+            password: [''],
+            passwordConfirmation: [''],
             status: ['ENABLED', Validators.required],
             names: ['', Validators.required],
             firstSurname: ['', Validators.required],
@@ -56,46 +55,72 @@ export class NewUserComponent implements OnInit {
             identificationNumber: ['', Validators.required]
         });
 
+        const userId: number = this.data.userId;
+        this.userService.getUserActionByUserId(userId).subscribe((response) => {
+            const user: UserResponse = response.data.user;
+            console.log(user);
+            this.editUserForm.patchValue({
+                username: user.username,
+                status: user.status,
+                names: user.names,
+                firstSurname: user.firstSurname,
+                secondSurname: user.secondSurname,
+                email: user.email,
+                phone: user.phone,
+                identificationNumber: user.identificationNumber
+            });
+            this.loadActionsChecked(response.data.actions);
+            // const userActions: Action[] = response.data.actions;
+        });
+
         this.roleService.getAllRoles().subscribe((response) => {
             this.roles = response.data;
         });
 
     }
 
-    registerNewUser(): void {
-        if (this.newUserForm.invalid) {
+    private loadActionsChecked(actions: Action[]): void {
+        for (const action of actions) {
+            const actionChecked: DataActionChecked = {
+                action: action,
+                isChecked: true
+            };
+            this.actionsChecked.push(actionChecked);
+        }
+    }
+
+
+    editUser(): void {
+        if (this.editUserForm.invalid) {
             return;
         }
-        this.newUserForm.disable();
+        this.editUserForm.disable();
         this.showAlert = false;
         const userRequest: UserRequest = {
-            username: this.newUserForm.value.username,
-            password: this.newUserForm.value.password,
-            passwordConfirmation: this.newUserForm.value.passwordConfirmation,
-            status: this.newUserForm.value.status,
-            names: this.newUserForm.value.names,
-            firstSurname: this.newUserForm.value.firstSurname,
-            secondSurname: this.newUserForm.value.secondSurname,
-            email: this.newUserForm.value.email,
-            phone: this.newUserForm.value.phone,
-            identificationNumber: this.newUserForm.value.identificationNumber
+            username: this.editUserForm.value.username,
+            status: this.editUserForm.value.status,
+            names: this.editUserForm.value.names,
+            firstSurname: this.editUserForm.value.firstSurname,
+            secondSurname: this.editUserForm.value.secondSurname,
+            email: this.editUserForm.value.email,
+            phone: this.editUserForm.value.phone,
+            identificationNumber: this.editUserForm.value.identificationNumber
 
         };
+
         const actionsId: number[] = this.getActionsIdChecked();
         const completeUserRequest: CompleteUserRequest = {
             user: userRequest,
             actionsId: actionsId
         };
-        this.userService.registerUser(completeUserRequest).subscribe((response) => {
-            this.newUserForm.enable();
-            this.newUserNgForm.resetForm();
+        const userId: number = this.data.userId;
+        this.userService.updateUser(userId, completeUserRequest).subscribe((response) => {
+            this.editUserForm.enable();
+            this.editUserNgForm.resetForm();
             const message: string = response.message;
-            const data: UserActionResponse = response.data;
             if (response.success) {
-                // this.toaster.success(message, data, 'Usuarios');
-                this.data.onUserCreated();
+                this.data.onUserEdited();
                 this.dialogRef.close();
-                // return;
             } else {
                 this.alert = {
                     type: 'error',
@@ -104,7 +129,6 @@ export class NewUserComponent implements OnInit {
                 this.showAlert = true;
 
             }
-            // this.toaster.error(message, data, 'Usuarios');
 
         });
 

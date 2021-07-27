@@ -4,7 +4,7 @@ import {RoleResponse} from '../interfaces/responses/role-response.interface';
 import {GeneralResponse} from '../interfaces/general-response.interface';
 import {Observable} from 'rxjs';
 import {Config} from '../core/config/config';
-import {RoleWithActionsIdRequest} from '../interfaces/requests/role-with-actions-id-request.interface';
+import {CompleteRoleRequest} from '../interfaces/requests/complete-role-request.interface';
 import {RoleActionResponse} from '../interfaces/responses/role-action-response.interface';
 import {UpdateRoleActionsRequest} from '../interfaces/requests/update-role-actions-request.interface';
 
@@ -19,12 +19,12 @@ export class RoleService {
         console.log('Servicio de Roles.');
     }
 
-    public registerRole(request: RoleWithActionsIdRequest): Observable<GeneralResponse<RoleActionResponse>> {
-        return this.baseService.post<RoleWithActionsIdRequest, RoleActionResponse>(this.ROLES_PATH, request);
+    public registerRole(request: CompleteRoleRequest): Observable<GeneralResponse<RoleActionResponse>> {
+        return this.baseService.post<CompleteRoleRequest, RoleActionResponse>(this.ROLES_PATH, request);
     }
 
-    public updateRole(request: RoleWithActionsIdRequest, id: number): Observable<GeneralResponse<RoleActionResponse>> {
-        return this.baseService.post<RoleWithActionsIdRequest, RoleActionResponse>(this.ROLES_PATH + id, request);
+    public updateRole(request: CompleteRoleRequest, id: number): Observable<GeneralResponse<RoleActionResponse>> {
+        return this.baseService.post<CompleteRoleRequest, RoleActionResponse>(this.ROLES_PATH + id, request);
     }
 
     public updateRoleActions(request: UpdateRoleActionsRequest,

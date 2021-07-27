@@ -27,12 +27,20 @@ export class UserService {
         return this.baseService.post<CompleteUserRequest, UserActionResponse>(this.USERS_PATH, request);
     }
 
+    public updateUser(userId: number, request: CompleteUserRequest): Observable<GeneralResponse<UserActionResponse>> {
+        return this.baseService.post<CompleteUserRequest, UserActionResponse>(this.USERS_PATH + userId, request);
+    }
+
     public getCurrentUser(): Observable<GeneralResponse<UserResponse>> {
         return this.baseService.get<UserResponse>(this.USERS_PATH + 'current');
     }
 
     public getAllUsers(): Observable<GeneralResponse<UserResponse[]>> {
         return this.baseService.get<UserResponse[]>(this.USERS_PATH + 'all');
+    }
+
+    public getUserActionByUserId(userId: number): Observable<GeneralResponse<UserActionResponse>>{
+        return this.baseService.get<UserActionResponse>(this.USERS_PATH + userId + '/actions');
     }
 
 }

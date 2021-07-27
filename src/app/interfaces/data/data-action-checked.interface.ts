@@ -1,6 +1,6 @@
 import {Action} from '../action.interface';
 
-export interface UserActionChecked {
+export interface DataActionChecked {
 
     action: Action;
     isChecked: boolean;
