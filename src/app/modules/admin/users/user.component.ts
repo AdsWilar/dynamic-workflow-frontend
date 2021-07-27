@@ -39,7 +39,7 @@ export class UserComponent implements OnInit {
         this.listUsers();
     };
 
-    updateListUser = () => {
+    updateListUser = (): void => {
         this.listUsers();
     };
 

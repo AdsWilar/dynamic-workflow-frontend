@@ -31,7 +31,7 @@
             <th mat-header-cell *matHeaderCellDef style="font-size: 100%;"> Acciones del usuario </th>
             <td mat-cell *matCellDef="let element">
 
-                <button mat-icon-button color="primary">
+                <button mat-icon-button color="primary"  (click)="viewUserActionsDialog(element.id)">
                     <mat-icon class="icon-size-5" [svgIcon]="'feather:eye'"></mat-icon>
                 </button>
 

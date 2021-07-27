@@ -5,6 +5,8 @@ import { UserResponse } from 'app/interfaces/responses/user-response.interface';
 import { UserService } from 'app/services/user-service.service';
 import {EditRoleComponent} from '../../roles/edit-role/edit-role.component';
 import {EditUserComponent} from '../edit-user/edit-user.component';
+import {ViewRoleActionComponent} from '../../roles/view-role-actions/view-role-actions.component';
+import {ViewUserActionComponent} from '../view-user/view-user-actions.component';
 
 @Component({
     selector: 'list-user',
@@ -25,16 +27,23 @@ import {EditUserComponent} from '../edit-user/edit-user.component';
     ngOnInit(): void {
 
     }
+    viewUserActionsDialog(userId: number): void {
+        this.dialog.open(ViewUserActionComponent, {
+            data: {
+                userId: userId
+            }
+        });
+    }
 
     editUserDialog(userId: number): void {
         this.dialog.open(EditUserComponent, {
             data: {
                 userId: userId,
-                onRoleEdited: this.onRoleEdited
+                onUserEdited: this.onUserEdited
             }
         });
     }
-    onRoleEdited = (): void => {
+    onUserEdited = (): void => {
         this.updateListUser();
     }
 }
