@@ -53,7 +53,10 @@ import { coreFeaturesRoutes } from 'app/modules/admin/docs/core-features/core-fe
         FindByKeyComponent,
         MustMatchComponent
     ],
-    imports     : [
+    exports: [
+        CardComponent
+    ],
+    imports: [
         RouterModule.forChild(coreFeaturesRoutes),
         MatButtonModule,
         MatIconModule,

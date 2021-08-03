@@ -1,0 +1,297 @@
+<div class="contenedor">
+
+    <!-- Card #56 -->
+    <fuse-card class="flex flex-col max-w-80 w-full md:max-w-192 cardFuse">
+        <form>
+            <div class="flex-auto p-6 sm:p-10">
+                <div class="flex flex-wrap -m-4">
+                    <div class="flex flex-col max-w-80 w-full " style="margin: 16px;">
+                          <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">
+                              Pregunta
+                         </span>
+                        <mat-form-field>
+                            <input matInput>
+                        </mat-form-field>
+                        <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">
+                              Descripción
+                         </span>
+                        <mat-form-field>
+                            <input matInput>
+                        </mat-form-field>
+                    </div>
+
+                    <!-- Seleccionee un componente-->
+                    <div class="flex flex-col max-w-80 w-full " style="margin: 16px;">
+                    <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">
+                        Seleccione un componente
+                      </span>
+                        <mat-form-field>
+
+                            <mat-select (selectionChange)="onSelectInputType($event)">
+                                <ng-container *ngFor="let inputType of inputTypes">
+                                    <mat-option [value]="inputType">
+                                        {{inputType.name | inputTypeName}}
+                                    </mat-option>
+                                </ng-container>
+                            </mat-select>
+                        </mat-form-field>
+
+                    </div>
+
+                    <!-- TEXT-->
+
+                    <div class="flex flex-col max-w-80 w-full" style="margin: 16px;"
+                         *ngIf="inputTypeSelected?.name == 'TEXT'">
+                          <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">
+                              Texto
+                         </span>
+                        <mat-form-field>
+                            <input matInput disabled class="input">
+                        </mat-form-field>
+                    </div>
+
+                    <!-- MULTIPLE_CHOICE-->
+                    <div class="flex flex-col max-w-80 w-full " style="margin: 16px;"
+                         *ngIf="inputTypeSelected?.name == 'MULTIPLE_CHOICE'">
+                        <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">Opción  múltiple</span>
+                        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+                            <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+                                <mat-form-field class="flex flex-col max-w-50 w-full " style="margin: 10px;"
+                                                (change)="todoLeafItemSelectionToggle(node)">
+                                    {{node.item}}
+                                    <input matInput disabled>
+                                </mat-form-field>
+                                <div class="flex justify-center">
+                                    <button color="primary" mat-button>
+                                        <mat-icon svgIcon="feather:x"></mat-icon>
+                                    </button>
+                                </div>
+
+                            </mat-tree-node>
+
+                            <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
+                                <button mat-icon-button disabled></button>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Opción</mat-label>
+                                    <input matInput #itemValue>
+                                </mat-form-field>
+                                <div class="flex justify-center">
+                                    <button color="primary" mat-button (click)="saveNode(node, itemValue.value)">
+                                        <mat-icon svgIcon="heroicons_outline:check"></mat-icon>
+                                    </button>
+                                    <button color="primary" mat-button (click)="saveNode(node, itemValue.value)">
+                                        <mat-icon svgIcon="feather:x"></mat-icon>
+                                    </button>
+                                </div>
+                            </mat-tree-node>
+
+                            <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+                                <button mat-icon-button matTreeNodeToggle
+                                        [attr.aria-label]="'Toggle ' + node.item">
+                                    <mat-icon class="mat-icon-rtl-mirror">
+                                        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                                    </mat-icon>
+                                </button>
+                                <mat-form-field class="flex flex-col max-w-50 w-full " style="margin: 10px;">
+                                    <input matInput disabled>
+                                </mat-form-field>
+
+                                <button mat-icon-button (click)="addNewItem(node)">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </mat-tree-node>
+                        </mat-tree>
+                    </div>
+
+
+                    <!-- SELECTION_BOX-->
+
+                    <div class="flex flex-col max-w-80 w-full " style="margin: 16px;"
+                         *ngIf="inputTypeSelected?.name == 'SELECTION_BOX'">
+                        <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">Casilla de seleccion</span>
+                        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+                            <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+                                <mat-form-field class="flex flex-col max-w-50 w-full " style="margin: 10px;"
+                                                (change)="todoLeafItemSelectionToggle(node)">
+                                    {{node.item}}
+                                    <input matInput disabled>
+                                </mat-form-field>
+                                <div class="flex justify-center">
+                                    <button color="primary" mat-button>
+                                        <mat-icon svgIcon="feather:x"></mat-icon>
+                                    </button>
+                                </div>
+
+                            </mat-tree-node>
+
+                            <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
+                                <button mat-icon-button disabled></button>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Opción</mat-label>
+                                    <input matInput #itemValue>
+                                </mat-form-field>
+                                <div class="flex justify-center">
+                                    <button color="primary" mat-button (click)="saveNode(node, itemValue.value)">
+                                        <mat-icon svgIcon="heroicons_outline:check"></mat-icon>
+                                    </button>
+                                    <button color="primary" mat-button (click)="saveNode(node, itemValue.value)">
+                                        <mat-icon svgIcon="feather:x"></mat-icon>
+                                    </button>
+                                </div>
+                            </mat-tree-node>
+
+                            <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+                                <button mat-icon-button matTreeNodeToggle
+                                        [attr.aria-label]="'Toggle ' + node.item">
+                                    <mat-icon class="mat-icon-rtl-mirror">
+                                        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                                    </mat-icon>
+                                </button>
+                                <mat-form-field class="flex flex-col max-w-50 w-full " style="margin: 10px;">
+                                    <input matInput disabled>
+                                </mat-form-field>
+
+                                <button mat-icon-button (click)="addNewItem(node)">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </mat-tree-node>
+                        </mat-tree>
+
+
+                    </div>
+
+
+                    <!-- DEPLOYABLE_LIST-->
+
+                    <div class="flex flex-col max-w-80 w-full " style="margin: 16px;"
+                         *ngIf="inputTypeSelected?.name == 'DEPLOYABLE_LIST'">
+                        <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">Lista desplegable</span>
+                        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+                            <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+                                <mat-form-field class="flex flex-col max-w-50 w-full " style="margin: 10px;"
+                                                (change)="todoLeafItemSelectionToggle(node)">
+                                    {{node.item}}
+                                    <input matInput disabled>
+                                </mat-form-field>
+                                <div class="flex justify-center">
+                                    <button color="primary" mat-button>
+                                        <mat-icon svgIcon="feather:x"></mat-icon>
+                                    </button>
+                                </div>
+
+                            </mat-tree-node>
+
+                            <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
+                                <button mat-icon-button disabled></button>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Opción</mat-label>
+                                    <input matInput #itemValue>
+                                </mat-form-field>
+                                <div class="flex justify-center">
+                                    <button color="primary" mat-button (click)="saveNode(node, itemValue.value)">
+                                        <mat-icon svgIcon="heroicons_outline:check"></mat-icon>
+                                    </button>
+                                    <button color="primary" mat-button (click)="saveNode(node, itemValue.value)">
+                                        <mat-icon svgIcon="feather:x"></mat-icon>
+                                    </button>
+                                </div>
+                            </mat-tree-node>
+
+                            <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+                                <button mat-icon-button matTreeNodeToggle
+                                        [attr.aria-label]="'Toggle ' + node.item">
+                                    <mat-icon class="mat-icon-rtl-mirror">
+                                        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                                    </mat-icon>
+                                </button>
+                                <mat-form-field class="flex flex-col max-w-50 w-full " style="margin: 10px;">
+                                    <input matInput disabled>
+                                </mat-form-field>
+
+                                <button mat-icon-button (click)="addNewItem(node)">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </mat-tree-node>
+                        </mat-tree>
+                    </div>
+
+
+                    <!-- UPLOAD_FILE-->
+                    <div class="flex flex-col max-w-80 w-full " style="margin: 16px;"
+                         *ngIf="inputTypeSelected?.name == 'UPLOAD_FILE'">
+                        <input type="file" class="file-input"
+                               (change)="onFileSelected($event)" #fileUpload disabled>
+
+                        <div class="file-upload">
+
+                            {{fileName || "agregue un archivo"}}
+
+                            <button mat-mini-fab color="primary" class="upload-btn"
+                                    (click)="fileUpload.click()">
+                                <mat-icon class="buttonColor">attach_file</mat-icon>
+                            </button>
+                        </div>
+                        <div class="flex flex-col max-w-30 w-full " style="margin: 16px;">
+                            <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">
+                        Tamaño máximo de archivo
+                      </span>
+                            <mat-form-field>
+                                <mat-select>
+                                    <ng-container>
+                                        <mat-option>
+                                            50M
+                                        </mat-option>
+                                        <mat-option>
+                                            100M
+                                        </mat-option>
+                                    </ng-container>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- DATE-->
+                    <div class="flex flex-col max-w-80 w-full " style="margin: 16px;"
+                         *ngIf="inputTypeSelected?.name == 'DATE'">
+                      <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">
+                             Fecha
+                      </span>
+                        <mat-form-field
+                            [ngClass]="formFieldHelpers">
+                            <input class="input"
+                                   matInput
+                                   [matDatepicker]="picker2" disabled>
+                            <mat-datepicker-toggle class="buttonColor" matSuffix [for]="picker2">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker class="buttonColor" #picker2></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+
+                </div>
+                <div class="flex justify-end mt-8">
+                    <button mat-icon-button>
+                        <mat-icon class="icon-size-5 buttonColor" [svgIcon]="'mat_solid:delete'"></mat-icon>
+                    </button>
+
+                    <section>
+                        <mat-slide-toggle
+                            class="example-margin"
+                            [color]="color"
+                            [checked]="checked"
+                            [disabled]="disabled">
+                            Obligatorio
+                        </mat-slide-toggle>
+                    </section>
+                </div>
+            </div>
+
+        </form>
+    </fuse-card>
+
+
+</div>
+

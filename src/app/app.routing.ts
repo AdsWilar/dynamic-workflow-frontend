@@ -123,6 +123,11 @@ export const appRoutes: Route[] = [
                 path: 'departments',
                 loadChildren: () => import('app/modules/admin/departments/department.module')
                     .then(m => m.DepartmentModule)
+            },
+            {
+                path: 'processes',
+                loadChildren: () => import('app/modules/admin/processes/processes.module')
+                    .then(m => m.ProcessesModule)
             }
 
 

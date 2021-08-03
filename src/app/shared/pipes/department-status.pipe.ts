@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {DepartmentStatus} from '../shared/types/department-status.type';
+import {DepartmentStatus} from '../types/department-status.type';
 
 @Pipe({name: 'departmentStatus'})
 export class DepartmentStatusPipe implements PipeTransform {

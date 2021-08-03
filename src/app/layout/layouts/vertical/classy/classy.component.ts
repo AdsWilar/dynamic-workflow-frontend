@@ -47,8 +47,15 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
             id: 'departments',
             title: 'Departamentos',
             type: 'basic',
-            icon: 'mat_solid:people_alt',
+            icon: 'heroicons_outline:office-building',
             link: '/departments'
+        },
+        {
+            id: 'processes',
+            title: 'Procesos',
+            type: 'basic',
+            icon: 'work_outline',
+            link: '/processes'
         }
     ];
     user: UserData;

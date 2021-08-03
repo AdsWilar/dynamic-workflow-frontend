@@ -1,11 +1,9 @@
 <div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden">
-
-    <mat-drawer-container class="flex-auto h-full bg-card dark:border-b">
-
-        <mat-drawer-content class="flex flex-col bg-gray-100 dark:border-b">
-
+    <mat-drawer-container class="flex-auto h-full bg-card dark:bg-transparent">
+        <mat-drawer-content class="flex flex-col bg-gray-100 dark:bg-transparent">
             <!-- Main -->
             <div class="flex flex-col flex-auto">
+
 
                 <div class="dark bg-card dark:border-b">
                     <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
@@ -14,18 +12,18 @@
                             <div class="flex flex-auto items-center min-w-0">
 
                                 <div class="flex flex-col min-w-0 ml-4">
-                                    <div class="text-2xl md:text-5xl font-semibold tracking-tight leading-7 md:leading-10 truncate">
-                                      Roles
+                                    <div
+                                        class="text-2xl md:text-5xl font-semibold tracking-tight leading-7 md:leading-10 truncate">
+                                        Procesos
                                     </div>
 
                                 </div>
                             </div>
 
                             <div class="mt-4 sm:mt-0">
-                                <!-- Upload button -->
-                                <button mat-flat-button [color]="'primary'" (click)="newRoleDialog()">
+                                <button mat-flat-button [color]="'primary'" [routerLink]="['/processes/new']">
                                     <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
-                                    <span class="ml-2 mr-1">Nuevo rol</span>
+                                    <span class="ml-2 mr-1">Nuevo proceso</span>
                                 </button>
                             </div>
 
@@ -34,13 +32,8 @@
                     </div>
                 </div>
 
-                <list-role [roles]="roles" [updateListRoles]="updateListRoles"></list-role>
-
             </div>
-
         </mat-drawer-content>
-
     </mat-drawer-container>
-
 </div>
 

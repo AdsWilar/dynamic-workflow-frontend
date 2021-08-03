@@ -1,31 +1,30 @@
-import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {FuseAnimations} from '../../../../../@fuse/animations';
 import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 import {FuseAlertType} from '../../../../../@fuse/components/alert';
-import {DepartmentStatuses} from '../../../../shared/constant';
 import {DepartmentStatus} from '../../../../shared/types/department-status.type';
+import {DepartmentStatuses} from '../../../../shared/constant';
+import {DepartmentResponse} from '../../../../interfaces/responses/department-response.interface';
+import {UserResponse} from '../../../../interfaces/responses/user-response.interface';
+import {DepartmentService} from '../../../../services/department-service.service';
 import {UserService} from '../../../../services/user-service.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {Toaster} from '../../../../shared/toaster';
-import {UserResponse} from '../../../../interfaces/responses/user-response.interface';
-import {DepartmentResponse} from '../../../../interfaces/responses/department-response.interface';
-import {DepartmentService} from '../../../../services/department-service.service';
 import {MatSelectChange} from '@angular/material/select';
+import {MatCheckboxChange} from '@angular/material/checkbox';
 import {DepartmentRequest} from '../../../../interfaces/requests/department-request.interface';
 import {CompleteDepartmentRequest} from '../../../../interfaces/requests/complete-department-request.interface';
 import {CompleteDepartmentResponse} from '../../../../interfaces/responses/complete-department-response.interface';
-import {MatCheckboxChange} from '@angular/material/checkbox';
 
 @Component({
-    selector: 'new-department',
-    templateUrl: './new-department.component.html',
+    selector: 'edit-department-member',
+    templateUrl: './edit-department-member.component.html',
     animations: FuseAnimations
 })
-export class NewDepartmentComponent implements OnInit {
+export class EditDepartmentMemberComponent implements OnInit {
 
-    @ViewChild('newDepartmentNgForm') newDepartmentNgForm: NgForm;
+    @ViewChild('editMemberNgForm') editMemberNgForm: NgForm;
     showAlert: boolean = false;
-    newDepartmentForm: FormGroup;
+    editMemberForm: FormGroup;
     alert: { type: FuseAlertType, message: string } = {
         type: 'success',
         message: ''
@@ -37,14 +36,17 @@ export class NewDepartmentComponent implements OnInit {
     filteredNonDepartmentMembers: UserResponse[] = [];
     selectedNonDepartmentMembers: UserResponse[] = [];
 
+    completeDepartment: CompleteDepartmentResponse;
+    department: DepartmentResponse;
+
 
     constructor(private formBuilder: FormBuilder, private departmentService: DepartmentService,
                 private userService: UserService, @Inject(MAT_DIALOG_DATA) private data: any,
-                private dialogRef: MatDialogRef<NewDepartmentComponent>, private toaster: Toaster) {
+                private dialogRef: MatDialogRef<EditDepartmentMemberComponent>) {
     }
 
     ngOnInit(): void {
-        this.newDepartmentForm = this.formBuilder.group({
+        this.editMemberForm = this.formBuilder.group({
             name: ['', Validators.required],
             contactEmail: ['', [Validators.required, Validators.email]],
             contactPhone: ['', Validators.required],
@@ -53,6 +55,9 @@ export class NewDepartmentComponent implements OnInit {
             parentDepartmentId: [''],
             departmentBossId: ['', Validators.required]
         });
+
+        this.completeDepartment = this.data.completeDepartment;
+        this.department = this.completeDepartment.department;
         this.departmentService.getAllDepartmentsForCurrentUser()
             .subscribe((response) => {
                 this.departments = response.data;
@@ -117,30 +122,30 @@ export class NewDepartmentComponent implements OnInit {
             );
     }
 
-    registerNewDepartment(): void {
-        if (this.newDepartmentForm.invalid) {
+    editMember(): void {
+        if (this.editMemberForm.invalid) {
             return;
         }
-        this.newDepartmentForm.disable();
+        this.editMemberForm.disable();
         this.showAlert = false;
         const departmentRequest: DepartmentRequest = {
-            name: this.newDepartmentForm.value.name,
-            contactEmail: this.newDepartmentForm.value.contactEmail,
-            contactPhone: this.newDepartmentForm.value.contactPhone,
-            location: this.newDepartmentForm.value.location,
-            status: this.newDepartmentForm.value.status,
-            parentDepartmentId: this.newDepartmentForm.value.parentDepartmentId
+            name: this.editMemberForm.value.name,
+            contactEmail: this.editMemberForm.value.contactEmail,
+            contactPhone: this.editMemberForm.value.contactPhone,
+            location: this.editMemberForm.value.location,
+            status: this.editMemberForm.value.status,
+            parentDepartmentId: this.editMemberForm.value.parentDepartmentId
         };
         const analystMembersId: number[] = this.getAnalystMembersId();
         const completeDepartmentRequest: CompleteDepartmentRequest = {
             department: departmentRequest,
-            departmentBossId: this.newDepartmentForm.value.departmentBossId,
+            departmentBossId: this.editMemberForm.value.departmentBossId,
             analystMembersId: analystMembersId
         };
         this.departmentService.registerCompleteDepartment(completeDepartmentRequest)
             .subscribe((response) => {
-                this.newDepartmentForm.enable();
-                this.newDepartmentNgForm.resetForm();
+                this.editMemberForm.enable();
+                this.editMemberNgForm.resetForm();
                 const message: string = response.message;
                 const data: CompleteDepartmentResponse = response.data;
                 if (response.success) {
@@ -167,5 +172,6 @@ export class NewDepartmentComponent implements OnInit {
         }
         return analystMembersId;
     }
+
 
 }

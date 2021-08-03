@@ -1,0 +1,97 @@
+<div mat-dialog-content>
+    <div class="flex flex-col flex-auto items-center sm:justify-center min-w-0 ">
+        <!-- Title -->
+        <div class="mt-8 text-4xl font-extrabold tracking-tight leading-tight" *ngIf="department">Editar miembros del departamento {{department.name}}</div>
+        <mat-divider class="my-2"></mat-divider>
+
+        <!-- Alert -->
+        <fuse-alert class="mt-8 -mb-4" *ngIf="showAlert" [appearance]="'outline'" [showIcon]="false"
+                    [type]="alert.type" [@shake]="alert.type === 'error'">
+            {{alert.message}}
+        </fuse-alert>
+
+        <form [formGroup]="editMemberForm" #editMemberNgForm="ngForm">
+            <div class="flex-auto p-6 sm:p-10">
+                <div class="flex flex-wrap -m-4">
+
+
+                    <!-- Department boss field -->
+                    <mat-form-field class="flex flex-col max-w-80 w-full " style="margin: 16px;">
+                        <mat-label>Jefe del departamento</mat-label>
+                        <mat-select [formControlName]="'departmentBossId'"
+                                    (selectionChange)="onSelectDepartmentBoss($event)">
+                            <ng-container *ngFor="let nonDepartmentBoss of nonDepartmentBosses">
+                                <mat-option [value]="nonDepartmentBoss.id">
+                                    {{nonDepartmentBoss | userFullInfo}}
+                                </mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="editMemberForm.get('departmentBossId').hasError('required')">
+                            El jefe de departamento es requerido
+                        </mat-error>
+                    </mat-form-field>
+
+                    <!-- Department members field -->
+                    <div class="flex flex-col max-w-80 w-full " style="margin: 16px;">
+                        <span class="mb-px font-medium leading-tight">Analistas del departamento</span>
+                        <div
+                            class="mt-1.5 rounded-md border border-gray-300 dark:border-gray-500 shadow-sm overflow-hidden">
+                            <!-- Header -->
+                            <div class="flex items-center -my-px py-2 px-3">
+                                <div class="flex items-center flex-auto min-w-0">
+                                    <mat-icon
+                                        class="icon-size-5"
+                                        [svgIcon]="'heroicons_solid:search'"></mat-icon>
+                                    <input
+                                        class="min-w-0 ml-2 py-1 border-0"
+                                        type="text"
+                                        placeholder="Buscar..."
+                                        (input)="filterNonDepartmentMembers($event)"
+                                        [maxLength]="50">
+                                </div>
+                            </div>
+                            <!-- Available department members -->
+                            <div
+                                class="h-44 leading-none overflow-y-auto border-t border-gray-300 dark:border-gray-500">
+                                <ng-container>
+                                    <ng-container *ngFor="let filteredNonDepartmentMember of filteredNonDepartmentMembers">
+                                        <mat-checkbox
+                                            class="flex items-center h-10 min-h-10 px-4"
+                                            [color]="'primary'"
+                                            [checked]="nonDepartmentMemberIsSelected(filteredNonDepartmentMember.id)"
+                                            (change)="toggleNonDepartmentMember(filteredNonDepartmentMember, $event)">
+                                            {{filteredNonDepartmentMember | userFullInfo}}
+                                        </mat-checkbox>
+                                    </ng-container>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <mat-divider class="my-2"></mat-divider>
+
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<mat-dialog-actions style="float: right">
+    <div class="example-container">
+        <button mat-flat-button mat-dialog-close [color]="'accent'">
+            <span>
+                Cerrar
+            </span>
+        </button>
+        <button mat-flat-button [color]="'primary'" [disabled]="editMemberForm.disabled "
+                (click)="editMember()">
+            <span *ngIf="!editMemberForm.disabled">
+                Editar
+            </span>
+            <mat-progress-spinner *ngIf="editMemberForm.disabled" [diameter]="24" [mode]="'indeterminate'">
+            </mat-progress-spinner>
+        </button>
+    </div>
+</mat-dialog-actions>

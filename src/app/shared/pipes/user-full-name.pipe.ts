@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {UserData} from '../interfaces/data/user-data.interface';
+import {UserData} from '../../interfaces/data/user-data.interface';
 
 @Pipe({name: 'userFullName'})
 export class UserFullNamePipe implements PipeTransform {
