@@ -1,0 +1,67 @@
+.contenedor {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 75%;
+    margin: 10px auto;
+    text-align-all: center;
+    text-align: -webkit-center;
+
+}
+
+.cardFuse {
+    display: inline-table;
+}
+
+fuse-card {
+    background-color: rgba(148, 163, 184, 0.38);
+}
+
+mat-select {
+    align-items: end;
+}
+
+.buttonColor {
+    color: darkslateblue;
+    //background-color: darkslateblue;
+}
+
+
+.example-h2 {
+    margin: 10px;
+}
+
+.example-section {
+    display: inline-table;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+}
+
+.example-margin {
+    margin: 10px;
+}
+
+
+.file-input {
+    display: none;
+}
+
+.input {
+    background-color: white;
+    //color: #F9FAFB;
+}
+
+.mat-form-field {
+    margin-right: 4px;
+}
+
+
+
+.buttonIcon {
+    background-color: darkslateblue;
+    color: white;
+
+
+
+}

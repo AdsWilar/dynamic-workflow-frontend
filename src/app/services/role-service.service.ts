@@ -30,7 +30,7 @@ export class RoleService {
     public updateRoleActions(request: UpdateRoleActionsRequest,
                              id: number): Observable<GeneralResponse<RoleActionResponse>> {
         return this.baseService.post<UpdateRoleActionsRequest, RoleActionResponse>(
-            this.ROLES_PATH + id + '/actions/',
+            this.ROLES_PATH + id + '/actions',
             request
         );
     }
@@ -44,7 +44,7 @@ export class RoleService {
     }
 
     public getRoleActionsByRoleId(roleId: number): Observable<GeneralResponse<RoleActionResponse>> {
-        return this.baseService.get<RoleActionResponse>(this.ROLES_PATH + roleId + '/actions/');
+        return this.baseService.get<RoleActionResponse>(this.ROLES_PATH + roleId + '/actions');
     }
 
 }

@@ -8,6 +8,8 @@ import {InitialData} from 'app/app.types';
 import {UserData} from '../../../../interfaces/data/user-data.interface';
 import {AuthManager} from '../../../../core/auth/auth-manager';
 import {AccessResponse} from '../../../../interfaces/responses/access-response.interface';
+import {UserService} from '../../../../services/user-service.service';
+import {UserResponse} from '../../../../interfaces/responses/user-response.interface';
 
 @Component({
     selector: 'classy-layout',
@@ -21,32 +23,46 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
     private _unsubscribeAll: Subject<any> = new Subject<any>();
     navigation: FuseNavigationItem[] = [
         {
-            id   : 'startup-profile',
+            id: 'startup-profile',
             title: 'Perfil',
-            type : 'basic',
-            icon : 'mat_solid:person',
-            link : '/startup-profile'
+            type: 'basic',
+            icon: 'mat_solid:person',
+            link: '/startup-profile'
         },
         {
-            id   : 'roles',
+            id: 'roles',
             title: 'Roles',
-            type : 'basic',
-            icon : 'heroicons_outline:document-text',
-            link : '/roles'
+            type: 'basic',
+            icon: 'heroicons_outline:document-text',
+            link: '/roles'
         },
         {
-            id   : 'users',
+            id: 'users',
             title: 'Usuarios',
-            type : 'basic',
-            icon : 'mat_solid:people_alt',
-            link : '/users'
+            type: 'basic',
+            icon: 'mat_solid:people_alt',
+            link: '/users'
+        },
+        {
+            id: 'departments',
+            title: 'Departamentos',
+            type: 'basic',
+            icon: 'heroicons_outline:office-building',
+            link: '/departments'
+        },
+        {
+            id: 'processes',
+            title: 'Procesos',
+            type: 'basic',
+            icon: 'work_outline',
+            link: '/processes'
         }
     ];
     user: UserData;
 
     constructor(private _activatedRoute: ActivatedRoute, private authManager: AuthManager, private _router: Router,
                 private _fuseMediaWatcherService: FuseMediaWatcherService,
-                private _fuseNavigationService: FuseNavigationService) {
+                private _fuseNavigationService: FuseNavigationService, private userService: UserService) {
         this.initialUser();
     }
 
@@ -67,9 +83,10 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
             names: null,
             firstSurname: null,
             secondSurname: null,
-            fullName: null,
             email: null,
-            phone: null
+            phone: null,
+            identificationNumber: null,
+            code: null
         };
     }
 
@@ -108,13 +125,17 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
     }
 
     private loadUser(): void {
-        if (this.authManager.isAuthenticated()) {
-            const accessData: AccessResponse = this.authManager.getCurrentAuthData().accessData;
-            this.user.username = accessData.username;
-            this.user.fullName = accessData.userFullName;
-            this.user.email = accessData.userEmail;
-            this.user.phone = accessData.userPhoneNumber;
-        }
+        this.userService.getCurrentUser().subscribe((response) => {
+            const userResponse: UserResponse = response.data;
+            this.user.username = userResponse.username;
+            this.user.names = userResponse.names;
+            this.user.firstSurname = userResponse.firstSurname;
+            this.user.secondSurname = userResponse.secondSurname;
+            this.user.email = userResponse.email;
+            this.user.phone = userResponse.phone;
+            this.user.identificationNumber = userResponse.identificationNumber;
+            this.user.code = userResponse.code;
+        });
     }
 
     // -----------------------------------------------------------------------------------------------------

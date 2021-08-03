@@ -108,7 +108,8 @@ export const appRoutes: Route[] = [
         children: [
             {
                 path: 'startup-profile',
-                loadChildren: () => import('app/modules/admin/startup-profile/startup-profile.module').then(m => m.StartupProfileModule)
+                loadChildren: () => import('app/modules/admin/startup-profile/startup-profile.module')
+                    .then(m => m.StartupProfileModule)
             },
             {
                 path: 'roles',
@@ -118,6 +119,16 @@ export const appRoutes: Route[] = [
                 path: 'users',
                 loadChildren: () => import('app/modules/admin/users/user.module').then(m => m.UserModule)
             },
+            {
+                path: 'departments',
+                loadChildren: () => import('app/modules/admin/departments/department.module')
+                    .then(m => m.DepartmentModule)
+            },
+            {
+                path: 'processes',
+                loadChildren: () => import('app/modules/admin/processes/processes.module')
+                    .then(m => m.ProcessesModule)
+            }
 
 
             // Dashboards

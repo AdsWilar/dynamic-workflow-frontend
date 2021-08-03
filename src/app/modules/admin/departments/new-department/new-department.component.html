@@ -1,0 +1,158 @@
+<div mat-dialog-content>
+    <div class="flex flex-col flex-auto items-center sm:justify-center min-w-0 ">
+        <!-- Title -->
+        <div class="mt-8 text-4xl font-extrabold tracking-tight leading-tight">Nuevo Departamento</div>
+        <mat-divider class="my-2"></mat-divider>
+
+        <!-- Alert -->
+        <fuse-alert class="mt-8 -mb-4" *ngIf="showAlert" [appearance]="'outline'" [showIcon]="false"
+                    [type]="alert.type" [@shake]="alert.type === 'error'">
+            {{alert.message}}
+        </fuse-alert>
+
+        <form [formGroup]="newDepartmentForm" #newDepartmentNgForm="ngForm">
+            <div class="flex-auto p-6 sm:p-10">
+                <div class="flex flex-wrap -m-4">
+
+                    <!-- Name field -->
+                    <mat-form-field class="flex flex-col max-w-80 w-full " style="margin: 16px;">
+                        <mat-label>Nombre</mat-label>
+                        <input id="name" matInput [formControlName]="'name'">
+                        <mat-error *ngIf="newDepartmentForm.get('name').hasError('required')">
+                            El nombre es requerido
+                        </mat-error>
+                    </mat-form-field>
+
+                    <!-- Contact email field -->
+                    <mat-form-field class="flex flex-col max-w-80 w-full " style="margin: 16px;">
+                        <mat-label>E-mail de contacto</mat-label>
+                        <input id="contactEmail" matInput [formControlName]="'contactEmail'">
+                        <mat-error *ngIf="newDepartmentForm.get('contactEmail').hasError('required')">
+                            El e-mail de contacto es requerido
+                        </mat-error>
+                        <mat-error *ngIf="newDepartmentForm.get('contactEmail').hasError('email')">
+                            Por favor ingrese un e-mail válido
+                        </mat-error>
+                    </mat-form-field>
+
+                    <!-- Contact phone field -->
+                    <mat-form-field class="flex flex-col max-w-80 w-full " style="margin: 16px;">
+                        <mat-label>Teléfono de contacto</mat-label>
+                        <input id="contactPhone" matInput [formControlName]="'contactPhone'">
+                        <mat-error *ngIf="newDepartmentForm.get('contactPhone').hasError('required')">
+                            El teléfono de contacto es requerido
+                        </mat-error>
+                    </mat-form-field>
+
+                    <!-- Location field -->
+                    <mat-form-field class="flex flex-col max-w-80 w-full " style="margin: 16px;">
+                        <mat-label>Ubicación</mat-label>
+                        <input id="location" matInput [formControlName]="'location'">
+                        <mat-error *ngIf="newDepartmentForm.get('location').hasError('required')">
+                            La ubicación es requerida
+                        </mat-error>
+                    </mat-form-field>
+
+                    <!-- Status field -->
+                    <mat-form-field class="flex flex-col max-w-80 w-full " style="margin: 16px;">
+                        <mat-label>Estado</mat-label>
+                        <mat-select [formControlName]="'status'">
+                            <mat-option *ngFor="let departmentStatus of departmentStatuses" [value]="departmentStatus">
+                                {{departmentStatus | departmentStatus}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="newDepartmentForm.get('status').hasError('required')">
+                            El estado es requerido
+                        </mat-error>
+                    </mat-form-field>
+
+                    <!-- Parent department field -->
+                    <mat-form-field class="flex flex-col max-w-80 w-full " style="margin: 16px;">
+                        <mat-label>Seleccione un departamento padre</mat-label>
+                        <mat-select [formControlName]="'parentDepartmentId'">
+                            <ng-container *ngFor="let department of departments">
+                                <mat-option [value]="department.id">{{department.name}}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <!-- Department boss field -->
+                    <mat-form-field class="flex flex-col max-w-80 w-full " style="margin: 16px;">
+                        <mat-label>Jefe del departamento</mat-label>
+                        <mat-select [formControlName]="'departmentBossId'"
+                                    (selectionChange)="onSelectDepartmentBoss($event)">
+                            <ng-container *ngFor="let nonDepartmentBoss of nonDepartmentBosses">
+                                <mat-option [value]="nonDepartmentBoss.id">
+                                    {{nonDepartmentBoss | userFullInfo}}
+                                </mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="newDepartmentForm.get('departmentBossId').hasError('required')">
+                            El jefe de departamento es requerido
+                        </mat-error>
+                    </mat-form-field>
+
+                    <!-- Department members field -->
+                    <div class="flex flex-col max-w-80 w-full " style="margin: 16px;">
+                        <span class="mb-px font-medium leading-tight">Analistas del departamento</span>
+                        <div
+                            class="mt-1.5 rounded-md border border-gray-300 dark:border-gray-500 shadow-sm overflow-hidden">
+                            <!-- Header -->
+                            <div class="flex items-center -my-px py-2 px-3">
+                                <div class="flex items-center flex-auto min-w-0">
+                                    <mat-icon
+                                        class="icon-size-5"
+                                        [svgIcon]="'heroicons_solid:search'"></mat-icon>
+                                    <input
+                                        class="min-w-0 ml-2 py-1 border-0"
+                                        type="text"
+                                        placeholder="Buscar..."
+                                        (input)="filterNonDepartmentMembers($event)"
+                                        [maxLength]="50">
+                                </div>
+                            </div>
+                            <!-- Available department members -->
+                            <div
+                                class="h-44 leading-none overflow-y-auto border-t border-gray-300 dark:border-gray-500">
+                                <ng-container>
+                                    <ng-container *ngFor="let filteredNonDepartmentMember of filteredNonDepartmentMembers">
+                                        <mat-checkbox
+                                            class="flex items-center h-10 min-h-10 px-4"
+                                            [color]="'primary'"
+                                            [checked]="nonDepartmentMemberIsSelected(filteredNonDepartmentMember.id)"
+                                            (change)="toggleNonDepartmentMember(filteredNonDepartmentMember, $event)">
+                                            {{filteredNonDepartmentMember | userFullInfo}}
+                                        </mat-checkbox>
+                                    </ng-container>
+                                </ng-container>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <mat-divider class="my-2"></mat-divider>
+
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<mat-dialog-actions style="float: right">
+    <div class="example-container">
+        <button mat-flat-button mat-dialog-close [color]="'accent'">
+            <span>
+                Cerrar
+            </span>
+        </button>
+        <button mat-flat-button [color]="'primary'" [disabled]="newDepartmentForm.disabled "
+                (click)="registerNewDepartment()">
+            <span *ngIf="!newDepartmentForm.disabled">
+                Crear
+            </span>
+            <mat-progress-spinner *ngIf="newDepartmentForm.disabled" [diameter]="24" [mode]="'indeterminate'">
+            </mat-progress-spinner>
+        </button>
+    </div>
+</mat-dialog-actions>
