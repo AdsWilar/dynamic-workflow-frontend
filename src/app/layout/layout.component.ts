@@ -9,6 +9,7 @@ import {FuseTailwindService} from '@fuse/services/tailwind/tailwind.service';
 import {FUSE_VERSION} from '@fuse/version';
 import {Layout} from 'app/layout/layout.types';
 import {AppConfig, Scheme, Theme} from 'app/core/config/app.config';
+import {ToasterConfig} from 'angular2-toaster';
 
 @Component({
     selector: 'layout',
@@ -23,6 +24,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
     theme: string;
     themes: [string, any][] = [];
     private _unsubscribeAll: Subject<any> = new Subject<any>();
+    toasterConfig: ToasterConfig;
 
     /**
      * Constructor
@@ -36,6 +38,12 @@ export class LayoutComponent implements OnInit, OnDestroy {
         private _fuseMediaWatcherService: FuseMediaWatcherService,
         private _fuseTailwindConfigService: FuseTailwindService
     ) {
+        this.toasterConfig = new ToasterConfig({
+            showCloseButton: true,
+            timeout: 12000,
+            positionClass: 'toast-bottom-right',
+            animation: 'fade'
+        });
     }
 
     // -----------------------------------------------------------------------------------------------------

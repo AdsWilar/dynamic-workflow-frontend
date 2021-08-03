@@ -20,13 +20,27 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
     isScreenSmall: boolean;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
     navigation: FuseNavigationItem[] = [
-        // {
-        //     id   : 'startup-profile',
-        //     title: 'Perfil',
-        //     type : 'basic',
-        //     icon : 'heroicons_outline:user-circle',
-        //     link : '/startup-profile'
-        // }
+        {
+            id   : 'startup-profile',
+            title: 'Perfil',
+            type : 'basic',
+            icon : 'mat_solid:person',
+            link : '/startup-profile'
+        },
+        {
+            id   : 'roles',
+            title: 'Roles',
+            type : 'basic',
+            icon : 'heroicons_outline:document-text',
+            link : '/roles'
+        },
+        {
+            id   : 'users',
+            title: 'Usuarios',
+            type : 'basic',
+            icon : 'mat_solid:people_alt',
+            link : '/users'
+        }
     ];
     user: UserData;
 

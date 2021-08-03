@@ -124,6 +124,12 @@
                     </mat-error>
                 </mat-form-field>
 
+                <!-- Identification number field -->
+                <mat-form-field class="w-full">
+                    <mat-label>Nro. documento de identidad</mat-label>
+                    <input id="identificationNumber" matInput [formControlName]="'identificationNumber'">
+                </mat-form-field>
+
                 <!-- Submit button -->
                 <button class="fuse-mat-button-large w-full mt-6" mat-flat-button [color]="'primary'"
                         [disabled]="registerForm.disabled" (click)="register()">

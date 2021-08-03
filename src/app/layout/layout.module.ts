@@ -15,6 +15,7 @@ import { DenseLayoutModule } from 'app/layout/layouts/vertical/dense/dense.modul
 import { FuturisticLayoutModule } from 'app/layout/layouts/vertical/futuristic/futuristic.module';
 import { ThinLayoutModule } from 'app/layout/layouts/vertical/thin/thin.module';
 import { SharedModule } from 'app/shared/shared.module';
+import {ToasterModule} from 'angular2-toaster';
 
 const layoutModules = [
     // Empty
@@ -39,12 +40,13 @@ const layoutModules = [
     declarations: [
         LayoutComponent
     ],
-    imports     : [
+    imports: [
         MatIconModule,
         MatTooltipModule,
         FuseDrawerModule,
         SharedModule,
-        ...layoutModules
+        ...layoutModules,
+        ToasterModule
     ],
     exports     : [
         LayoutComponent,

@@ -36,7 +36,8 @@ export class RegisterComponent implements OnInit {
                 firstSurname: ['', Validators.required],
                 secondSurname: [''],
                 email: ['', [Validators.required, Validators.email]],
-                phone: ['', Validators.required]
+                phone: ['', Validators.required],
+                identificationNumber: ['']
             }
         );
     }
@@ -57,6 +58,7 @@ export class RegisterComponent implements OnInit {
             secondSurname: this.registerForm.value.secondSurname,
             email: this.registerForm.value.email,
             phone: this.registerForm.value.phone,
+            identificationNumber: this.registerForm.value.identificationNumber
         };
 
         this.userService.registerRequestingUser(userRequest).subscribe((response) => {

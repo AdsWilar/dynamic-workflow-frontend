@@ -110,6 +110,15 @@ export const appRoutes: Route[] = [
                 path: 'startup-profile',
                 loadChildren: () => import('app/modules/admin/startup-profile/startup-profile.module').then(m => m.StartupProfileModule)
             },
+            {
+                path: 'roles',
+                loadChildren: () => import('app/modules/admin/roles/role.module').then(m => m.RoleModule)
+            },
+            {
+                path: 'users',
+                loadChildren: () => import('app/modules/admin/users/user.module').then(m => m.UserModule)
+            },
+
 
             // Dashboards
             // {
