@@ -1,4 +1,4 @@
-.contenedor {
+.container {
     justify-content: center;
     align-items: center;
     display: flex;
@@ -6,10 +6,9 @@
     margin: 10px auto;
     text-align-all: center;
     text-align: -webkit-center;
-
 }
 
-.cardFuse {
+.dynamic-input-card {
     display: inline-table;
 }
 
@@ -23,9 +22,7 @@ mat-select {
 
 .buttonColor {
     color: darkslateblue;
-    //background-color: darkslateblue;
 }
-
 
 .example-h2 {
     margin: 10px;
@@ -42,26 +39,23 @@ mat-select {
     margin: 10px;
 }
 
-
 .file-input {
     display: none;
 }
 
 .input {
     background-color: white;
-    //color: #F9FAFB;
 }
 
 .mat-form-field {
     margin-right: 4px;
 }
 
-
-
 .buttonIcon {
     background-color: darkslateblue;
     color: white;
+}
 
-
-
+table {
+    width: 100%;
 }

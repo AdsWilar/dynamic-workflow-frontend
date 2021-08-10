@@ -23,10 +23,6 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {EditDepartmentComponent} from './edit-department/edit-department.component';
 import {MemberDetailDepartmentComponent} from './menbers-details-department/member-detail-department.component';
 import {EditDepartmentMemberComponent} from './edit-department-member/edit-department-member.component';
-import {StageFormComponent} from '../processes/new-processes/stage-form/stage-form.component';
-import {SequenceOfStagesComponent} from '../processes/new-processes/sequence-of-stages/sequence-of-stages.component';
-import {ProcessFormComponent} from '../processes/new-processes/process-form/process-form.component';
-import {GeneralInformationComponent} from '../processes/new-processes/general-information/general-information.component';
 
 @NgModule({
     declarations: [

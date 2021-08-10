@@ -6,9 +6,7 @@ import {ViewDepartmentComponent} from './view-department/view-department.compone
 export const departmentRoutes: Route[] = [
     {
         path: '',
-        component: DepartmentComponent,
-
-
+        component: DepartmentComponent
     },
     {
         path: 'view/:id',

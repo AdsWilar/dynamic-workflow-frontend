@@ -31,7 +31,6 @@ export class NewRoleComponent implements OnInit {
     }
 
     ngOnInit(): void {
-
         this.newRoleForm = this.formBuilder.group({
             name: ['', Validators.required],
             description: ['', Validators.required]
@@ -53,11 +52,11 @@ export class NewRoleComponent implements OnInit {
             name: this.newRoleForm.value.name,
             description: this.newRoleForm.value.description
         };
-        const roleWithActionsIdRequest: CompleteRoleRequest = {
+        const completeRoleRequest: CompleteRoleRequest = {
             role: roleRequest,
             actionsId: this.actionsId
         };
-        this.roleService.registerRole(roleWithActionsIdRequest).subscribe((response) => {
+        this.roleService.registerRole(completeRoleRequest).subscribe((response) => {
             console.log(response);
             this.newRoleForm.enable();
             this.newRoleNgForm.resetForm();
@@ -70,10 +69,7 @@ export class NewRoleComponent implements OnInit {
                     message: response.message
                 };
                 this.showAlert = true;
-
             }
-
-
         });
 
     }

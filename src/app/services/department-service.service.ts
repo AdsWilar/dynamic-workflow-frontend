@@ -8,6 +8,7 @@ import {CompleteDepartmentResponse} from '../interfaces/responses/complete-depar
 import {DepartmentRequest} from '../interfaces/requests/department-request.interface';
 import {DepartmentResponse} from '../interfaces/responses/department-response.interface';
 import {UpdateDepartmentMembersRequest} from '../interfaces/requests/update-department-members-request.interface';
+import {DepartmentMember} from "../interfaces/department-member.interface";
 
 @Injectable({
     providedIn: 'root'
@@ -46,6 +47,15 @@ export class DepartmentService {
 
     public getAllDepartmentsForCurrentUser(): Observable<GeneralResponse<DepartmentResponse[]>> {
         return this.baseService.get<DepartmentResponse[]>(this.DEPARTMENTS_PATH + 'current-user/all');
+    }
+
+    public getDepartmentWithDescendantsById(id: number): Observable<GeneralResponse<DepartmentResponse[]>> {
+        return this.baseService.get<DepartmentResponse[]>(this.DEPARTMENTS_PATH + id + '/with-descendants');
+    }
+
+    public getAllDepartmentMembersByDepartmentId(departmentId: number):
+        Observable<GeneralResponse<DepartmentMember[]>> {
+        return this.baseService.get<DepartmentMember[]>(this.DEPARTMENTS_PATH + departmentId + '/members');
     }
 
 }

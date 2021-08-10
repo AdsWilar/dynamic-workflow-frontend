@@ -135,7 +135,7 @@
                     <mat-form-field class="flex flex-col max-w-80 w-full " style="margin: 16px;">
                         <mat-label>Seleccione un rol</mat-label>
                         <mat-select (selectionChange)="onSelectRole($event)">
-                            <ng-container *ngFor="let role of roles ">
+                            <ng-container *ngFor="let role of roles">
                                 <mat-option [value]="role.id">{{role.name | roleName}}</mat-option>
                             </ng-container>
                         </mat-select>

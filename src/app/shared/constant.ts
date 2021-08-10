@@ -1,5 +1,6 @@
 import {DepartmentStatus} from './types/department-status.type';
 import {ProcessStatus} from './types/process-status.type';
+import {InputTypeName} from './types/input-type-name.type';
 
 export const MainRoles: string[] = [
     'ADMINISTRATOR',
@@ -8,7 +9,7 @@ export const MainRoles: string[] = [
     'REQUESTING_USER'
 ];
 
-export let DepartmentStatuses: DepartmentStatus[] = [
+export const DepartmentStatuses: DepartmentStatus[] = [
     'ENABLED',
     'DISABLED'
 ];
@@ -16,4 +17,10 @@ export let DepartmentStatuses: DepartmentStatus[] = [
 export const ProcessStatuses: ProcessStatus[] = [
     'ACTIVE',
     'INACTIVE'
+];
+
+export const InputTypesWithOptionValues: InputTypeName[] = [
+    'MULTIPLE_CHOICE',
+    'SELECTION_BOX',
+    'DEPLOYABLE_LIST'
 ];

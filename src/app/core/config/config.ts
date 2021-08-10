@@ -6,5 +6,6 @@ export let Config = {
     actionsPath: 'actions/',
     usersPath: 'users/',
     departmentsPath: 'departments/',
-    inputTypesPath: 'input-types/'
+    inputTypesPath: 'input-types/',
+    processesPath: 'processes/'
 };

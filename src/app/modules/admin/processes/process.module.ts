@@ -15,9 +15,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {ProcessesComponent} from './processes.component';
-import {processesRoutes} from './processes.routing';
-import {NewProcessesComponent} from './new-processes/new-processes.component';
+import {ProcessComponent} from './process.component';
+import {processRoutes} from './process.routing';
+import {NewProcessComponent} from './new-process/new-process.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatRadioModule} from '@angular/material/radio';
 import {FuseCardModule} from '../../../../@fuse/components/card';
@@ -26,27 +26,25 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import {MatTreeModule} from '@angular/material/tree';
-import {StageFormComponent} from './new-processes/stage-form/stage-form.component';
-import {SequenceOfStagesComponent} from './new-processes/sequence-of-stages/sequence-of-stages.component';
-import {ProcessFormComponent} from './new-processes/process-form/process-form.component';
 import {MatCardModule} from '@angular/material/card';
-import {DynamicInputComponent} from './new-processes/process-form/dynamic-input/dynamic-input.component';
-import {GeneralInformationComponent} from './new-processes/general-information/general-information.component';
+import {DynamicInputComponent} from './new-process/dynamic-input/dynamic-input.component';
+import {NewOptionComponent} from './new-process/dynamic-input/option/new-option.component';
+import {EditOptionComponent} from './new-process/dynamic-input/option/edit-option.component';
+import {StageComponent} from './new-process/stage/stage.component';
+import {ProcessListComponent} from './process-list/process-list.component';
 
 @NgModule({
     declarations: [
-        ProcessesComponent,
-        NewProcessesComponent,
+        ProcessComponent,
+        ProcessListComponent,
+        NewProcessComponent,
         DynamicInputComponent,
-        StageFormComponent,
-        SequenceOfStagesComponent,
-        ProcessFormComponent,
-        GeneralInformationComponent
-
-
+        NewOptionComponent,
+        EditOptionComponent,
+        StageComponent
     ],
     imports: [
-        RouterModule.forChild(processesRoutes),
+        RouterModule.forChild(processRoutes),
         MatSidenavModule,
         MatDialogModule,
         MatButtonModule,
@@ -74,5 +72,5 @@ import {GeneralInformationComponent} from './new-processes/general-information/g
     ]
 })
 
-export class ProcessesModule {
+export class ProcessModule {
 }
