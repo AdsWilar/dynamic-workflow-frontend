@@ -36,6 +36,6 @@ export class DepartmentComponent implements OnInit {
 
     onDepartmentCreated = (): void => {
         this.listDepartments();
-    };
+    }
 
 }

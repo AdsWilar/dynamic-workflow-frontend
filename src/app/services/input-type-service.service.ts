@@ -13,7 +13,7 @@ export class InputTypeService {
     private INPUT_TYPES_PATH: string = Config.inputTypesPath;
 
     constructor(private baseService: BaseService) {
-        console.log('Servicio de Acciones.');
+        console.log('Servicio de Tipos de Entradas.');
     }
 
     public getAllInputTypes(): Observable<GeneralResponse<InputType[]>> {

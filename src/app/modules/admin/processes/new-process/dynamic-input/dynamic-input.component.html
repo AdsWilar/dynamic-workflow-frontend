@@ -1,0 +1,195 @@
+<div class="container">
+
+    <fuse-card class="flex flex-col max-w-80 w-full md:max-w-192 dynamic-input-card">
+        <form [formGroup]="dynamicInputForm">
+            <div class="flex-auto p-6 sm:p-10">
+                <div class="flex flex-wrap -m-4">
+
+                    <div class="flex flex-col max-w-80 w-full " style="margin: 16px;">
+                        <mat-form-field>
+                            <mat-label>Título</mat-label>
+                            <input id="title" matInput [formControlName]="'title'">
+                            <mat-error *ngIf="dynamicInputForm.get('title').hasError('required')">
+                                El título es requerido
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Descripción</mat-label>
+                            <input id="description" matInput [formControlName]="'description'">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="flex flex-col max-w-80 w-full " style="margin: 16px;">
+                        <mat-form-field>
+                            <mat-label>Seleccione un componente</mat-label>
+                            <mat-select [formControlName]="'inputTypeNameSelected'">
+                                <ng-container *ngFor="let inputType of inputTypes">
+                                    <mat-option [value]="inputType.name">
+                                        {{inputType.name | inputTypeName}}
+                                    </mat-option>
+                                </ng-container>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <!-- TEXT-->
+                    <div class="flex flex-col max-w-80 w-full" style="margin: 16px;"
+                         *ngIf="dynamicInputForm.get('inputTypeNameSelected').value == 'TEXT'">
+                         <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">
+                             Texto
+                         </span>
+                        <mat-form-field>
+                            <input matInput disabled class="input">
+                        </mat-form-field>
+                    </div>
+
+                    <!-- MULTIPLE_CHOICE-->
+                    <div class="flex flex-col max-w-80 w-full " style="margin: 16px;"
+                         *ngIf="dynamicInputForm.get('inputTypeNameSelected').value == 'MULTIPLE_CHOICE'">
+                        <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">
+                             Opción múltiple
+                            <button mat-icon-button (click)="openNewOptionDialog()">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </span>
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                            <ng-container matColumnDef="element">
+                                <td mat-cell *matCellDef="let option">
+                                    <mat-radio-button disabled></mat-radio-button>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="value">
+                                <td mat-cell *matCellDef="let option"> {{option}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="options">
+                                <td mat-cell *matCellDef="let option">
+                                    <button mat-icon-button color="accent" (click)="openEditOptionDialog(option)">
+                                        <mat-icon class="icon-size-5" [svgIcon]="'feather:edit-2'"></mat-icon>
+                                    </button>
+                                    <button mat-icon-button color="warn" (click)="removeOption(option)">
+                                        <mat-icon class="icon-size-5" [svgIcon]="'feather:x'"></mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+                            <tr mat-row *matRowDef="let row; columns: optionColumns;"></tr>
+                        </table>
+                    </div>
+
+
+                    <!-- SELECTION_BOX-->
+                    <div class="flex flex-col max-w-80 w-full " style="margin: 16px;"
+                         *ngIf="dynamicInputForm.get('inputTypeNameSelected').value == 'SELECTION_BOX'">
+                        <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">
+                            Casilla de selección
+                            <button mat-icon-button (click)="openNewOptionDialog()">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </span>
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                            <ng-container matColumnDef="element">
+                                <td mat-cell *matCellDef="let option">
+                                    <mat-checkbox disabled></mat-checkbox>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="value">
+                                <td mat-cell *matCellDef="let option"> {{option}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="options">
+                                <td mat-cell *matCellDef="let option">
+                                    <button mat-icon-button color="accent" (click)="openEditOptionDialog(option)">
+                                        <mat-icon class="icon-size-5" [svgIcon]="'feather:edit-2'"></mat-icon>
+                                    </button>
+                                    <button mat-icon-button color="warn" (click)="removeOption(option)">
+                                        <mat-icon class="icon-size-5" [svgIcon]="'feather:x'"></mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+                            <tr mat-row *matRowDef="let row; columns: optionColumns;"></tr>
+                        </table>
+                    </div>
+
+
+                    <!-- DEPLOYABLE_LIST-->
+                    <div class="flex flex-col max-w-80 w-full " style="margin: 16px;"
+                         *ngIf="dynamicInputForm.get('inputTypeNameSelected').value == 'DEPLOYABLE_LIST'">
+                        <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">
+                            Lista desplegable
+                            <button mat-icon-button (click)="openNewOptionDialog()">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </span>
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                            <ng-container matColumnDef="element">
+                                <td mat-cell *matCellDef="let option; let optionIndex = index">
+                                    {{ optionIndex + 1 + '.' }}
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="value">
+                                <td mat-cell *matCellDef="let option"> {{option}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="options">
+                                <td mat-cell *matCellDef="let option" class="btn-group d-none d-sm-block">
+                                    <button mat-icon-button color="accent" (click)="openEditOptionDialog(option)">
+                                        <mat-icon class="icon-size-5" [svgIcon]="'feather:edit-2'"></mat-icon>
+                                    </button>
+                                    <button mat-icon-button color="warn" (click)="removeOption(option)">
+                                        <mat-icon class="icon-size-5" [svgIcon]="'feather:x'"></mat-icon>
+                                    </button>
+                                </td>
+                            </ng-container>
+                            <tr mat-row *matRowDef="let row; columns: optionColumns;"></tr>
+                        </table>
+                    </div>
+
+
+                    <!-- UPLOAD_FILE-->
+                    <div class="flex flex-col max-w-80 w-full " style="margin: 16px;"
+                         *ngIf="dynamicInputForm.get('inputTypeNameSelected').value == 'UPLOAD_FILE'">
+                        <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">
+                            Subir archivo
+                        </span>
+                        <input type="file" class="file-input" disabled>
+                        <div class="file-upload">
+                            Seleccione un archivo
+                            <button mat-mini-fab color="primary" class="upload-btn">
+                                <mat-icon class="buttonColor">attach_file</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- DATE-->
+                    <div class="flex flex-col max-w-80 w-full " style="margin: 16px;"
+                         *ngIf="dynamicInputForm.get('inputTypeNameSelected').value == 'DATE'">
+                        <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">
+                            Fecha
+                        </span>
+                        <mat-form-field>
+                            <input class="input" matInput [matDatepicker]="picker2" disabled>
+                            <mat-datepicker-toggle class="buttonColor" matSuffix [for]="picker2">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker class="buttonColor" #picker2></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+
+                </div>
+                <div class="flex justify-end mt-8">
+                    <button mat-icon-button (click)="removeMe()">
+                        <mat-icon class="icon-size-5 buttonColor" [svgIcon]="'mat_solid:delete'"></mat-icon>
+                    </button>
+
+                    <section>
+                        <mat-slide-toggle class="example-margin" [color]="'primary'" [formControlName]="'isMandatory'">
+                            Obligatorio
+                        </mat-slide-toggle>
+                    </section>
+                </div>
+            </div>
+
+        </form>
+    </fuse-card>
+
+
+</div>
+

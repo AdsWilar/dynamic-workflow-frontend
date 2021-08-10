@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {FuseAnimations} from '../../../../../@fuse/animations';
 import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 import {FuseAlertType} from '../../../../../@fuse/components/alert';
