@@ -2,10 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import {RoleResponse} from 'app/interfaces/responses/role-response.interface';
-import {RoleService} from 'app/services/role-service.service';
 import {ViewRoleActionComponent} from '../view-role-actions/view-role-actions.component';
 import {EditRoleComponent} from '../edit-role/edit-role.component';
-import {MainRoles} from '../../../../shared/constans';
+import {MainRoles} from '../../../../shared/constant';
 
 @Component({
     selector: 'list-role',

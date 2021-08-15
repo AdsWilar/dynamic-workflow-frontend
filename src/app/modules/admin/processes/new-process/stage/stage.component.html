@@ -1,0 +1,58 @@
+<div class="container">
+
+    <fuse-card class="flex flex-col max-w-80 w-full md:max-w-192 dynamic-input-card">
+        <form [formGroup]="stageForm">
+
+            <div class="flex-auto p-6 sm:p-10">
+                <div class="flex flex-wrap -m-4">
+
+                    <mat-form-field class="flex flex-col max-w-80 w-full " style="margin: 16px;">
+                        <mat-label>Nombre de la etapa</mat-label>
+                        <input id="name" matInput [formControlName]="'name'">
+                        <mat-error *ngIf="stageForm.get('name').hasError('required')">
+                            El nombre es requerido
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="flex flex-col max-w-80 w-full " style="margin: 16px;">
+                        <mat-label>Descripción</mat-label>
+                        <input id="description" matInput [formControlName]="'description'">
+                    </mat-form-field>
+
+                    <mat-form-field class="flex flex-col max-w-80 w-full " style="margin: 16px;">
+                        <mat-label>Seleccione un departamento</mat-label>
+                        <mat-select (selectionChange)="onSelectDepartment($event)">
+                            <ng-container *ngFor="let availableDepartmentForStage of availableDepartmentsForStage">
+                                <mat-option [value]="availableDepartmentForStage.id">
+                                    {{availableDepartmentForStage.name}}
+                                </mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <div class="flex flex-col max-w-80 w-full " style="margin: 16px;">
+                        <mat-label class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">
+                            Seleccione los analistas
+                        </mat-label>
+
+                        <div *ngFor="let departmentMemberChecked of departmentMembersChecked">
+                            <mat-checkbox class="mb-2" [checked]="false" [color]="'primary'"
+                                          (change)="checkDepartmentMember($event, departmentMemberChecked.data.id)">
+                                {{departmentMemberChecked.data.user | userFullInfo}}
+                            </mat-checkbox>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="flex justify-end mt-8">
+                    <button mat-icon-button (click)="removeMe()">
+                        <mat-icon class="icon-size-5 buttonColor" [svgIcon]="'mat_solid:delete'"></mat-icon>
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </fuse-card>
+
+</div>
+

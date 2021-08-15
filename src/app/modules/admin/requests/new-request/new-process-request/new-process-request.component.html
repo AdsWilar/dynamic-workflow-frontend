@@ -1,0 +1,44 @@
+<div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden">
+    <mat-drawer-container class="flex-auto h-full bg-card dark:bg-transparent">
+        <mat-drawer-content class="flex flex-col bg-gray-100 dark:bg-transparent">
+            <!-- Main -->
+            <div class="flex flex-col flex-auto">
+
+
+                <div class="dark bg-card dark:border-b">
+                    <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
+                        <div class="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 my-8 sm:my-12">
+                            <!-- Avatar and name -->
+                            <div class="flex flex-auto items-center min-w-0">
+
+                                <div class="flex flex-col min-w-0 ml-4">
+                                    <div
+                                        class="text-2xl md:text-5xl font-semibold tracking-tight leading-7 md:leading-10 truncate">
+                                        Realizar Solicitud
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="mt-4 sm:mt-0">
+                                <button mat-flat-button [color]="'primary'"
+                                        [routerLink]="['/requests/view-process-request',department.id]"
+                                        style="margin: 16px;">
+                                    <mat-icon svgIcon="mat_solid:arrow_back"></mat-icon>
+                                    <span class="ml-2 mr-1">Volver</span>
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div >
+                    <input-dynamic></input-dynamic>
+                </div>
+
+            </div>
+        </mat-drawer-content>
+    </mat-drawer-container>
+</div>
+

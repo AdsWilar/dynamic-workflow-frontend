@@ -2,6 +2,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({name: 'roleName'})
 export class RoleNamePipe implements PipeTransform {
+
     transform(roleName: string): string {
         switch (roleName) {
             case 'ADMINISTRATOR':

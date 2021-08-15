@@ -39,8 +39,16 @@ export class UserService {
         return this.baseService.get<UserResponse[]>(this.USERS_PATH + 'all');
     }
 
-    public getUserActionByUserId(userId: number): Observable<GeneralResponse<UserActionResponse>>{
+    public getUserActionByUserId(userId: number): Observable<GeneralResponse<UserActionResponse>> {
         return this.baseService.get<UserActionResponse>(this.USERS_PATH + userId + '/actions');
+    }
+
+    public getNonDepartmentBosses(): Observable<GeneralResponse<UserResponse[]>> {
+        return this.baseService.get<UserResponse[]>(this.USERS_PATH + 'non-department-bosses');
+    }
+
+    public getNonDepartmentMembers(): Observable<GeneralResponse<UserResponse[]>> {
+        return this.baseService.get<UserResponse[]>(this.USERS_PATH + 'non-department-members');
     }
 
 }

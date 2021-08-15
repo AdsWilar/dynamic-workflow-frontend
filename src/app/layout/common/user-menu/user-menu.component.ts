@@ -20,7 +20,7 @@ import {AuthManager} from '../../../core/auth/auth-manager';
 })
 export class UserMenuComponent implements OnInit, OnDestroy {
 
-    @Input() userData: UserData;
+    @Input() username: string;
 
     private unsubscribeAll: Subject<any> = new Subject<any>();
 
@@ -38,4 +38,5 @@ export class UserMenuComponent implements OnInit, OnDestroy {
     logOut(): void {
         this.router.navigate(['/log-out']);
     }
+
 }

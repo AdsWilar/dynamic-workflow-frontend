@@ -1,0 +1,193 @@
+<div class="flex flex-col flex-auto min-w-0">
+
+    <!-- Header -->
+    <div class="dark bg-card dark:border-b">
+        <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
+            <div class="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 my-8 sm:my-12">
+                <!-- Avatar and name -->
+                <div class="flex flex-auto items-center min-w-0">
+
+                    <div class="flex flex-col min-w-0 ml-4">
+                        <div class="text-2xl md:text-5xl font-semibold tracking-tight leading-7 md:leading-10 truncate">
+                            {{department.name}}
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Main -->
+    <div class="flex-auto mt-4 sm:mt-6">
+        <div class="w-full max-w-screen-xl mx-auto">
+
+            <!-- Tabs -->
+            <mat-tab-group
+                class="sm:px-2"
+                [animationDuration]="'0'">
+
+                <!-- Home -->
+                <mat-tab label="Departamento">
+                    <ng-template matTabContent>
+                        <div
+                            class="sm:col-span-2 md:col-span-4 flex flex-col flex-auto p-10 ">
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id="general" class="tab-pane fade in active">
+
+                                        <div class="panel panel-info transaction-panel-info"
+                                             *ngIf="department !== undefined">
+
+                                            <table class="mat-elevation-z8 demo-table bg-card ">
+
+                                                <tr matColumnDef="demo-name">
+                                                    <td mat-cell><b>Nombre</b>
+                                                    </td>
+                                                    <td mat-cell> {{department.name}}</td>
+                                                </tr>
+                                                <tr matColumnDef="demo-name">
+                                                    <td mat-cell><b>Email de contacto</b></td>
+                                                    <td mat-cell>{{department.contactEmail}}</td>
+                                                </tr>
+                                                <tr matColumnDef="demo-name">
+                                                    <td mat-cell><b>Telefono de
+                                                        contacto</b></td>
+                                                    <td mat-cell>{{department.contactPhone}}</td>
+                                                </tr>
+                                                <tr matColumnDef="demo-name">
+                                                    <td mat-cell><b>Ubicacion</b>
+                                                    </td>
+
+                                                    <td mat-cell>{{department.location}}</td>
+
+                                                </tr>
+                                                <tr matColumnDef="demo-name">
+                                                    <td mat-cell><b>Estado</b>
+                                                    </td>
+
+                                                    <td mat-cell>{{department.status}}</td>
+
+                                                </tr>
+                                                <tr matColumnDef="demo-name">
+                                                    <td mat-cell><b>Registro del
+                                                        departamento</b></td>
+                                                    <td mat-cell>{{department.creationTimestamp | date: 'dd-MM-yyyy HH:mm'}}</td>
+                                                </tr>
+                                                <tr matColumnDef="demo-name">
+                                                    <td mat-cell><b>Última
+                                                        actualización</b></td>
+                                                    <td mat-cell>{{department.modificationTimestamp | date: 'dd-MM-yyyy HH:mm'}}</td>
+                                                </tr>
+                                                <tr matColumnDef="demo-name">
+                                                    <td mat-cell><b>Departamento
+                                                        Padre</b></td>
+                                                    <td mat-cell>
+                                                                <span *ngIf="department.parentDepartment != null">
+                                                                    {{department.parentDepartment.name }}
+                                                                </span>
+
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="mt-4 sm:mt-0" align="center">
+                            <button mat-flat-button [color]="'warn-400'" [routerLink]="['/departments']"
+                                    style="margin: 16px;">
+                                <mat-icon svgIcon="mat_solid:arrow_back"></mat-icon>
+                                <span class="ml-2 mr-1">Volver</span>
+                            </button>
+                            <!-- New department button -->
+                            <button mat-flat-button [color]="'accent'" (click)="openEditDepartmentDialog(department.id)"
+                                    style="margin: 16px;">
+                                <mat-icon class="icon-size-5" [svgIcon]="'feather:edit-2'"></mat-icon>
+                                <span class="ml-2 mr-1">Editar</span>
+                            </button>
+                        </div>
+
+                    </ng-template>
+                    <!-- Actions -->
+
+                </mat-tab>
+
+                <!--                </table>-->
+
+                <mat-tab label="Miembros">
+                    <ng-template matTabContent>
+                        <div
+                            class="sm:col-span-2 md:col-span-4 flex flex-col flex-auto p-10 ">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="tab-pane fade in active">
+
+                                        <div class="panel panel-info transaction-panel-info"
+                                             *ngIf="department !== undefined">
+
+                                            <table class="mat-elevation-z8 demo-table bg-card ">
+
+                                                <tr matColumnDef="demo-name">
+                                                    <td mat-cell><b>Jefe de Departamento</b>
+                                                    </td>
+                                                    <td mat-cell
+                                                        (click)="openDepartmentMemberDialog(departmentBoss, true)">
+                                                        <ul>
+                                                            {{departmentBoss | userFullInfo }}
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                                <tr matColumnDef="demo-name">
+                                                    <td mat-cell><b>Analistas</b></td>
+                                                    <td mat-cell>
+                                                        <span
+                                                            *ngIf="analystMembers!== null && analystMembers.length == 0">
+                                                              No hay datos para mostrar
+                                                        </span>
+                                                        <ol *ngIf="analystMembers !== null && analystMembers.length > 0">
+                                                            <ul *ngFor="let analyst of analystMembers"
+                                                                (click)="openDepartmentMemberDialog(analyst, false)">
+                                                                {{analyst.names}}
+                                                                {{analyst.firstSurname}}
+                                                            </ul>
+                                                        </ol>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 sm:mt-0" align="center">
+                            <button mat-flat-button [color]="'warn-400'" [routerLink]="['/departments']"
+                                    style="margin: 16px;">
+                                <mat-icon svgIcon="mat_solid:arrow_back"></mat-icon>
+                                <span class="ml-2 mr-1">Volver</span>
+                            </button>
+                            <!-- New department button -->
+                            <button mat-flat-button [color]="'accent'" (click)="openEditMemberDepartmentDialog()"
+                                    style="margin: 16px;">
+                                <mat-icon class="icon-size-5" [svgIcon]="'feather:edit-2'"></mat-icon>
+                                <span class="ml-2 mr-1">Editar</span>
+                            </button>
+                        </div>
+
+                    </ng-template>
+                </mat-tab>
+
+            </mat-tab-group>
+
+        </div>
+    </div>
+
+</div>

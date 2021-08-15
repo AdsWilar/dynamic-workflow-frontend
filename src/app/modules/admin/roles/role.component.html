@@ -1,27 +1,36 @@
 <div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden">
 
-    <mat-drawer-container class="flex-auto h-full bg-card dark:bg-transparent">
+    <mat-drawer-container class="flex-auto h-full bg-card dark:border-b">
 
-        <mat-drawer-content class="flex flex-col bg-gray-100 dark:bg-transparent">
+        <mat-drawer-content class="flex flex-col bg-gray-100 dark:border-b">
 
             <!-- Main -->
             <div class="flex flex-col flex-auto">
 
-                <!-- Header -->
-                <div
-                    class="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between p-6 sm:py-12 md:px-8 border-b bg-card dark:bg-transparent">
-                    <!-- Title -->
-                    <div>
-                        <div class="text-4xl font-extrabold tracking-tight leading-none">Roles</div>
+                <div class="dark bg-card dark:border-b">
+                    <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
+                        <div class="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 my-8 sm:my-12">
+                            <!-- Avatar and name -->
+                            <div class="flex flex-auto items-center min-w-0">
 
-                    </div>
-                    <!-- Actions -->
-                    <div class="mt-4 sm:mt-0">
-                        <!-- Upload button -->
-                        <button mat-flat-button [color]="'primary'" (click)="newRoleDialog()">
-                            <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
-                            <span class="ml-2 mr-1">Nuevo rol</span>
-                        </button>
+                                <div class="flex flex-col min-w-0 ml-4">
+                                    <div class="text-2xl md:text-5xl font-semibold tracking-tight leading-7 md:leading-10 truncate">
+                                      Roles
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="mt-4 sm:mt-0">
+                                <!-- Upload button -->
+                                <button mat-flat-button [color]="'primary'" (click)="newRoleDialog()">
+                                    <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+                                    <span class="ml-2 mr-1">Nuevo rol</span>
+                                </button>
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
 
@@ -34,3 +43,4 @@
     </mat-drawer-container>
 
 </div>
+

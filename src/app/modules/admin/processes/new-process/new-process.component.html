@@ -1,0 +1,159 @@
+<div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden">
+    <mat-drawer-container class="flex-auto h-full bg-card dark:bg-transparent">
+        <mat-drawer-content class="flex flex-col bg-gray-100 dark:bg-transparent">
+            <!-- Main -->
+            <div class="flex flex-col flex-auto">
+
+                <div class="dark bg-card dark:border-b">
+                    <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
+                        <div class="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 my-8 sm:my-12">
+                            <!-- Avatar and name -->
+                            <div class="flex flex-auto items-center min-w-0">
+
+                                <div class="flex flex-col min-w-0 ml-4">
+                                    <div
+                                        class="text-2xl md:text-5xl font-semibold tracking-tight leading-7 md:leading-10 truncate">
+                                        Nuevo proceso
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New process wizard form -->
+                <form [formGroup]="newProcessWizardForm">
+
+                    <mat-horizontal-stepper [linear]="true" #horizontalStepper>
+
+                        <mat-step [formGroupName]="'generalInfo'"
+                                  [stepControl]="newProcessWizardForm.get('generalInfo')" #generalInfoStep>
+                            <ng-template matStepLabel>Información general</ng-template>
+                            <div class="flex-auto p-6 sm:p-10">
+                                <div class="flex flex-wrap -m-4">
+
+                                    <!-- Name field -->
+                                    <mat-form-field class="flex flex-col max-w-80 w-full" style="margin: 16px;">
+                                        <mat-label>Nombre</mat-label>
+                                        <input matInput [formControlName]="'name'" required>
+                                        <mat-error
+                                            *ngIf="newProcessWizardForm.get('generalInfo').get('name').hasError('required')">
+                                            El nombre es requerido
+                                        </mat-error>
+                                    </mat-form-field>
+
+                                    <!-- Description field -->
+                                    <mat-form-field class="flex flex-col max-w-80 w-full " style="margin: 16px;">
+                                        <mat-label>Descripción</mat-label>
+                                        <input matInput [formControlName]="'description'">
+                                    </mat-form-field>
+
+                                    <!-- Status field -->
+                                    <mat-form-field class="flex flex-col max-w-80 w-full " style="margin: 16px;">
+                                        <mat-label>Estado</mat-label>
+                                        <mat-select [formControlName]="'status'">
+                                            <mat-option *ngFor="let processStatus of processStatuses"
+                                                        [value]="processStatus">
+                                                {{processStatus | processStatus}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <!-- Department field -->
+                                    <mat-form-field class="flex flex-col max-w-80 w-full " style="margin: 16px;">
+                                        <mat-label>Seleccione un departamento</mat-label>
+                                        <mat-select [formControlName]="'departmentId'"
+                                                    (selectionChange)="onSelectDepartment()">
+                                            <ng-container *ngFor="let department of departments">
+                                                <mat-option [value]="department.id">{{department.name}}</mat-option>
+                                            </ng-container>
+                                        </mat-select>
+                                        <mat-error
+                                            *ngIf="newProcessWizardForm.get('generalInfo').get('departmentId').hasError('required')">
+                                            Debe seleccionar un departamento
+                                        </mat-error>
+                                    </mat-form-field>
+
+                                </div>
+
+                                <div class="flex justify-end">
+                                    <button class="px-8" mat-flat-button [color]="'primary'"
+                                            (click)="prepareForNextSteps()"
+                                            [disabled]="generalInfoStep.stepControl.pristine ||
+                                            generalInfoStep.stepControl.invalid"
+                                            type="button" matStepperNext>
+                                        Siguiente
+                                    </button>
+                                </div>
+                            </div>
+                        </mat-step>
+
+                        <mat-step [formGroupName]="'processForm'"
+                                  [stepControl]="newProcessWizardForm.get('processForm')">
+                            <ng-template matStepLabel>Formulario del proceso</ng-template>
+
+                            <ng-template #inputContainerRef></ng-template>
+                            <button mat-icon-button (click)="addInput()">
+                                <mat-icon class="buttonIcon">add</mat-icon>
+                            </button>
+
+                            <div class=" flex justify-end">
+                                <button class="px-8 mr-2" mat-flat-button [color]="'accent'" type="button"
+                                        matStepperPrevious>
+                                    Atrás
+                                </button>
+                                <button class="px-8" mat-flat-button [color]="'primary'" type="button" matStepperNext>
+                                    Siguiente
+                                </button>
+                            </div>
+                        </mat-step>
+
+                        <mat-step [formGroupName]="'stageForm'" [stepControl]="newProcessWizardForm.get('stageForm')">
+                            <ng-template matStepLabel>Etapas del proceso</ng-template>
+
+                            <ng-template #stageContainerRef></ng-template>
+                            <button mat-icon-button (click)="addStage()">
+                                <mat-icon class="buttonIcon">add</mat-icon>
+                            </button>
+
+                            <div class="flex justify-end mt-8">
+                                <button class="px-8 mr-2" mat-flat-button [color]="'accent'" type="button"
+                                        matStepperPrevious>
+                                    Atrás
+                                </button>
+                                <button class="px-8" mat-flat-button [color]="'primary'" type="reset"
+                                        (click)="createProcess()">
+                                    Crear Proceso
+                                </button>
+                            </div>
+                        </mat-step>
+
+<!--                        <mat-step [formGroupName]="'stageDetail'"-->
+<!--                                  [stepControl]="newProcessWizardForm.get('stageDetail')">-->
+<!--                            <ng-template matStepLabel>Detalle de las etapas</ng-template>-->
+<!--                            <p class="my-6 font-medium">-->
+<!--                                Thank you for completing our form! You can reset the form if you would like to change-->
+<!--                                your information.-->
+<!--                            </p>-->
+<!--                            <div class="flex justify-end mt-8">-->
+<!--                                <button class="px-8 mr-2" mat-flat-button [color]="'accent'" type="button"-->
+<!--                                        matStepperPrevious>-->
+<!--                                    Atrás-->
+<!--                                </button>-->
+<!--                                <button class="px-8" mat-flat-button [color]="'primary'" type="reset"-->
+<!--                                        (click)="createProcess()">-->
+<!--                                    Crear Proceso-->
+<!--                                </button>-->
+<!--                            </div>-->
+<!--                        </mat-step>-->
+
+                    </mat-horizontal-stepper>
+
+                </form>
+
+            </div>
+        </mat-drawer-content>
+    </mat-drawer-container>
+</div>
+

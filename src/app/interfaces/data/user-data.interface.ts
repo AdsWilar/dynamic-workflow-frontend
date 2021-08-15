@@ -4,8 +4,9 @@ export interface UserData {
     names?: string;
     firstSurname?: string;
     secondSurname?: string;
-    fullName?: string;
     email?: string;
     phone?: string;
+    identificationNumber?: number;
+    code?: string;
 
 }

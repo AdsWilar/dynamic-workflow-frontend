@@ -4,5 +4,8 @@ export let Config = {
     accessPath: 'access/',
     rolesPath: 'roles/',
     actionsPath: 'actions/',
-    usersPath: 'users/'
+    usersPath: 'users/',
+    departmentsPath: 'departments/',
+    inputTypesPath: 'input-types/',
+    processesPath: 'processes/'
 };
