@@ -8,7 +8,7 @@ import {ActivatedRoute} from '@angular/router';
 import {DepartmentService} from '../../../../../services/department-service.service';
 import {MatDialog} from '@angular/material/dialog';
 import {EditDepartmentComponent} from '../../../departments/edit-department/edit-department.component';
-import {MemberDetailDepartmentComponent} from '../../../departments/menbers-details-department/member-detail-department.component';
+import {DepartmentMemberComponent} from '../../../departments/department-member/department-member.component';
 import {EditDepartmentMemberComponent} from '../../../departments/edit-department-member/edit-department-member.component';
 
 @Component({

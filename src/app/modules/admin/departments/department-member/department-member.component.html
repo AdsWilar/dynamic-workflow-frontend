@@ -1,40 +1,8 @@
 <div mat-dialog-content>
     <div class="flex flex-col flex-auto items-center sm:justify-center min-w-0 ">
 
-        <!--        <div class="w-full max-w-80 sm:w-80 mx-auto sm:mx-0">-->
-        <!-- Title -->
-        <div class=" sm:text-2xl font-extrabold tracking-tight leading-tight" *ngIf="departmentMember">Datos
-            del {{departmentMemberTitle}} </div>
-        <mat-divider class="my-2"></mat-divider>
-
-        <table *ngIf="departmentMember">
-
-            <tr matColumnDef="demo-name">
-                <td mat-cell><b>Nombre: </b>
-                </td>
-                <td mat-cell>{{departmentMember.user.names}} {{departmentMember.user.firstSurname}} {{departmentMember.user.secondSurname}}</td>
-            </tr>
-            <tr matColumnDef="demo-name">
-                <td mat-cell><b>Email: </b>
-                </td>
-                <td mat-cell>{{departmentMember.user.email}}</td>
-            </tr>
-            <tr matColumnDef="demo-name">
-                <td mat-cell><b>Teléfono: </b>
-                </td>
-                <td mat-cell>{{departmentMember.user.phone}}</td>
-            </tr>
-            <tr matColumnDef="demo-name">
-                <td mat-cell><b>Estado: </b>
-                </td>
-                <td mat-cell>{{departmentMember.user.status}}</td>
-            </tr>
-
-        </table>
-
-        <mat-divider class="my-2"></mat-divider>
         <div class=" sm:text-2xl font-extrabold tracking-tight leading-tight" *ngIf="departmentMember">
-            Información del Certificado
+            Datos del {{departmentMemberTitle}}
         </div>
         <mat-divider class="my-2"></mat-divider>
         <table *ngIf="departmentMember">
@@ -57,22 +25,48 @@
             <tr matColumnDef="demo-name">
                 <td mat-cell><b>Estado: </b>
                 </td>
-                <td mat-cell>{{departmentMember.user.status}}</td>
+                <td mat-cell>{{departmentMember.user.status | userStatus}}</td>
             </tr>
 
         </table>
 
+        <mat-divider class="my-2"></mat-divider>
+
+        <div class=" sm:text-2xl font-extrabold tracking-tight leading-tight" *ngIf="digitalCertificate">
+            Información del Certificado Digital
+        </div>
+        <div class=" sm:text-2xl font-extrabold tracking-tight leading-tight" *ngIf="!digitalCertificate">
+            No tiene Certificado Digital
+        </div>
+        <mat-divider class="my-2"></mat-divider>
+        <table *ngIf="digitalCertificate">
+
+            <tr matColumnDef="demo-name">
+                <td mat-cell>
+                    <b>Primer configuración: </b>
+                </td>
+                <td mat-cell>{{digitalCertificate.uploadTimestamp | date: 'dd-MM-yyyy HH:mm'}}</td>
+            </tr>
+            <tr matColumnDef="demo-name">
+                <td mat-cell>
+                    <b>Última actualización: </b>
+                </td>
+                <td mat-cell>{{digitalCertificate.modificationTimestamp | date: 'dd-MM-yyyy HH:mm'}}</td>
+            </tr>
+
+        </table>
 
     </div>
 </div>
-<div mat-dialog-actions align="end">
+<mat-dialog-actions style="float: right">
     <div class="example-container">
-        <button mat-flat-button mat-dialog-close [color]="'accent'">
+        <file-chooser [buttonText]="'Subir certificado'" [acceptedExtension]="certificateExtension"
+                      [saveFileDataCallback]="uploadDigitalCertificate">
+        </file-chooser>
+        <button mat-flat-button mat-dialog-close [color]="'accent'" style="float: right">
             <span>
                 Cerrar
             </span>
         </button>
     </div>
-
-
-</div>
+</mat-dialog-actions>
