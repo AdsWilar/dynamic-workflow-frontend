@@ -5,6 +5,7 @@ import {DepartmentResponse} from '../../../../../interfaces/responses/department
 import {DataChecked} from '../../../../../interfaces/data/data-checked.interface';
 import {DepartmentMember} from '../../../../../interfaces/department-member.interface';
 import {DepartmentService} from '../../../../../services/department-service.service';
+import {DepartmentMemberService} from "../../../../../services/department-member-service.service";
 
 @Component({
     selector: 'stage',
@@ -21,7 +22,7 @@ export class StageComponent implements OnInit {
 
     departmentMembersChecked: DataChecked<DepartmentMember>[] = [];
 
-    constructor(private formBuilder: FormBuilder, private departmentService: DepartmentService) {
+    constructor(private formBuilder: FormBuilder, private departmentMemberService: DepartmentMemberService) {
     }
 
     ngOnInit(): void {
@@ -34,7 +35,7 @@ export class StageComponent implements OnInit {
     onSelectDepartment(event: MatSelectChange): void {
         this.purgeUncheckedDepartmentMembers();
         const departmentId: number = event.value;
-        this.departmentService.getAllDepartmentMembersByDepartmentId(departmentId)
+        this.departmentMemberService.getAllDepartmentMembersByDepartmentId(departmentId)
             .subscribe((response) => {
                 const departmentMembers: DepartmentMember[] = response.data;
                 for (const departmentMember of departmentMembers) {

@@ -141,7 +141,7 @@
                                                     <td mat-cell
                                                         (click)="openDepartmentMemberDialog(departmentBoss, true)">
                                                         <ul>
-                                                            {{departmentBoss | userFullInfo }}
+                                                            {{departmentBoss.user | userFullInfo }}
                                                         </ul>
                                                     </td>
                                                 </tr>
@@ -155,8 +155,8 @@
                                                         <ol *ngIf="analystMembers !== null && analystMembers.length > 0">
                                                             <ul *ngFor="let analyst of analystMembers"
                                                                 (click)="openDepartmentMemberDialog(analyst, false)">
-                                                                {{analyst.names}}
-                                                                {{analyst.firstSurname}}
+                                                                {{analyst.user.names}}
+                                                                {{analyst.user.firstSurname}}
                                                             </ul>
                                                         </ol>
                                                     </td>
