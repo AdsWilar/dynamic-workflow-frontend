@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {DepartmentResponse} from '../../../../../interfaces/responses/department-response.interface';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
-import {DepartmentService} from '../../../../../services/department-service.service';
+import {ProcessInputsResponse} from '../../../../../interfaces/responses/process-inputs-response.interface';
+import {ProcessService} from '../../../../../services/process-service.service';
 
 @Component({
     selector: 'new-process-request',
@@ -11,23 +11,25 @@ import {DepartmentService} from '../../../../../services/department-service.serv
 })
 export class NewProcessRequestComponent implements OnInit {
     private subscription: Subscription;
-    private departmentId: number;
-    department: DepartmentResponse;
+    private processId: number;
+    processInputs: ProcessInputsResponse;
+    departmentId: number;
 
-    @Input()
-    departments: DepartmentResponse[];
 
-    constructor(private router: Router, private activatedRoute: ActivatedRoute, private departmentService: DepartmentService) {
+    constructor(private activatedRoute: ActivatedRoute, private processService: ProcessService) {
     }
 
     ngOnInit(): void {
         this.subscription = this.activatedRoute.paramMap.subscribe((params) => {
-            if (params.get('id') != null) {
-                this.departmentId = +params.get('id');
-                console.log(this.departmentId);
-                this.departmentService.getCompleteDepartmentById(this.departmentId).subscribe((response) => {
-                    this.department = response.data.department;
+            if (params.get('processId') != null) {
+                this.processId = +params.get('processId');
+                console.log(this.processId);
+                this.processService.getProcessInputsByProcessId(this.processId).subscribe((response) => {
+                    this.processInputs = response.data;
                 });
+            }
+            if (params.get('departmentId') != null) {
+                this.departmentId = +params.get('departmentId');
             }
         });
     }

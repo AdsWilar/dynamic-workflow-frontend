@@ -2,22 +2,31 @@ import {Component, Input, OnInit} from '@angular/core';
 import {DepartmentResponse} from '../../../../../interfaces/responses/department-response.interface';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DepartmentService} from '../../../../../services/department-service.service';
+import {FuseAnimations} from '../../../../../../@fuse/animations';
+import {ProcessService} from '../../../../../services/process-service.service';
+import {ProcessResponse} from '../../../../../interfaces/responses/process-response.interface';
 
 @Component({
     selector: 'department-process-list',
     templateUrl: './department-process-list.component.html',
-    styleUrls: ['./department-process-list.component.scss']
+    styleUrls: ['./department-process-list.component.scss'],
+    animations: FuseAnimations
 })
 export class DepartmentProcessListComponent implements OnInit {
 
-    displayedColumns: string[] = ['name', 'contactEmail', 'contactPhone', 'status', 'viewDetail'];
     @Input()
-    departments: DepartmentResponse[];
+    department: DepartmentResponse;
+    processes: ProcessResponse[];
 
-    constructor() {
+    constructor(private processService: ProcessService) {
+        this.processes = [];
     }
 
     ngOnInit(): void {
+        this.processService.getAllActiveProcessesByDepartmentId(this.department.id)
+            .subscribe((response) => {
+                this.processes = response.data;
+            });
     }
 
 }

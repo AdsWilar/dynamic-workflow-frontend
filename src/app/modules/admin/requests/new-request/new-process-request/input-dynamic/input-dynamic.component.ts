@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FuseAnimations} from '../../../../../../../@fuse/animations';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {ProcessStatus} from '../../../../../../shared/types/process-status.type';
-import {ProcessStatuses} from '../../../../../../shared/constant';
+import {FormBuilder} from '@angular/forms';
 import {DepartmentResponse} from '../../../../../../interfaces/responses/department-response.interface';
 import {DepartmentService} from '../../../../../../services/department-service.service';
 import {InputType} from '../../../../../../interfaces/input-type.interface';
@@ -10,7 +8,6 @@ import {ThemePalette} from '@angular/material/core';
 import {MatSelectChange} from '@angular/material/select';
 import {HttpClient} from '@angular/common/http';
 import {InputTypeService} from '../../../../../../services/input-type-service.service';
-import {List} from 'postcss/lib/list';
 
 @Component({
     selector: 'input-dynamic',
