@@ -127,6 +127,11 @@ export const appRoutes: Route[] = [
             {
                 path: 'processes',
                 loadChildren: () => import('app/modules/admin/processes/process.module').then(m => m.ProcessModule)
+            },
+            {
+                path: 'requests',
+                loadChildren: () => import('app/modules/admin/requests/request.module')
+                    .then(m => m.RequestModule)
             }
 
 

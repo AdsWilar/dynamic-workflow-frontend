@@ -56,7 +56,27 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
             type: 'basic',
             icon: 'work_outline',
             link: '/processes'
-        }
+        },
+        {
+            id: 'requests',
+            title: 'Solicitudes',
+            type: 'collapsable',
+            icon: 'heroicons_outline:pencil-alt',
+            children: [
+                {
+                    id: 'new-request',
+                    title: 'Nueva Solicitud',
+                    type: 'basic',
+                    link: '/requests/new-request/root'
+                },
+                {
+                    id: 'my-requests',
+                    title: 'Mis Solicitudes',
+                    type: 'basic',
+                    link: '/requests/my-requests'
+                }
+            ]
+        },
     ];
     user: UserData;
 
