@@ -1,10 +1,10 @@
 import {DepartmentResponse} from './department-response.interface';
-import {UserResponse} from './user-response.interface';
+import {DepartmentMember} from '../department-member.interface';
 
 export interface CompleteDepartmentResponse {
 
     department: DepartmentResponse;
-    departmentBoss: UserResponse;
-    analystMembers: UserResponse[];
+    departmentBoss: DepartmentMember;
+    analystMembers: DepartmentMember[];
 
 }

@@ -6,6 +6,7 @@ import {RoleService} from '../../../../services/role-service.service';
 import {DepartmentService} from '../../../../services/department-service.service';
 import {DepartmentResponse} from '../../../../interfaces/responses/department-response.interface';
 import {UserResponse} from '../../../../interfaces/responses/user-response.interface';
+import {DepartmentMember} from '../../../../interfaces/department-member.interface';
 
 @Component({
     selector: 'member-detail-department',
@@ -14,7 +15,7 @@ import {UserResponse} from '../../../../interfaces/responses/user-response.inter
 })
 
 export class MemberDetailDepartmentComponent implements OnInit {
-    departmentMember: UserResponse;
+    departmentMember: DepartmentMember;
     departmentMemberTitle: string = '';
 
 

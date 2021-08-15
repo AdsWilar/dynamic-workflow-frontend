@@ -17,6 +17,7 @@ import {MemberDetailDepartmentComponent} from '../menbers-details-department/mem
 import {Style} from '@angular/cli/lib/config/schema';
 import {EditDepartmentMemberComponent} from '../edit-department-member/edit-department-member.component';
 import {CompleteDepartmentResponse} from '../../../../interfaces/responses/complete-department-response.interface';
+import {DepartmentMember} from "../../../../interfaces/department-member.interface";
 
 
 @Component({
@@ -38,15 +39,16 @@ export class ViewDepartmentComponent implements OnInit {
 
 
     department: DepartmentResponse;
-    departmentBoss: UserResponse;
-    analystMembers: UserResponse[];
+    departmentBoss: DepartmentMember;
+    analystMembers: DepartmentMember[];
 
     completeDepartment: CompleteDepartmentResponse;
 
 
     displayedColumns: string[] = ['name', 'contactEmail', 'contactPhone', 'status', 'location'];
 
-    constructor(private activatedRoute: ActivatedRoute, private departmentService: DepartmentService, private dialog: MatDialog) {
+    constructor(private activatedRoute: ActivatedRoute, private departmentService: DepartmentService,
+                private dialog: MatDialog) {
         this.department = {
             id: null,
             name: null,
@@ -59,21 +61,6 @@ export class ViewDepartmentComponent implements OnInit {
             parentDepartmentId: null,
             parentDepartment: null,
             subordinateDepartments: null
-        };
-
-        this.departmentBoss = {
-            id: null,
-            username: null,
-            status: null,
-            creationTimestamp: null,
-            modificationTimestamp: null,
-            names: null,
-            firstSurname: null,
-            secondSurname: null,
-            email: null,
-            phone: null,
-            identificationNumber: null,
-            code: null
         };
 
         this.analystMembers = [];
@@ -108,7 +95,7 @@ export class ViewDepartmentComponent implements OnInit {
         });
     }
 
-    openDepartmentMemberDialog(departmentMember: UserResponse, isDepartmentBoss: boolean): void {
+    openDepartmentMemberDialog(departmentMember: DepartmentMember, isDepartmentBoss: boolean): void {
         if (isDepartmentBoss === true) {
             this.dialog.open(MemberDetailDepartmentComponent, {
                 data: {
