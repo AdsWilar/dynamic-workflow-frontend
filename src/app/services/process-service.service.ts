@@ -6,6 +6,8 @@ import {Observable} from 'rxjs';
 import {GeneralResponse} from '../interfaces/general-response.interface';
 import {CompleteProcessResponse} from '../interfaces/responses/complete-process-response.interface';
 import {ProcessDetailResponse} from '../interfaces/responses/process-detail-response.interface';
+import {ProcessResponse} from '../interfaces/responses/process-response.interface';
+import {ProcessInputsResponse} from '../interfaces/responses/process-inputs-response.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -27,6 +29,14 @@ export class ProcessService {
 
     public getAllDetailedProcesses(): Observable<GeneralResponse<ProcessDetailResponse[]>> {
         return this.baseService.get<ProcessDetailResponse[]>(this.PROCESSES_PATH + 'all');
+    }
+
+    public getAllActiveProcessesByDepartmentId(departmentId: number): Observable<GeneralResponse<ProcessResponse[]>> {
+        return this.baseService.get<ProcessResponse[]>(this.PROCESSES_PATH + departmentId + '/all-active');
+    }
+
+    public getProcessInputsByProcessId(processId: number): Observable<GeneralResponse<ProcessInputsResponse>> {
+        return this.baseService.get<ProcessInputsResponse>(this.PROCESSES_PATH + processId + '/inputs');
     }
 
 }

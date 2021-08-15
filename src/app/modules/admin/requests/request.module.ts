@@ -23,6 +23,12 @@ import {MatTreeModule} from '@angular/material/tree';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatInputModule} from '@angular/material/input';
+import {SalverRequestComponent} from './salver-request/salver-request.component';
+import {TapSalverRequestComponent} from './salver-request/tap-salver-request/tap-salver-request.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {ListMyRequestComponent} from './my-requests/list-my-request/list-my-request.component';
+import {ApprovedListComponent} from './salver-request/tap-salver-request/approved-list/approved-list.component';
+import {SlopesListComponent} from './salver-request/tap-salver-request/slopes-list/slopes-list.component';
 
 @NgModule({
     declarations: [
@@ -32,7 +38,12 @@ import {MatInputModule} from '@angular/material/input';
         ViewProcessesComponent,
         DepartmentProcessListComponent,
         NewProcessRequestComponent,
-        InputDynamicComponent
+        InputDynamicComponent,
+        SalverRequestComponent,
+        TapSalverRequestComponent,
+        ListMyRequestComponent,
+        ApprovedListComponent,
+        SlopesListComponent
 
 
     ],
@@ -52,7 +63,8 @@ import {MatInputModule} from '@angular/material/input';
         MatTreeModule,
         MatDatepickerModule,
         MatSlideToggleModule,
-        MatInputModule
+        MatInputModule,
+        MatTabsModule
     ],
 })
 

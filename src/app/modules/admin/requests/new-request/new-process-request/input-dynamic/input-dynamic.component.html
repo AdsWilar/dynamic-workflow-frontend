@@ -1,7 +1,7 @@
 <div class="contenedor">
 
     <!-- Card #56 -->
-    <fuse-card class="flex flex-col max-w-80 w-full md:max-w-192 cardFuse">
+    <fuse-card class="flex flex-col max-w-80 w-full md:max-w-120 cardFuse">
         <form>
             <div class="flex-auto p-6 sm:p-10">
                 <div class="flex flex-wrap -m-4">
@@ -39,69 +39,55 @@
                                     <mat-icon class="buttonColor">attach_file</mat-icon>
                                 </button>
                             </div>
+                        </div>
 
-                            <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">
-                             Tamaño máximo de archivo
-                            </span>
-                            <mat-form-field>
-                                <mat-select>
-                                    <ng-container>
-                                        <mat-option>
-                                            50M
-                                        </mat-option>
-                                        <mat-option>
-                                            100M
-                                        </mat-option>
-                                    </ng-container>
-                                </mat-select>
-                            </mat-form-field>
+                        <!--                         MULTIPLE_CHOICE-->
+                        <div class="flex flex-col max-w-80 w-full " style="margin: 16px;">
+<!--                            *ngIf="inputTypeSelected?.name == 'MULTIPLE_CHOICE'"-->
+                            <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">Opción  múltiple</span>
+
+                        </div>
+
+
+                        <!--                         SELECTION_BOX-->
+
+                        <div class="flex flex-col max-w-80 w-full " style="margin: 16px;">
+
+<!--                            *ngIf="inputTypeSelected?.name == 'SELECTION_BOX'"-->
+                            <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">Casilla de seleccion</span>
 
 
                         </div>
 
-                        <!-- MULTIPLE_CHOICE-->
-                        <!--                        <div class="flex flex-col max-w-80 w-full " style="margin: 16px;"-->
-                        <!--                             *ngIf="inputTypeSelected?.name == 'MULTIPLE_CHOICE'">-->
-                        <!--                            <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">Opción  múltiple</span>-->
 
-                        <!--                        </div>-->
+                        <!--                         DEPLOYABLE_LIST-->
 
+                        <div class="flex flex-col max-w-80 w-full " style="margin: 16px;">
 
-                        <!-- SELECTION_BOX-->
+<!--                            *ngIf="inputTypeSelected?.name == 'DEPLOYABLE_LIST'"-->
+                            <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">Lista desplegable</span>
 
-                        <!--                        <div class="flex flex-col max-w-80 w-full " style="margin: 16px;"-->
-                        <!--                             *ngIf="inputTypeSelected?.name == 'SELECTION_BOX'">-->
-                        <!--                            <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">Casilla de seleccion</span>-->
+                        </div>
 
 
-                        <!--                        </div>-->
+                        <!-- DATE-->
+<!--                        <div class="flex flex-col max-w-80 w-full " style="margin: 16px;">-->
 
-
-                        <!-- DEPLOYABLE_LIST-->
-
-                        <!--                        <div class="flex flex-col max-w-80 w-full " style="margin: 16px;"-->
-                        <!--                             *ngIf="inputTypeSelected?.name == 'DEPLOYABLE_LIST'">-->
-                        <!--                            <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">Lista desplegable</span>-->
-
-                        <!--                        </div>-->
-
-
-                        <!--                        &lt;!&ndash; DATE&ndash;&gt;-->
-                        <!--                        <div class="flex flex-col max-w-80 w-full " style="margin: 16px;"-->
-                        <!--                             *ngIf="inputTypeSelected?.name == 'DATE'">-->
-                        <!--                      <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">-->
-                        <!--                             Fecha-->
-                        <!--                      </span>-->
-                        <!--                            <mat-form-field-->
-                        <!--                                [ngClass]="formFieldHelpers">-->
-                        <!--                                <input class="input"-->
-                        <!--                                       matInput-->
-                        <!--                                       [matDatepicker]="picker2" disabled>-->
-                        <!--                                <mat-datepicker-toggle class="buttonColor" matSuffix [for]="picker2">-->
-                        <!--                                </mat-datepicker-toggle>-->
-                        <!--                                <mat-datepicker class="buttonColor" #picker2></mat-datepicker>-->
-                        <!--                            </mat-form-field>-->
-                        <!--                        </div>-->
+<!--&lt;!&ndash;                            *ngIf="inputTypeSelected?.name == 'DATE'"&ndash;&gt;-->
+<!--                                              <span-->
+<!--                                                  class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">-->
+<!--                                                     Fecha-->
+<!--                                              </span>-->
+<!--                            <mat-form-field-->
+<!--                                [ngClass]="formFieldHelpers">-->
+<!--                                <input class="input"-->
+<!--                                       matInput-->
+<!--                                       [matDatepicker]="picker2" disabled>-->
+<!--                                <mat-datepicker-toggle class="buttonColor" matSuffix [for]="picker2">-->
+<!--                                </mat-datepicker-toggle>-->
+<!--                                <mat-datepicker class="buttonColor" #picker2></mat-datepicker>-->
+<!--                            </mat-form-field>-->
+<!--                        </div>-->
 
                     </div>
                 </div>
@@ -112,65 +98,4 @@
 
 
 </div>
-
-
-<!--<div class="contenedor">-->
-
-<!--    &lt;!&ndash; Card #56 &ndash;&gt;-->
-<!--    <fuse-card class="flex flex-col max-w-80 w-full md:max-w-192 cardFuse">-->
-<!--        <form>-->
-<!--            <div class="flex-auto p-6 sm:p-10">-->
-<!--                <div class="flex flex-wrap -m-4">-->
-<!--                    <div class="flex flex-col max-w-80 w-full " style="margin: 16px;">-->
-<!--                          <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">-->
-<!--                              Pregunta: preguntaaaaaaaaa-->
-<!--                         </span>-->
-<!--                        <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">-->
-<!--                              Descripción: descripcionnnnnnn-->
-<!--                         </span>-->
-
-<!--                        &lt;!&ndash;                         UPLOAD_FILE&ndash;&gt;-->
-<!--                        <div class="flex flex-col max-w-80 w-full " style="margin: 16px;"-->
-<!--                             *ngIf="inputTypeSelected.name2 == 'UPLOAD_FILE'">-->
-<!--                            <input type="file" class="file-input"-->
-<!--                                   (change)="onFileSelected($event)" #fileUpload>-->
-
-<!--                            <div class="file-upload">-->
-
-<!--                                {{fileName || "agregue un archivo"}}-->
-
-<!--                                <button mat-mini-fab color="primary" class="upload-btn"-->
-<!--                                        (click)="fileUpload.click()">-->
-<!--                                    <mat-icon class="buttonColor">attach_file</mat-icon>-->
-<!--                                </button>-->
-<!--                            </div>-->
-
-<!--                            <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">-->
-<!--                             Tamaño máximo de archivo-->
-<!--                            </span>-->
-<!--                            <mat-form-field>-->
-<!--                                <mat-select>-->
-<!--                                    <ng-container>-->
-<!--                                        <mat-option>-->
-<!--                                            50M-->
-<!--                                        </mat-option>-->
-<!--                                        <mat-option>-->
-<!--                                            100M-->
-<!--                                        </mat-option>-->
-<!--                                    </ng-container>-->
-<!--                                </mat-select>-->
-<!--                            </mat-form-field>-->
-
-
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--        </form>-->
-<!--    </fuse-card>-->
-
-
-<!--</div>-->
-
 
