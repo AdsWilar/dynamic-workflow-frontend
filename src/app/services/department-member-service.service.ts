@@ -31,4 +31,11 @@ export class DepartmentMemberService {
         return this.baseService.get<DepartmentMember[]>(this.DEPARTMENT_MEMBERS_PATH + departmentId + '/all');
     }
 
+    public getDigitalCertificateByDepartmentMemberId(departmentMemberId: number):
+        Observable<GeneralResponse<DigitalCertificateResponse>> {
+        return this.baseService.get<DigitalCertificateResponse>(
+            this.DEPARTMENT_MEMBERS_PATH + departmentMemberId + '/digital-certificate'
+        );
+    }
+
 }

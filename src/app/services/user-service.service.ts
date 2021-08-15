@@ -48,7 +48,7 @@ export class UserService {
     }
 
     public getNonDepartmentMembers(): Observable<GeneralResponse<UserResponse[]>> {
-        return this.baseService.get<UserResponse[]>(this.USERS_PATH + 'non-department-members');
+        return this.baseService.get<UserResponse[]>(this.USERS_PATH + 'non-department-member');
     }
 
 }

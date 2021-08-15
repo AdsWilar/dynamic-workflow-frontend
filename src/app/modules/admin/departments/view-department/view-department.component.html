@@ -139,7 +139,7 @@
                                                     <td mat-cell><b>Jefe de Departamento</b>
                                                     </td>
                                                     <td mat-cell
-                                                        (click)="openDepartmentMemberDialog(departmentBoss, true)">
+                                                        (click)="openDepartmentMemberDialog(departmentBoss)">
                                                         <ul>
                                                             {{departmentBoss.user | userFullInfo }}
                                                         </ul>
@@ -154,7 +154,7 @@
                                                         </span>
                                                         <ol *ngIf="analystMembers !== null && analystMembers.length > 0">
                                                             <ul *ngFor="let analyst of analystMembers"
-                                                                (click)="openDepartmentMemberDialog(analyst, false)">
+                                                                (click)="openDepartmentMemberDialog(analyst)">
                                                                 {{analyst.user.names}}
                                                                 {{analyst.user.firstSurname}}
                                                             </ul>

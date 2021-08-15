@@ -21,7 +21,7 @@ import {ViewDepartmentComponent} from './view-department/view-department.compone
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {EditDepartmentComponent} from './edit-department/edit-department.component';
-import {MemberDetailDepartmentComponent} from './menbers-details-department/member-detail-department.component';
+import {DepartmentMemberComponent} from './department-member/department-member.component';
 import {EditDepartmentMemberComponent} from './edit-department-member/edit-department-member.component';
 
 @NgModule({
@@ -32,8 +32,7 @@ import {EditDepartmentMemberComponent} from './edit-department-member/edit-depar
         ViewDepartmentComponent,
         EditDepartmentComponent,
         EditDepartmentMemberComponent,
-        MemberDetailDepartmentComponent
-
+        DepartmentMemberComponent
     ],
     imports: [
         RouterModule.forChild(departmentRoutes),
