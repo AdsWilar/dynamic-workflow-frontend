@@ -3,7 +3,8 @@ import {MyRequestComponent} from './my-requests/my-request.component';
 import {NewRequestComponent} from './new-request/new-request.component';
 import {ViewProcessesComponent} from './new-request/view-processes/view-processes.component';
 import {NewProcessRequestComponent} from './new-request/new-process-request/new-process-request.component';
-import {SalverRequestComponent} from './salver-request/salver-request.component';
+import {RequestTrayComponent} from './salver-request/request-tray.component';
+import {ViewRequestDetailComponent} from './salver-request/tap-salver-request/slopes-list/view-request-detail/view-request-detail.component';
 
 export const requestRouting: Route[] = [
 
@@ -42,6 +43,12 @@ export const requestRouting: Route[] = [
     },
     {
         path: 'salver-requests',
-        component: SalverRequestComponent,
+        component: RequestTrayComponent,
+    },
+    {
+        path: 'view-request-detail/:requestId',
+        component: ViewRequestDetailComponent,
     }
+
+
 ];

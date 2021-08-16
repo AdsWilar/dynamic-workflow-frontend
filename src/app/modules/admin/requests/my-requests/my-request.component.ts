@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {DepartmentResponse} from '../../../../interfaces/responses/department-response.interface';
-import {DepartmentService} from '../../../../services/department-service.service';
+import {RequestResponse} from '../../../../interfaces/responses/request-response.interface';
+import {RequestService} from '../../../../services/request-service.service';
 
 @Component({
     selector: 'my-requests',
@@ -9,13 +9,23 @@ import {DepartmentService} from '../../../../services/department-service.service
 })
 export class MyRequestComponent implements OnInit {
 
-    departments: DepartmentResponse[] = [];
-    panelOpenState = false;
+    requests: RequestResponse[];
 
-
-    constructor(private departmentService: DepartmentService) {
+    constructor(private requestsService: RequestService) {
+        this.requests = [];
     }
 
     ngOnInit(): void {
+        this.listRequests();
     }
+
+    private listRequests(): void {
+        this.requestsService.getAllRequestsForCurrentUser()
+            .subscribe((response) => {
+                if (response.success) {
+                    this.requests = response.data;
+                }
+            });
+    }
+
 }

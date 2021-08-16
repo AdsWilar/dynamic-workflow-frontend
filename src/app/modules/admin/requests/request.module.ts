@@ -23,12 +23,19 @@ import {MatTreeModule} from '@angular/material/tree';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatInputModule} from '@angular/material/input';
-import {SalverRequestComponent} from './salver-request/salver-request.component';
+import {RequestTrayComponent} from './salver-request/request-tray.component';
 import {TapSalverRequestComponent} from './salver-request/tap-salver-request/tap-salver-request.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {ListMyRequestComponent} from './my-requests/list-my-request/list-my-request.component';
-import {ApprovedListComponent} from './salver-request/tap-salver-request/approved-list/approved-list.component';
+import {FinishedListComponent} from './salver-request/tap-salver-request/finished-list/finished-list.component';
 import {SlopesListComponent} from './salver-request/tap-salver-request/slopes-list/slopes-list.component';
+import {ViewRequestDetailComponent} from './salver-request/tap-salver-request/slopes-list/view-request-detail/view-request-detail.component';
+import {DetailComponent} from './salver-request/tap-salver-request/slopes-list/view-request-detail/detail/detail.component';
+import {ApproveRequestDialogComponent} from './salver-request/tap-salver-request/slopes-list/view-request-detail/detail/approve-request-dialog/approve-request-dialog.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatDividerModule} from '@angular/material/divider';
+import {FuseAlertModule} from '../../../../@fuse/components/alert';
 
 @NgModule({
     declarations: [
@@ -39,11 +46,14 @@ import {SlopesListComponent} from './salver-request/tap-salver-request/slopes-li
         DepartmentProcessListComponent,
         NewProcessRequestComponent,
         InputDynamicComponent,
-        SalverRequestComponent,
+        RequestTrayComponent,
         TapSalverRequestComponent,
         ListMyRequestComponent,
-        ApprovedListComponent,
-        SlopesListComponent
+        FinishedListComponent,
+        SlopesListComponent,
+        ViewRequestDetailComponent,
+        DetailComponent,
+        ApproveRequestDialogComponent
 
 
     ],
@@ -64,7 +74,11 @@ import {SlopesListComponent} from './salver-request/tap-salver-request/slopes-li
         MatDatepickerModule,
         MatSlideToggleModule,
         MatInputModule,
-        MatTabsModule
+        MatTabsModule,
+        MatProgressSpinnerModule,
+        MatDialogModule,
+        MatDividerModule,
+        FuseAlertModule
     ],
 })
 

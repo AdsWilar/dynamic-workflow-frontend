@@ -9,9 +9,13 @@ import {DepartmentStatusPipe} from './pipes/department-status.pipe';
 import {UserFullInfoPipe} from './pipes/user-full-info.pipe';
 import {InputTypeNamePipe} from './pipes/input-type-name.pipe';
 import {ProcessStatusPipe} from './pipes/process-status.pipe';
-import {FileChooserComponent} from "./file-chooser/file-chooser.component";
-import {MatIconModule} from "@angular/material/icon";
-import {MatButtonModule} from "@angular/material/button";
+
+import {FileChooserComponent} from './file-chooser/file-chooser.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+
+import {RequestStatusPipe} from './pipes/requests-status.pipe';
+
 
 @NgModule({
     declarations: [
@@ -23,7 +27,11 @@ import {MatButtonModule} from "@angular/material/button";
         InputTypeNamePipe,
         ProcessStatusPipe,
 
-        FileChooserComponent
+
+        FileChooserComponent,
+
+        RequestStatusPipe
+
     ],
     imports: [
         CommonModule,
@@ -44,7 +52,11 @@ import {MatButtonModule} from "@angular/material/button";
         InputTypeNamePipe,
         ProcessStatusPipe,
 
-        FileChooserComponent
+
+        FileChooserComponent,
+
+        RequestStatusPipe
+
     ],
     providers: [
         Toaster

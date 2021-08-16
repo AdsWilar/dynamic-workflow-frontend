@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {DepartmentResponse} from '../../../../../interfaces/responses/department-response.interface';
 import {DepartmentService} from '../../../../../services/department-service.service';
+import {RequestResponse} from '../../../../../interfaces/responses/request-response.interface';
 
 @Component({
     selector: 'list-my-requests',
@@ -9,11 +10,12 @@ import {DepartmentService} from '../../../../../services/department-service.serv
 })
 export class ListMyRequestComponent implements OnInit {
 
-    departments: DepartmentResponse[] = [];
-    panelOpenState = false;
+    displayedColumns: string[] = ['code', 'finishTimestamp', 'status', 'viewDetail'];
+    @Input()
+    requests: RequestResponse[];
 
 
-    constructor(private departmentService: DepartmentService) {
+    constructor() {
     }
 
     ngOnInit(): void {

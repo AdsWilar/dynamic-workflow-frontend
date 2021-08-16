@@ -1,0 +1,60 @@
+<div class="flex-auto mt-4 sm:mt-6">
+    <div class="w-full max-w-screen-xl mx-auto">
+
+            <!-- Home -->
+                    <div
+                        class="sm:col-span-2 md:col-span-4 flex flex-col flex-auto p-10 ">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="general" class="tab-pane fade in active">
+
+                                    <div class="panel panel-info transaction-panel-info">
+
+                                        <table class="mat-elevation-z8 demo-table bg-card ">
+
+                                            <tr matColumnDef="demo-name">
+                                                <td mat-cell><b>Nombre</b>
+                                                </td>
+                                            </tr>
+                                            <tr matColumnDef="demo-name">
+                                                <td mat-cell><b>Email de contacto</b></td>
+                                            </tr>
+                                            <tr matColumnDef="demo-name">
+                                                <td mat-cell><b>Telefono de
+                                                    contacto</b></td>
+                                            </tr>
+                                            <tr matColumnDef="demo-name">
+                                                <td mat-cell><b>Ubicacion</b>
+                                                </td>
+
+                                            </tr>
+                                            <tr matColumnDef="demo-name">
+                                                <td mat-cell><b>Estado</b>
+                                                </td>
+
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-4 sm:mt-0" align="center">
+                        <button mat-flat-button [color]="'accent'"[routerLink]="['/departments']"
+                                style="margin: 16px;">
+                            <mat-icon svgIcon="close"></mat-icon>
+                            <span class="ml-2 mr-1">Rechazar</span>
+                        </button>
+                        <!-- New department button -->
+                        <button mat-flat-button [color]="'primary'" (click)="approveRequestDialog(requestId)"
+                                style="margin: 16px;">
+                            <mat-icon class="icon-size-5" svgIcon="check"></mat-icon>
+                            <span class="ml-2 mr-1">Aprobar</span>
+                        </button>
+                    </div>
+
+    </div>
+</div>
