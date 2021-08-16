@@ -9,10 +9,9 @@ import {RequestResponse} from '../../../../../../interfaces/responses/request-re
 })
 export class FinishedListComponent implements OnInit {
 
-    displayedColumns: string[] = ['code', 'finishTimestamp', 'status', 'viewDetail'];
-    requestStatuses: RequestStatus[] = ['IN_PROCESS', 'APPROVED', 'REJECTED'];
+    displayedColumns: string[] = ['code', 'shippingTimestamp', 'finishTimestamp', 'status', 'viewDetail'];
     @Input()
-    requests: RequestResponse[];
+    requestsFinish: RequestResponse[];
 
 
     constructor() {

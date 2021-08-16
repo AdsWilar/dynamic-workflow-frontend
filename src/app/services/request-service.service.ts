@@ -39,4 +39,9 @@ export class RequestService {
         return this.baseService.get<RequestResponse[]>(this.REQUESTS_PATH + 'pending/current-analyst');
     }
 
+    public getFinishedRequestsForCurrentAnalyst(): Observable<GeneralResponse<RequestResponse[]>> {
+        return this.baseService.get<RequestResponse[]>(this.REQUESTS_PATH + 'finished/current-analyst');
+    }
+
+
 }

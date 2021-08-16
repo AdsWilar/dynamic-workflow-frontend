@@ -19,18 +19,28 @@ import {RequestService} from '../../../../../services/request-service.service';
 })
 export class TapSalverRequestComponent implements OnInit {
 
-    requests: RequestResponse[];
+    requestsPending: RequestResponse[];
+    requestsFinish: RequestResponse[];
 
 
     constructor(private requestsService: RequestService) {
-        this.requests = [];
+        this.requestsPending = [];
+        this.requestsFinish = [];
     }
 
     ngOnInit(): void {
         this.requestsService.getPendingRequestsForCurrentAnalyst()
             .subscribe((response) => {
                 if (response.success) {
-                    this.requests = response.data;
+                    this.requestsPending = response.data;
+                }
+            });
+        this.requestsService.getFinishedRequestsForCurrentAnalyst()
+            .subscribe((response) => {
+                if (response.success) {
+                    this.requestsFinish = response.data;
+                    console.log('paso po requestsPending');
+                    console.log(this.requestsFinish);
                 }
             });
     }
