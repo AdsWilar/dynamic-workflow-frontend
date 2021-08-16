@@ -13,17 +13,14 @@ export class NewRequestComponent implements OnInit {
 
     private dataSubscription: Subscription;
     private subscription: Subscription;
-    departments: DepartmentResponse[] = [];
     private departmentId: number;
     department: DepartmentResponse;
 
 
-    constructor(private departmentService: DepartmentService, private activatedRoute: ActivatedRoute) {
-
+    constructor(private activatedRoute: ActivatedRoute, private departmentService: DepartmentService) {
     }
 
     ngOnInit(): void {
-
         this.dataSubscription = this.activatedRoute.data.subscribe((data) => {
             const isRoot: boolean = data.isRoot;
             if (isRoot) {
@@ -36,20 +33,14 @@ export class NewRequestComponent implements OnInit {
                     if (params.get('departmentId')) {
                         this.departmentId = +params.get('departmentId');
                         console.log(this.departmentId);
-                        this.departmentService.getCompleteDepartmentById(this.departmentId).subscribe((response) => {
+                        this.departmentService.getCompleteDepartmentById(this.departmentId)
+                            .subscribe((response) => {
                             this.department = response.data.department;
                         });
                     }
-                    // this.departmentService.getRootDepartment().subscribe((response) => {
-                    //     this.department = response.data;
-                    //     console.log(this.department);
-                    // });
-
                 });
             }
-
         });
-
-
     }
+
 }

@@ -4,7 +4,6 @@
             <!-- Main -->
             <div class="flex flex-col flex-auto">
 
-
                 <div class="dark bg-card dark:border-b">
                     <div class="flex flex-col w-full max-w-screen-xl mx-auto px-6 sm:px-8">
                         <div class="flex flex-col sm:flex-row flex-auto sm:items-center min-w-0 my-8 sm:my-12">
@@ -16,13 +15,12 @@
                                         class="text-2xl md:text-5xl font-semibold tracking-tight leading-7 md:leading-10 truncate">
                                         Realizar Solicitud
                                     </div>
-
                                 </div>
                             </div>
 
                             <div class="mt-4 sm:mt-0" *ngIf="departmentId">
                                 <button mat-flat-button [color]="'primary'"
-                                        [routerLink]="['/requests/view-process-request', departmentId]"
+                                        [routerLink]="['/requests/view-processes', departmentId]"
                                         style="margin: 16px;">
                                     <mat-icon svgIcon="mat_solid:arrow_back"></mat-icon>
                                     <span class="ml-2 mr-1">Volver</span>
@@ -33,12 +31,21 @@
 
                     </div>
                 </div>
-                <div >
-                    <input-dynamic></input-dynamic>
+
+                <ng-template #formInputContainerRef></ng-template>
+
+                <div class="mt-4 sm:mt-0" align="center">
+                    <button mat-flat-button [color]="'primary'" style="margin: 16px;" (click)="registerRequest()">
+                        <mat-icon class="icon-size-5" svgIcon="feather:send"></mat-icon>
+                        <span class="ml-2 mr-1">Enviar solicitud</span>
+                    </button>
                 </div>
+
+<!--                <div>-->
+<!--                    <input-dynamic></input-dynamic>-->
+<!--                </div>-->
 
             </div>
         </mat-drawer-content>
     </mat-drawer-container>
 </div>
-

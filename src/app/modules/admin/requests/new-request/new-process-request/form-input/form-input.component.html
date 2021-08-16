@@ -1,0 +1,96 @@
+<div class="contenedor">
+
+    <!-- Card #56 -->
+    <fuse-card class="flex flex-col max-w-80 w-full md:max-w-120 cardFuse">
+        <form>
+            <div class="flex-auto p-6 sm:p-10">
+                <div class="flex flex-wrap -m-4">
+                    <div class="flex flex-col max-w-80 w-full " style="margin: 16px;">
+                        <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">
+                            Título: {{ detailedInput.input.name }}
+                        </span>
+                        <span class="font-semibold mb-2 gt-xs:text-right gt-xs:min-w-32 gt-xs:mr-4 gt-xs:mb-0">
+                            Descripción: {{ detailedInput.input.description }}
+                        </span>
+
+                        <!-- TEXT -->
+                        <div class="flex flex-col max-w-80 w-full input" style="margin: 16px;"
+                             *ngIf="detailedInput.inputType.name == 'TEXT'">
+                            <input matInput id="text" type="text" [(ngModel)]="inputValue" #textInput="ngModel"
+                                   placeholder="Respuesta..." [ngModelOptions]="{standalone: true}">
+                            <mat-error *ngIf="textInput.invalid && textInput.touched">
+                                El campo es requerido
+                            </mat-error>
+                        </div>
+
+                        <!-- MULTIPLE_CHOICE -->
+                        <div class="flex flex-col max-w-80 w-full" style="margin: 16px;"
+                             *ngIf="detailedInput.inputType.name == 'MULTIPLE_CHOICE'">
+                            <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+                                             [(ngModel)]="inputValue" #multipleChoiceInput="ngModel"
+                                             [ngModelOptions]="{standalone: true}">
+                                <mat-radio-button class="example-radio-button"
+                                                  *ngFor="let selectionInputValue of detailedInput.selectionInputValues"
+                                                  [value]="selectionInputValue.value">
+                                    {{ selectionInputValue.value }}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                            <mat-error *ngIf="multipleChoiceInput.invalid && multipleChoiceInput.touched">
+                                Debe seleccionar una opción
+                            </mat-error>
+                        </div>
+
+<!--                        &lt;!&ndash; SELECTION_BOX &ndash;&gt;-->
+<!--                        <div class="flex flex-col max-w-80 w-full " style="margin: 16px;"-->
+<!--                             *ngIf="detailedInput.inputType.name == 'SELECTION_BOX'">-->
+
+<!--                        </div>-->
+
+
+                        <!-- DEPLOYABLE_LIST -->
+                        <div class="flex flex-col max-w-80 w-full " style="margin: 16px;"
+                             *ngIf="detailedInput.inputType.name == 'DEPLOYABLE_LIST'">
+                            <mat-select [(ngModel)]="inputValue" name="inputValue" #deployableListInput="ngModel"
+                                        [ngModelOptions]="{standalone: true}">
+                                <mat-option *ngFor="let selectionInputValue of detailedInput.selectionInputValues"
+                                            [value]="selectionInputValue.value">
+                                    {{ selectionInputValue.value }}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="deployableListInput.invalid && deployableListInput.touched">
+                                Debe seleccionar una opción
+                            </mat-error>
+                        </div>
+
+                        <!-- UPLOAD_FILE -->
+                        <div class="flex flex-col max-w-80 w-full " style="margin: 16px;"
+                             *ngIf="detailedInput.inputType.name == 'UPLOAD_FILE'">
+                            {{ fileName || 'Seleccione un archivo' }}
+                            <file-chooser [buttonText]="'Seleccionar archivo'" [acceptedExtension]="acceptedExtension"
+                                          [saveFileDataCallback]="saveSelectedFile">
+                            </file-chooser>
+                        </div>
+
+                        <!-- DATE -->
+                        <div class="flex flex-col max-w-80 w-full " style="margin: 16px;"
+                             *ngIf="detailedInput.inputType.name == 'DATE'">
+                            <input class="input" matInput [matDatepicker]="picker2" [(ngModel)]="inputValue"
+                                   #dateInput="ngModel" [ngModelOptions]="{standalone: true}">
+                            <mat-datepicker-toggle class="buttonColor" matSuffix [for]="picker2">
+                            </mat-datepicker-toggle>
+                            <mat-datepicker class="buttonColor" #picker2></mat-datepicker>
+                            <mat-error *ngIf="dateInput.invalid && dateInput.touched">
+                                Debe seleccionar una fecha válida
+                            </mat-error>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </fuse-card>
+
+
+</div>
+

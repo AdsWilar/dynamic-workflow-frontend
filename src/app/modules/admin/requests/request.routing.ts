@@ -28,12 +28,12 @@ export const requestRouting: Route[] = [
         }
     },
     {
-        path: 'new-processes-request/:processId/:departmentId',
+        path: 'new-process-request/:processId/:departmentId',
         component: NewProcessRequestComponent,
     },
 
     {
-        path: 'view-process-request/:departmentId',
+        path: 'view-processes/:departmentId',
         component: ViewProcessesComponent
     },
     {

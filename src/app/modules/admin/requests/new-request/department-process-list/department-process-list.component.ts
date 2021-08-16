@@ -1,7 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {DepartmentResponse} from '../../../../../interfaces/responses/department-response.interface';
-import {ActivatedRoute, Router} from '@angular/router';
-import {DepartmentService} from '../../../../../services/department-service.service';
 import {FuseAnimations} from '../../../../../../@fuse/animations';
 import {ProcessService} from '../../../../../services/process-service.service';
 import {ProcessResponse} from '../../../../../interfaces/responses/process-response.interface';
