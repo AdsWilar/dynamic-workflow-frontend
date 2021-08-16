@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {RequestService} from '../../../../../../../../services/request-service.service';
 import {ApproveRequestDialogComponent} from './approve-request-dialog/approve-request-dialog.component';
+import {ExecuteAction} from '../../../../../../../../shared/types/execute-action.type';
 
 @Component({
     selector: 'details-request',
@@ -21,9 +22,21 @@ export class DetailComponent implements OnInit {
     }
 
     approveRequestDialog(requestId: number): void {
+        const executeAction: ExecuteAction = 'APPROVE';
         this.dialog.open(ApproveRequestDialogComponent, {
             data: {
                 requestId: requestId,
+                action: executeAction
+            }
+        });
+    }
+
+    rejectRequestDialog(requestId: number): void {
+        const executeAction: ExecuteAction = 'REJECT';
+        this.dialog.open(ApproveRequestDialogComponent, {
+            data: {
+                requestId: requestId,
+                action: executeAction
             }
         });
     }

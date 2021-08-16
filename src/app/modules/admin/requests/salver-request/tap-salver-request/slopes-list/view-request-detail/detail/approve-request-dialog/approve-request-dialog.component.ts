@@ -11,6 +11,8 @@ import {CompleteRoleRequest} from '../../../../../../../../../interfaces/request
 import {RequestService} from '../../../../../../../../../services/request-service.service';
 import {RequestActionRequest} from '../../../../../../../../../interfaces/requests/request-action-request.interface';
 import {Router} from '@angular/router';
+import {RequestStatus} from '../../../../../../../../../shared/types/request-status.type';
+import {ExecuteAction} from '../../../../../../../../../shared/types/execute-action.type';
 
 @Component({
     selector: 'approve-request-dialog',
@@ -20,16 +22,22 @@ import {Router} from '@angular/router';
 export class ApproveRequestDialogComponent implements OnInit {
 
     @ViewChild('ApproveRequestNgForm') ApproveRequestRForm: NgForm;
+    @ViewChild('rejectRequestNgForm') rejectRequestRForm: NgForm;
     showAlert: boolean = false;
     ApproveRequestForm: FormGroup;
+    rejectRequestForm: FormGroup;
     alert: { type: FuseAlertType, message: string } = {
         type: 'success',
         message: ''
     };
 
+    executeAction: ExecuteAction;
+    requestId: number;
+
 
     constructor(private router: Router, private formBuilder: FormBuilder, private actionService: ActionService, private requestService: RequestService,
                 @Inject(MAT_DIALOG_DATA) private data: any, private dialogRef: MatDialogRef<ApproveRequestDialogComponent>) {
+
     }
 
     ngOnInit(): void {
@@ -37,9 +45,13 @@ export class ApproveRequestDialogComponent implements OnInit {
             commentary: ['', Validators.required],
             digitalCertificatePassword: ['', Validators.required]
         });
-        console.log('executeActionOnRequest');
-        console.log(this.data.requestId);
 
+        this.rejectRequestForm = this.formBuilder.group({
+            commentary: ['', Validators.required]
+        });
+
+        this.requestId = this.data.requestId;
+        this.executeAction = this.data.action;
     }
 
     approve(): void {
@@ -54,13 +66,47 @@ export class ApproveRequestDialogComponent implements OnInit {
             digitalCertificatePassword: this.ApproveRequestForm.value.digitalCertificatePassword
         };
 
-        this.requestService.executeActionOnRequest(requestActionRequest, this.data.requestId).subscribe((response) => {
+        this.requestService.executeActionOnRequest(requestActionRequest, this.requestId).subscribe((response) => {
             console.log(response);
             this.ApproveRequestForm.enable();
             // this.ApproveRequestNgForm.resetForm();
             if (response.success) {
                 // this.data.onRoleCreated();
                 console.log('exito al aprobar');
+                console.log(response.data);
+                this.dialogRef.close();
+                this.router.navigate(['salver-requests']);
+
+            } else {
+                this.alert = {
+                    type: 'error',
+                    message: response.message
+                };
+                this.showAlert = true;
+            }
+        });
+
+    }
+
+    reject(): void {
+        if (this.rejectRequestForm.invalid) {
+            return;
+        }
+        this.rejectRequestForm.disable();
+        this.showAlert = false;
+        const requestActionRequest: RequestActionRequest = {
+            executedAction: 'REJECT',
+            commentary: this.rejectRequestForm.value.commentary,
+            digitalCertificatePassword: null
+        };
+
+        this.requestService.executeActionOnRequest(requestActionRequest, this.requestId).subscribe((response) => {
+            console.log(response);
+            this.rejectRequestForm.enable();
+            // this.ApproveRequestNgForm.resetForm();
+            if (response.success) {
+                // this.data.onRoleCreated();
+                console.log('exito al rechazar');
                 console.log(response.data);
                 this.dialogRef.close();
                 this.router.navigate(['salver-requests']);
