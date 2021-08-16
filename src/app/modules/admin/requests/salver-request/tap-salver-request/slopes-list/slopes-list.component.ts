@@ -9,10 +9,9 @@ import {RequestStatus} from '../../../../../../shared/types/request-status.type'
 })
 export class SlopesListComponent implements OnInit {
 
-    displayedColumns: string[] = ['code', 'finishTimestamp', 'status', 'viewDetail'];
-    requestStatuses: RequestStatus[] = ['IN_PROCESS', 'APPROVED', 'REJECTED'];
+    displayedColumns: string[] = ['code', 'shippingTimestamp', 'status', 'viewDetail'];
     @Input()
-    requests: RequestResponse[];
+    requestsPending: RequestResponse[];
 
 
     constructor() {
