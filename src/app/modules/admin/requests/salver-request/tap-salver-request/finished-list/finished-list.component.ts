@@ -1,13 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {RequestResponse} from '../../../../../../interfaces/responses/request-response.interface';
 import {RequestStatus} from '../../../../../../shared/types/request-status.type';
+import {RequestResponse} from '../../../../../../interfaces/responses/request-response.interface';
 
 @Component({
-    selector: 'slopes-list',
-    templateUrl: './slopes-list.component.html',
-    styleUrls: ['/slopes-list.component.scss']
+    selector: 'finished-list',
+    templateUrl: './finished-list.component.html',
+    styleUrls: ['/finished-list.component.scss']
 })
-export class SlopesListComponent implements OnInit {
+export class FinishedListComponent implements OnInit {
 
     displayedColumns: string[] = ['code', 'finishTimestamp', 'status', 'viewDetail'];
     requestStatuses: RequestStatus[] = ['IN_PROCESS', 'APPROVED', 'REJECTED'];

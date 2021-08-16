@@ -13,7 +13,7 @@ export class ListDepartmentComponent implements OnInit {
     @Input()
     departments: DepartmentResponse[];
 
-    constructor(private router: Router, private _activatedRoute: ActivatedRoute) {
+    constructor() {
     }
 
     ngOnInit(): void {

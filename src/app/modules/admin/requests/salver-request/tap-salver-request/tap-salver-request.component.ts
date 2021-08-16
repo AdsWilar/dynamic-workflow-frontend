@@ -1,15 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {Subscription} from 'rxjs';
-import {DepartmentResponse} from '../../../../../interfaces/responses/department-response.interface';
-import {UserResponse} from '../../../../../interfaces/responses/user-response.interface';
-import {CompleteDepartmentResponse} from '../../../../../interfaces/responses/complete-department-response.interface';
-import {ActivatedRoute} from '@angular/router';
-import {DepartmentService} from '../../../../../services/department-service.service';
-import {MatDialog} from '@angular/material/dialog';
-import {EditDepartmentComponent} from '../../../departments/edit-department/edit-department.component';
-import {DepartmentMemberComponent} from '../../../departments/department-member/department-member.component';
-import {EditDepartmentMemberComponent} from '../../../departments/edit-department-member/edit-department-member.component';
+
+import {RequestResponse} from '../../../../../interfaces/responses/request-response.interface';
+import {RequestService} from '../../../../../services/request-service.service';
+
 
 @Component({
     selector: 'tap-salver-request',
@@ -25,20 +19,19 @@ import {EditDepartmentMemberComponent} from '../../../departments/edit-departmen
 })
 export class TapSalverRequestComponent implements OnInit {
 
-    private subscription: Subscription;
-    private departmentId: number;
+    requests: RequestResponse[];
 
 
-    constructor(private activatedRoute: ActivatedRoute) {
-
+    constructor(private requestsService: RequestService) {
+        this.requests = [];
     }
 
     ngOnInit(): void {
-        this.subscription = this.activatedRoute.paramMap.subscribe((params) => {
-            if (params.get('id') != null) {
-                this.departmentId = +params.get('id');
-                console.log(this.departmentId);
-            }
-        });
+        this.requestsService.getPendingRequestsForCurrentAnalyst()
+            .subscribe((response) => {
+                if (response.success) {
+                    this.requests = response.data;
+                }
+            });
     }
 }

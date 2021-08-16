@@ -1,0 +1,55 @@
+<div mat-dialog-content>
+    <div class="flex flex-col flex-auto items-center sm:justify-center min-w-0">
+        <!-- <div class="w-full sm:w-auto py-8 px-4 sm:p-12 sm:rounded-2xl sm:shadow sm:bg-card"> -->
+        <div class="w-full max-w-80 sm:w-80 mx-auto sm:mx-0">
+            <!-- Title -->
+            <div class="mt-8 text-4xl font-extrabold tracking-tight leading-tight">Aprobar solicitud</div>
+            <mat-divider class="my-2"></mat-divider>
+
+
+            <!--             Alert -->
+<!--            <fuse-alert class="mt-8 -mb-4" *ngIf="showAlert" [appearance]="'outline'" [showIcon]="false"-->
+<!--                        [type]="alert.type" [@shake]="alert.type === 'error'">-->
+<!--                {{alert.message}}-->
+<!--            </fuse-alert>-->
+
+            <form class="mt-8" [formGroup]="ApproveRequestForm" #ApproveRequestRForm="ngForm">
+
+                <mat-form-field class="w-full">
+                    <mat-label>Comentario</mat-label>
+                    <input id="commentary" matInput [formControlName]="'commentary'">
+                    <mat-error *ngIf="ApproveRequestForm.get('commentary').hasError('required')">
+                        El comentario es requerido
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="w-full">
+                    <mat-label>Contraseña del certificado digital</mat-label>
+                    <input id="digitalCertificatePassword" matInput [formControlName]="'digitalCertificatePassword'">
+                    <mat-error *ngIf="ApproveRequestForm.get('digitalCertificatePassword').hasError('required')">
+                        La contraseña es requerida
+                    </mat-error>
+                </mat-form-field>
+
+
+            </form>
+        </div>
+    </div>
+
+</div>
+<div mat-dialog-actions>
+    <div>
+        <button mat-flat-button mat-dialog-close [color]="'accent'" style="float: left">
+            <span>
+                Cerrar
+            </span>
+        </button>
+        <button mat-flat-button [color]="'primary'" style="float: right" (click)="approve()">
+        <span>
+                Aprobar
+            </span>
+        </button>
+    </div>
+
+
+</div>

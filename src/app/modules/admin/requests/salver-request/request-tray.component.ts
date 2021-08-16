@@ -3,11 +3,11 @@ import {DepartmentResponse} from '../../../../interfaces/responses/department-re
 import {DepartmentService} from '../../../../services/department-service.service';
 
 @Component({
-    selector: 'salver-requests',
-    templateUrl: './salver-request.component.html',
-    styleUrls: ['/salver-request.component.scss']
+    selector: 'requests-tray',
+    templateUrl: './request-tray.component.html',
+    styleUrls: ['/request-tray.component.scss']
 })
-export class SalverRequestComponent implements OnInit {
+export class RequestTrayComponent implements OnInit {
 
     departments: DepartmentResponse[] = [];
     panelOpenState = false;
