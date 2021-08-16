@@ -30,7 +30,6 @@ export const requestRouting: Route[] = [
     {
         path: 'new-processes-request/:processId/:departmentId',
         component: NewProcessRequestComponent,
-
     },
 
     {
