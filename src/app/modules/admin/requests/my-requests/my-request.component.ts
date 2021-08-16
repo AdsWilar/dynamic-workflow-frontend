@@ -20,12 +20,11 @@ export class MyRequestComponent implements OnInit {
     }
 
     private listRequests(): void {
-        this.requestsService.getAllRequestsForCurrentUser()
-            .subscribe((response) => {
-                if (response.success) {
-                    this.requests = response.data;
-                }
-            });
+        this.requestsService.getAllRequestsForCurrentUser().subscribe((response) => {
+            if (response.success) {
+                this.requests = response.data;
+            }
+        });
     }
 
 }

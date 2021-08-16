@@ -6,22 +6,21 @@ import {FuseAnimations} from '../../../../../../@fuse/animations';
 @Component({
     selector: 'department-list',
     templateUrl: './department-list.component.html',
-    styleUrls: ['/department-list.component.scss'],
+    styleUrls: ['./department-list.component.scss'],
     animations: FuseAnimations
 })
 export class DepartmentListComponent implements OnInit {
+
     @Input()
     department: DepartmentResponse;
     subordinateDepartments: DepartmentResponse[];
 
-
-    constructor(private departmentService: DepartmentService) {
-
+    constructor() {
         this.subordinateDepartments = [];
     }
 
     ngOnInit(): void {
-
         this.subordinateDepartments = this.department.subordinateDepartments;
     }
+
 }

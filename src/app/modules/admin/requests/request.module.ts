@@ -17,7 +17,7 @@ import {MatTableModule} from '@angular/material/table';
 import {ViewProcessesComponent} from './new-request/view-processes/view-processes.component';
 import {DepartmentProcessListComponent} from './new-request/department-process-list/department-process-list.component';
 import {NewProcessRequestComponent} from './new-request/new-process-request/new-process-request.component';
-import {InputDynamicComponent} from './new-request/new-process-request/input-dynamic/input-dynamic.component';
+import {FormInputComponent} from './new-request/new-process-request/form-input/form-input.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -29,13 +29,14 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {ListMyRequestComponent} from './my-requests/list-my-request/list-my-request.component';
 import {FinishedListComponent} from './salver-request/tap-salver-request/finished-list/finished-list.component';
 import {SlopesListComponent} from './salver-request/tap-salver-request/slopes-list/slopes-list.component';
-import {ViewRequestDetailComponent} from './salver-request/tap-salver-request/slopes-list/view-request-detail/view-request-detail.component';
-import {DetailComponent} from './salver-request/tap-salver-request/slopes-list/view-request-detail/detail/detail.component';
-import {ApproveRequestDialogComponent} from './salver-request/tap-salver-request/slopes-list/view-request-detail/detail/approve-request-dialog/approve-request-dialog.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatDividerModule} from '@angular/material/divider';
 import {FuseAlertModule} from '../../../../@fuse/components/alert';
+import {MatRadioModule} from '@angular/material/radio';
+import {ViewRequestDetailComponent} from './salver-request/tap-salver-request/slopes-list/view-request-detail/view-request-detail.component';
+import {DetailComponent} from './salver-request/tap-salver-request/slopes-list/view-request-detail/detail/detail.component';
+import {ApproveRequestDialogComponent} from './salver-request/tap-salver-request/slopes-list/view-request-detail/detail/approve-request-dialog/approve-request-dialog.component';
 
 @NgModule({
     declarations: [
@@ -45,8 +46,8 @@ import {FuseAlertModule} from '../../../../@fuse/components/alert';
         ViewProcessesComponent,
         DepartmentProcessListComponent,
         NewProcessRequestComponent,
-        InputDynamicComponent,
         RequestTrayComponent,
+        FormInputComponent,
         TapSalverRequestComponent,
         ListMyRequestComponent,
         FinishedListComponent,
@@ -78,7 +79,8 @@ import {FuseAlertModule} from '../../../../@fuse/components/alert';
         MatProgressSpinnerModule,
         MatDialogModule,
         MatDividerModule,
-        FuseAlertModule
+        FuseAlertModule,
+        MatRadioModule
     ],
 })
 

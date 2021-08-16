@@ -1,4 +1,3 @@
-
 <div class="contenedor2" *ngIf="processes">
     <div class="flex-auto p-6 sm:p-10 ">
         <div class="flex flex-wrap -m-4 ">
@@ -10,12 +9,14 @@
                             <div class="panel panel-info transaction-panel-info">
                                 <table class="demo-table">
                                     <tr matColumnDef="demo-name1">
-                                        <td mat-cell><b>Nombre</b>
+                                        <td mat-cell>
+                                            <b>Nombre</b>
                                         </td>
                                         <td mat-cell>{{process.name}}</td>
                                     </tr>
                                     <tr matColumnDef="demo-name1">
-                                        <td mat-cell><b>Descripcion</b>
+                                        <td mat-cell>
+                                            <b>Descripción</b>
                                         </td>
                                         <td mat-cell>{{process.description}}</td>
                                     </tr>
@@ -23,7 +24,7 @@
                             </div>
                             <div>
                                 <button mat-flat-button [color]="'primary'"
-                                        [routerLink]="['/requests/new-processes-request', process.id, department.id]">
+                                        [routerLink]="['/requests/new-process-request', process.id, department.id]">
                                     <mat-icon class="icon-size-5"
                                               [svgIcon]="'heroicons_outline:pencil-alt'"></mat-icon>
                                     <span class="ml-2 mr-1">Realizar Rolicitud</span>
