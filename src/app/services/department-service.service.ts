@@ -54,11 +54,6 @@ export class DepartmentService {
         return this.baseService.get<DepartmentResponse[]>(this.DEPARTMENTS_PATH + id + '/with-descendants');
     }
 
-    public getAllDepartmentMembersByDepartmentId(departmentId: number):
-        Observable<GeneralResponse<DepartmentMember[]>> {
-        return this.baseService.get<DepartmentMember[]>(this.DEPARTMENTS_PATH + departmentId + '/members');
-    }
-
     public getRootDepartment(): Observable<GeneralResponse<DepartmentResponse>> {
         return this.baseService.get<DepartmentResponse>(this.DEPARTMENTS_PATH + 'root');
     }

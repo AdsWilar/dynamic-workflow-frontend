@@ -7,5 +7,6 @@ export let Config = {
     usersPath: 'users/',
     departmentsPath: 'departments/',
     inputTypesPath: 'input-types/',
-    processesPath: 'processes/'
+    processesPath: 'processes/',
+    departmentMembersPath: 'department-members/'
 };

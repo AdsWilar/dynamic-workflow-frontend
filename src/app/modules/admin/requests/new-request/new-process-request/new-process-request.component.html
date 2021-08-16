@@ -20,9 +20,9 @@
                                 </div>
                             </div>
 
-                            <div class="mt-4 sm:mt-0">
+                            <div class="mt-4 sm:mt-0" *ngIf="departmentId">
                                 <button mat-flat-button [color]="'primary'"
-                                        [routerLink]="['/requests/view-process-request',department.id]"
+                                        [routerLink]="['/requests/view-process-request', departmentId]"
                                         style="margin: 16px;">
                                     <mat-icon svgIcon="mat_solid:arrow_back"></mat-icon>
                                     <span class="ml-2 mr-1">Volver</span>

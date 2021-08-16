@@ -75,6 +75,13 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
                     type: 'basic',
                     link: '/requests/my-requests'
                 }
+                ,
+                {
+                    id: 'salver-requests',
+                    title: 'Bandeja',
+                    type: 'basic',
+                    link: '/requests/salver-requests'
+                }
             ]
         },
     ];

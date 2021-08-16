@@ -19,19 +19,7 @@ export class NewRequestComponent implements OnInit {
 
 
     constructor(private departmentService: DepartmentService, private activatedRoute: ActivatedRoute) {
-        // this.department = {
-        //     id: null,
-        //     name: null,
-        //     contactEmail: null,
-        //     contactPhone: null,
-        //     location: null,
-        //     creationTimestamp: null,
-        //     modificationTimestamp: null,
-        //     status: null,
-        //     parentDepartmentId: null,
-        //     parentDepartment: null,
-        //     subordinateDepartments: null
-        // };
+
     }
 
     ngOnInit(): void {

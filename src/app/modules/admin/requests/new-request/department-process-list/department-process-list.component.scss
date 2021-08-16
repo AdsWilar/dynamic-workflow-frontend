@@ -1,4 +1,70 @@
 
-table {
+.expandir {
+    width: 80%;
+}
+
+.contenedor1{
+    //height: 40%;
+    //margin: 1% 1%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 75%;
+    margin: 10px auto;
+    text-align-all: center;
+    text-align: -webkit-center;
+}
+.contenedor2{
+    //height: 49%;
+    margin: 1% 1%;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align-all: center;
+    text-align: -webkit-center;
+}
+
+.fuente{
+
+    font-size: xx-large;
+    text-align: center;
+    min-width :100%;
+    margin: 40px auto;
+    left:0; right:0; top:0;
+}
+.fuente2{
+
+    font-size: xx-large;
+    text-align: center;
+    min-width :100%;
+    margin: 40px auto;
+    left:0; right:0; top:0;
+}
+
+.demo-table {
+    width: 100%;
+    margin: 30px auto;
+
+}
+
+.mat-column-demo-name {
+    padding-left: 16px;
+    font-size: 20px;
+}
+
+.mat-column-demo-name1 {
+    padding-left: 16px;
+    font-size: 15px;
+}
+
+.linea
+{
+    display: inline-block;
+}
+
+
+.linea2
+{
+    display: ruby-text-container;
 }
