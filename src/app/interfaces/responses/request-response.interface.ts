@@ -1,6 +1,7 @@
 import {RequestStatus} from '../../shared/types/request-status.type';
 
 export interface RequestResponse {
+
     id: number;
     shippingTimestamp: string;
     finishTimestamp: string;
@@ -9,4 +10,5 @@ export interface RequestResponse {
     formPath: string;
     processId: number;
     userId: number;
+
 }

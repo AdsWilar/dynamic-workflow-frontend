@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {RequestStatus} from '../../../../../../shared/types/request-status.type';
 import {RequestResponse} from '../../../../../../interfaces/responses/request-response.interface';
+import {FileDownloadService} from '../../../../../../services/file-download-service.service';
+import {RequestService} from '../../../../../../services/request-service.service';
 
 @Component({
     selector: 'finished-list',
@@ -9,14 +10,28 @@ import {RequestResponse} from '../../../../../../interfaces/responses/request-re
 })
 export class FinishedListComponent implements OnInit {
 
-    displayedColumns: string[] = ['code', 'shippingTimestamp', 'finishTimestamp', 'status', 'viewDetail'];
+    displayedColumns: string[] = ['code', 'shippingTimestamp', 'finishTimestamp', 'status', 'downloadRequestForm'];
     @Input()
     requestsFinish: RequestResponse[];
 
 
-    constructor() {
+    constructor(private requestService: RequestService, private fileDownloadService: FileDownloadService) {
     }
 
     ngOnInit(): void {
     }
+
+    downloadRequestForm(requestId: number): void {
+        this.requestService.downloadRequestFormByRequestId(requestId)
+            .subscribe((response) => {
+                if (response.success) {
+                    this.fileDownloadService.downloadFile(response.data);
+                    console.log(response.message);
+                    console.log(response.data);
+                    return;
+                }
+                console.log('Error al descargar el formulario de solicitud, ' + response.message);
+        });
+    }
+
 }

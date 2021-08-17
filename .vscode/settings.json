@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/986f688e-c1a8-42f4-8b31-a43fefe568c2/resourceGroups/dynamic-workflow/providers/Microsoft.Web/sites/dw-web-app",
+    "appService.deploySubpath": "dist\\fuse"
+}

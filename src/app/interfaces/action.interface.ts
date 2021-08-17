@@ -1,7 +1,9 @@
+import {ActionCode} from '../shared/types/action-code.type';
+
 export interface Action {
 
     id: number;
-    code: string;
+    code: ActionCode;
     description: string;
 
 }

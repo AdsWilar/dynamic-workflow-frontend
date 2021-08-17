@@ -8,7 +8,6 @@ import {CompleteDepartmentResponse} from '../interfaces/responses/complete-depar
 import {DepartmentRequest} from '../interfaces/requests/department-request.interface';
 import {DepartmentResponse} from '../interfaces/responses/department-response.interface';
 import {UpdateDepartmentMembersRequest} from '../interfaces/requests/update-department-members-request.interface';
-import {DepartmentMember} from '../interfaces/department-member.interface';
 
 @Injectable({
     providedIn: 'root'
