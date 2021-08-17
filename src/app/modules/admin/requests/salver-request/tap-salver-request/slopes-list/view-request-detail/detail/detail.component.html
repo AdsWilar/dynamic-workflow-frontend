@@ -1,9 +1,7 @@
 <div class="flex-auto mt-4 sm:mt-6">
     <div class="w-full max-w-screen-xl mx-auto">
 
-        <!-- Home -->
-        <div
-            class="sm:col-span-2 md:col-span-4 flex flex-col flex-auto p-10 ">
+        <div class="sm:col-span-2 md:col-span-4 flex flex-col flex-auto p-10" *ngIf="requestDetail">
 
             <div class="row">
                 <div class="col-md-12">
@@ -11,59 +9,58 @@
 
                         <div class="panel panel-info transaction-panel-info">
 
+                            <table class="mat-elevation-z8 demo-table bg-card">
 
-                            <table class="mat-elevation-z8 demo-table bg-card ">
                                 <div class="text-2xl md:text-3xl font-extrabold tracking-tight"
                                      style="text-align: center">
-                                    Información de Solicitud
+                                    Información de la Solicitud
                                 </div>
 
                                 <tr matColumnDef="demo-name">
-                                    <td mat-cell><b>Nombre</b>
+                                    <td mat-cell>
+                                        <b>Código: </b> {{requestDetail.request.code}}
                                     </td>
+<!--                                    <td mat-cell>-->
+<!--                                        {{requestDetail.request.code}}-->
+<!--                                    </td>-->
                                 </tr>
                                 <tr matColumnDef="demo-name">
-                                    <td mat-cell><b>Email de contacto</b></td>
-                                </tr>
-                                <tr matColumnDef="demo-name">
-                                    <td mat-cell><b>Telefono de
-                                        contacto</b></td>
-                                </tr>
-                                <tr matColumnDef="demo-name">
-                                    <td mat-cell><b>Ubicacion</b>
+                                    <td mat-cell>
+                                        <b>Fecha de envío: </b> {{requestDetail.request.shippingTimestamp | date: 'dd-MM-yyyy HH:mm'}}
                                     </td>
+<!--                                    <td mat-cell>-->
+<!--                                        {{requestDetail.request.shippingTimestamp | date: 'dd-MM-yyyy HH:mm'}}-->
+<!--                                    </td>-->
+                                </tr>
+                                <tr matColumnDef="demo-name">
+                                    <td mat-cell>
+                                        <b>Estado: </b> {{requestDetail.request.status | requestStatus}}
+                                    </td>
+<!--                                    <td mat-cell>-->
+<!--                                        {{requestDetail.request.status | requestStatus}}-->
+<!--                                    </td>-->
+                                </tr>
 
-                                </tr>
-                                <tr matColumnDef="demo-name">
-                                    <td mat-cell><b>Estado</b>
-                                    </td>
-
-                                </tr>
                                 <div class="text-2xl md:text-3xl font-extrabold tracking-tight"
                                      style="text-align: center">
                                     Información del Proceso
                                 </div>
 
                                 <tr matColumnDef="demo-name">
-                                    <td mat-cell><b>Nombre</b>
+                                    <td mat-cell>
+                                        <b>Nombre: </b> {{requestDetail.process.name}}
                                     </td>
+<!--                                    <td mat-cell>-->
+<!--                                        {{requestDetail.process.name}}-->
+<!--                                    </td>-->
                                 </tr>
-                                <tr matColumnDef="demo-name">
-                                    <td mat-cell><b>Email de contacto</b></td>
-                                </tr>
-                                <tr matColumnDef="demo-name">
-                                    <td mat-cell><b>Telefono de
-                                        contacto</b></td>
-                                </tr>
-                                <tr matColumnDef="demo-name">
-                                    <td mat-cell><b>Ubicacion</b>
+                                <tr matColumnDef="demo-name" *ngIf="requestDetail.process.description">
+                                    <td mat-cell>
+                                        <b>Descripción: </b> {{requestDetail.process.description}}
                                     </td>
-
-                                </tr>
-                                <tr matColumnDef="demo-name">
-                                    <td mat-cell><b>Estado</b>
-                                    </td>
-
+<!--                                    <td mat-cell>-->
+<!--                                        {{requestDetail.process.description}}-->
+<!--                                    </td>-->
                                 </tr>
 
                                 <div class="text-2xl md:text-3xl font-extrabold tracking-tight"
@@ -72,40 +69,57 @@
                                 </div>
 
                                 <tr matColumnDef="demo-name">
-                                    <td mat-cell><b>Nombre</b>
+                                    <td mat-cell>
+                                        <b>Usuario: </b> {{requestDetail.user.username}}
                                     </td>
+<!--                                    <td mat-cell>-->
+<!--                                        {{requestDetail.user.username}}-->
+<!--                                    </td>-->
                                 </tr>
-                                <tr matColumnDef="demo-name">
-                                    <td mat-cell><b>Email de contacto</b></td>
-                                </tr>
-                                <tr matColumnDef="demo-name">
-                                    <td mat-cell><b>Telefono de
-                                        contacto</b></td>
-                                </tr>
-                                <tr matColumnDef="demo-name">
-                                    <td mat-cell><b>Ubicacion</b>
-                                    </td>
 
+                                <tr matColumnDef="demo-name">
+                                    <td mat-cell>
+                                        <b>Nombre: </b> {{requestDetail.user.names}} {{requestDetail.user.firstSurname}} {{requestDetail.user.secondSurname}}
+                                    </td>
+<!--                                    <td mat-cell>-->
+<!--                                        {{requestDetail.user.names}} {{requestDetail.user.firstSurname}} {{requestDetail.user.secondSurname}}-->
+<!--                                    </td>-->
                                 </tr>
                                 <tr matColumnDef="demo-name">
-                                    <td mat-cell><b>Estado</b>
+                                    <td mat-cell>
+                                        <b>Email: </b> {{requestDetail.user.email}}
                                     </td>
-
+<!--                                    <td mat-cell>-->
+<!--                                        {{requestDetail.user.email}}-->
+<!--                                    </td>-->
+                                </tr>
+                                <tr matColumnDef="demo-name">
+                                    <td mat-cell>
+                                        <b>Teléfono: </b> {{requestDetail.user.phone}}
+                                    </td>
+<!--                                    <td mat-cell>-->
+<!--                                        {{requestDetail.user.phone}}-->
+<!--                                    </td>-->
+                                </tr>
+                                <tr matColumnDef="demo-name">
+                                    <td mat-cell>
+                                        <b>Número de identificación: </b> {{requestDetail.user.identificationNumber}}
+                                    </td>
+<!--                                    <td mat-cell>-->
+<!--                                        {{requestDetail.user.identificationNumber}}-->
+<!--                                    </td>-->
                                 </tr>
 
                                 <div class="mt-4 sm:mt-0" align="center">
 
-                                    <!-- New department button -->
-                                    <button mat-flat-button [color]="'primary'"
-
-                                            style="margin: 16px;">
+                                    <button mat-flat-button [color]="'primary'" style="margin: 16px;"
+                                            (click)="downloadRequestForm()">
                                         <mat-icon class="icon-size-5" svgIcon="file_download"></mat-icon>
                                         <span class="ml-2 mr-1">Descargar Formulario</span>
                                     </button>
                                 </div>
 
                             </table>
-
 
                         </div>
                     </div>
@@ -114,14 +128,14 @@
 
         </div>
 
-        <div class="mt-4 sm:mt-0" align="center">
-            <button mat-flat-button [color]="'accent'" (click)="rejectRequestDialog(requestId)"
+        <div class="mt-4 sm:mt-0" align="center" *ngIf="requestId">
+            <button mat-flat-button [color]="'accent'" (click)="rejectRequestDialog()"
                     style="margin: 16px;">
                 <mat-icon svgIcon="close"></mat-icon>
                 <span class="ml-2 mr-1">Rechazar</span>
             </button>
             <!-- New department button -->
-            <button mat-flat-button [color]="'primary'" (click)="approveRequestDialog(requestId)"
+            <button mat-flat-button [color]="'primary'" (click)="approveRequestDialog()"
                     style="margin: 16px;">
                 <mat-icon class="icon-size-5" svgIcon="check"></mat-icon>
                 <span class="ml-2 mr-1">Aprobar</span>

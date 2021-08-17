@@ -10,6 +10,14 @@ import {AuthManager} from '../../../../core/auth/auth-manager';
 import {AccessResponse} from '../../../../interfaces/responses/access-response.interface';
 import {UserService} from '../../../../services/user-service.service';
 import {UserResponse} from '../../../../interfaces/responses/user-response.interface';
+import {
+    DepartmentsItem,
+    MyRequestsItem, NewRequestItem,
+    ProcessesItem, RequestsItem,
+    RolesItem, SalverRequestsItem,
+    StartupProfileItem,
+    UsersItem
+} from '../../../../shared/constant';
 
 @Component({
     selector: 'classy-layout',
@@ -21,75 +29,13 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
     data: InitialData;
     isScreenSmall: boolean;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
-    navigation: FuseNavigationItem[] = [
-        {
-            id: 'startup-profile',
-            title: 'Perfil',
-            type: 'basic',
-            icon: 'mat_solid:person',
-            link: '/startup-profile'
-        },
-        {
-            id: 'roles',
-            title: 'Roles',
-            type: 'basic',
-            icon: 'heroicons_outline:document-text',
-            link: '/roles'
-        },
-        {
-            id: 'users',
-            title: 'Usuarios',
-            type: 'basic',
-            icon: 'mat_solid:people_alt',
-            link: '/users'
-        },
-        {
-            id: 'departments',
-            title: 'Departamentos',
-            type: 'basic',
-            icon: 'heroicons_outline:office-building',
-            link: '/departments'
-        },
-        {
-            id: 'processes',
-            title: 'Procesos',
-            type: 'basic',
-            icon: 'work_outline',
-            link: '/processes'
-        },
-        {
-            id: 'requests',
-            title: 'Solicitudes',
-            type: 'collapsable',
-            icon: 'heroicons_outline:pencil-alt',
-            children: [
-                {
-                    id: 'new-request',
-                    title: 'Nueva Solicitud',
-                    type: 'basic',
-                    link: '/requests/new-request/root'
-                },
-                {
-                    id: 'my-requests',
-                    title: 'Mis Solicitudes',
-                    type: 'basic',
-                    link: '/requests/my-requests'
-                }
-                ,
-                {
-                    id: 'salver-requests',
-                    title: 'Bandeja',
-                    type: 'basic',
-                    link: '/requests/salver-requests'
-                }
-            ]
-        },
-    ];
+    navigation: FuseNavigationItem[];
     user: UserData;
 
     constructor(private _activatedRoute: ActivatedRoute, private authManager: AuthManager, private _router: Router,
                 private _fuseMediaWatcherService: FuseMediaWatcherService,
                 private _fuseNavigationService: FuseNavigationService, private userService: UserService) {
+        this.navigation = [];
         this.initialUser();
     }
 
@@ -117,6 +63,40 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
         };
     }
 
+    private initializeNavigation(): void {
+        this.navigation.push(StartupProfileItem);
+        if (this.authManager.hasAction('ROLE_GET_ALL')) {
+            this.navigation.push(RolesItem);
+        }
+        if (this.authManager.hasAction('USER_GET_ALL')) {
+            this.navigation.push(UsersItem);
+        }
+        if (this.authManager.hasAction('DEPARTMENT_GET_ALL')) {
+            this.navigation.push(DepartmentsItem);
+        }
+        if (this.authManager.hasAction('PROCESS_GET_ALL')) {
+            this.navigation.push(ProcessesItem);
+        }
+        if (this.authManager.hasAction('PROCESS_GET_ALL')) {
+            this.navigation.push(ProcessesItem);
+        }
+        const requestItems: FuseNavigationItem[] = [];
+        if (this.authManager.hasAction('REQUEST_REGISTER')) {
+            requestItems.push(NewRequestItem);
+        }
+        if (this.authManager.hasAction('REQUEST_GET_ALL_CURRENT_USER')) {
+            requestItems.push(MyRequestsItem);
+        }
+        if (this.authManager.hasAction('REQUEST_EXECUTE_ACTION')) {
+            requestItems.push(SalverRequestsItem);
+        }
+        if (requestItems.length !== 0) {
+            const requestsItem: FuseNavigationItem = RequestsItem;
+            requestsItem.children = requestItems;
+            this.navigation.push(requestsItem);
+        }
+    }
+
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
     // -----------------------------------------------------------------------------------------------------
@@ -125,6 +105,7 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
      * On init
      */
     ngOnInit(): void {
+        this.initializeNavigation();
         // this.navigation = [];
         // Subscribe to the resolved route mock-api
         // this._activatedRoute.data.subscribe((data: Data) => {

@@ -7,6 +7,8 @@ import {RequestResponse} from '../interfaces/responses/request-response.interfac
 import {RequestActionRequest} from '../interfaces/requests/request-action-request.interface';
 import {RequestActionResponse} from '../interfaces/responses/request-action-response.interface';
 import {NewRequestRequest} from '../interfaces/requests/new-request-request.interface';
+import {FileResponse} from "../interfaces/responses/file-response.interface";
+import {RequestDetailResponse} from "../interfaces/responses/request-detail-response.interface";
 
 @Injectable({
     providedIn: 'root'
@@ -43,5 +45,12 @@ export class RequestService {
         return this.baseService.get<RequestResponse[]>(this.REQUESTS_PATH + 'finished/current-analyst');
     }
 
+    public downloadRequestFormByRequestId(requestId: number): Observable<GeneralResponse<FileResponse>> {
+        return this.baseService.get<FileResponse>(this.REQUESTS_PATH + requestId + '/form');
+    }
+
+    public getRequestDetailByRequestId(requestId: number): Observable<GeneralResponse<RequestDetailResponse>> {
+        return this.baseService.get<RequestDetailResponse>(this.REQUESTS_PATH + requestId + '/detail');
+    }
 
 }
