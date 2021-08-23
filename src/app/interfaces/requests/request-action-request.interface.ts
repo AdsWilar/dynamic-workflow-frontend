@@ -1,8 +1,8 @@
-import {ExecuteAction} from '../../shared/types/execute-action.type';
+import {ExecutedAction} from '../../shared/types/executed-action.type';
 
 export interface RequestActionRequest {
 
-    executedAction: ExecuteAction;
+    executedAction: ExecutedAction;
     commentary: string;
-    digitalCertificatePassword: string;
+    digitalCertificatePassword?: string;
 }

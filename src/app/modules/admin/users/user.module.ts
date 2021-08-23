@@ -20,6 +20,7 @@ import {MatOptionModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import {EditUserComponent} from './edit-user/edit-user.component';
 import {ViewUserActionComponent} from './view-user/view-user-actions.component';
+import {ToastContainerModule} from "ngx-toastr";
 
 @NgModule({
     declarations: [
@@ -44,8 +45,8 @@ import {ViewUserActionComponent} from './view-user/view-user-actions.component';
         MatProgressSpinnerModule,
         MatInputModule,
         MatOptionModule,
-        MatSelectModule
-
+        MatSelectModule,
+        ToastContainerModule
 
     ]
 })

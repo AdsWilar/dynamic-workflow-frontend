@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {RequestStatus} from '../../../../../../../shared/types/request-status.type';
 import {RequestResponse} from '../../../../../../../interfaces/responses/request-response.interface';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
@@ -7,8 +6,7 @@ import {RequestService} from '../../../../../../../services/request-service.serv
 
 @Component({
     selector: 'view-request-detail',
-    templateUrl: './view-request-detail.component.html',
-    styleUrls: ['/view-request-detail.component.scss']
+    templateUrl: './view-request-detail.component.html'
 })
 export class ViewRequestDetailComponent implements OnInit {
 

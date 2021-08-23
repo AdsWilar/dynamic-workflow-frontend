@@ -6,6 +6,7 @@ import {DepartmentMemberService} from '../../../../services/department-member-se
 import {FileData} from '../../../../interfaces/data/file-data.interface';
 import {DigitalCertificateRequest} from '../../../../interfaces/requests/digital-certificate-request.interface';
 import {FileRequest} from '../../../../interfaces/requests/file-request.interface';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
     selector: 'member-detail-department',
@@ -20,7 +21,7 @@ export class DepartmentMemberComponent implements OnInit {
     certificateExtension: string = '.p12';
 
     constructor(private dialog: MatDialog, @Inject(MAT_DIALOG_DATA) private data: any,
-                private departmentMemberService: DepartmentMemberService) {
+                private departmentMemberService: DepartmentMemberService, private toaster: ToastrService) {
         this.departmentMemberTitle = '';
     }
 
@@ -32,14 +33,14 @@ export class DepartmentMemberComponent implements OnInit {
                 if (response.success) {
                     this.digitalCertificate = response.data;
                 }
-        });
+            });
     }
 
     uploadDigitalCertificate = (fileData: FileData): void => {
         const extension: string = fileData.extension;
+        const digitalCertificateTitle = 'Certificado Digital';
         if ('.' + extension !== this.certificateExtension) {
-            // TODO Modal de mensaje
-            console.log('Sólo archivos P12...');
+            this.toaster.error('Sólo se permiten archivos con extensión .p12.', digitalCertificateTitle);
             return;
         }
         const certificateFile: FileRequest = {
@@ -51,10 +52,14 @@ export class DepartmentMemberComponent implements OnInit {
         };
         this.departmentMemberService.uploadDigitalCertificate(digitalCertificateRequest, this.departmentMember.id)
             .subscribe((response) => {
+                const message: string = response.message;
                 if (response.success) {
                     this.digitalCertificate = response.data;
+                    this.toaster.success(message, digitalCertificateTitle);
+                    return;
                 }
-        });
+                this.toaster.error(message, digitalCertificateTitle);
+            });
     }
 
 }

@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {DepartmentResponse} from '../../../../interfaces/responses/department-response.interface';
-import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
     selector: 'list-department',

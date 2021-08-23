@@ -22,9 +22,9 @@ export class ViewProcessesComponent implements OnInit {
             if (params.get('departmentId') != null) {
                 this.departmentId = +params.get('departmentId');
                 console.log(this.departmentId);
-                this.departmentService.getCompleteDepartmentById(this.departmentId)
+                this.departmentService.getDepartmentById(this.departmentId)
                     .subscribe((response) => {
-                        this.department = response.data.department;
+                        this.department = response.data;
                     });
             }
         });

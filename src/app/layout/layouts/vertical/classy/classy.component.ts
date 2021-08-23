@@ -63,40 +63,6 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
         };
     }
 
-    private initializeNavigation(): void {
-        this.navigation.push(StartupProfileItem);
-        if (this.authManager.hasAction('ROLE_GET_ALL')) {
-            this.navigation.push(RolesItem);
-        }
-        if (this.authManager.hasAction('USER_GET_ALL')) {
-            this.navigation.push(UsersItem);
-        }
-        if (this.authManager.hasAction('DEPARTMENT_GET_ALL')) {
-            this.navigation.push(DepartmentsItem);
-        }
-        if (this.authManager.hasAction('PROCESS_GET_ALL')) {
-            this.navigation.push(ProcessesItem);
-        }
-        if (this.authManager.hasAction('PROCESS_GET_ALL')) {
-            this.navigation.push(ProcessesItem);
-        }
-        const requestItems: FuseNavigationItem[] = [];
-        if (this.authManager.hasAction('REQUEST_REGISTER')) {
-            requestItems.push(NewRequestItem);
-        }
-        if (this.authManager.hasAction('REQUEST_GET_ALL_CURRENT_USER')) {
-            requestItems.push(MyRequestsItem);
-        }
-        if (this.authManager.hasAction('REQUEST_EXECUTE_ACTION')) {
-            requestItems.push(SalverRequestsItem);
-        }
-        if (requestItems.length !== 0) {
-            const requestsItem: FuseNavigationItem = RequestsItem;
-            requestsItem.children = requestItems;
-            this.navigation.push(requestsItem);
-        }
-    }
-
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
     // -----------------------------------------------------------------------------------------------------
@@ -121,6 +87,37 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
                 this.isScreenSmall = !matchingAliases.includes('md');
             });
         this.loadUser();
+    }
+
+    private initializeNavigation(): void {
+        this.navigation.push(StartupProfileItem);
+        if (this.authManager.hasAction('ROLE_GET_ALL')) {
+            this.navigation.push(RolesItem);
+        }
+        if (this.authManager.hasAction('USER_GET_ALL')) {
+            this.navigation.push(UsersItem);
+        }
+        if (this.authManager.hasAction('DEPARTMENT_GET_ALL')) {
+            this.navigation.push(DepartmentsItem);
+        }
+        if (this.authManager.hasAction('PROCESS_GET_ALL')) {
+            this.navigation.push(ProcessesItem);
+        }
+        const requestChildrenItems: FuseNavigationItem[] = [];
+        if (this.authManager.hasAction('REQUEST_REGISTER')) {
+            requestChildrenItems.push(NewRequestItem);
+        }
+        if (this.authManager.hasAction('REQUEST_GET_ALL_CURRENT_USER')) {
+            requestChildrenItems.push(MyRequestsItem);
+        }
+        if (this.authManager.hasAction('REQUEST_EXECUTE_ACTION')) {
+            requestChildrenItems.push(SalverRequestsItem);
+        }
+        if (requestChildrenItems.length !== 0) {
+            const requestsItem: FuseNavigationItem = RequestsItem;
+            requestsItem.children = requestChildrenItems;
+            this.navigation.push(requestsItem);
+        }
     }
 
     /**

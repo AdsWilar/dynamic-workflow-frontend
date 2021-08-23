@@ -25,6 +25,7 @@ import {DepartmentMember} from '../../../../interfaces/department-member.interfa
 import {CompleteProcessRequest} from '../../../../interfaces/requests/complete-process-request.interface';
 import {ProcessService} from '../../../../services/process-service.service';
 import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
     selector: 'new-processes',
@@ -35,9 +36,10 @@ import {Router} from '@angular/router';
 export class NewProcessComponent implements OnInit {
 
     newProcessWizardForm: FormGroup;
-    processStatuses: ProcessStatus[] = ProcessStatuses;
-    departments: DepartmentResponse[] = [];
-    availableDepartmentsForStage: DepartmentResponse[] = [];
+    processStatuses: ProcessStatus[];
+    departments: DepartmentResponse[];
+    availableDepartmentsForStage: DepartmentResponse[];
+    processesTitle: string;
 
     isFirstTimeInProcessForm: boolean = true;
     isFirstTimeInStageForm: boolean = true;
@@ -50,7 +52,11 @@ export class NewProcessComponent implements OnInit {
 
     constructor(private formBuilder: FormBuilder, private departmentService: DepartmentService,
                 private componentFactoryResolver: ComponentFactoryResolver, private processService: ProcessService,
-                private router: Router) {
+                private router: Router, private toaster: ToastrService) {
+        this.processStatuses = ProcessStatuses;
+        this.departments = [];
+        this.availableDepartmentsForStage = [];
+        this.processesTitle = 'Procesos';
     }
 
     ngOnInit(): void {
@@ -108,7 +114,10 @@ export class NewProcessComponent implements OnInit {
 
     removeInput = (index: number): void => {
         if (this.inputContainerRef.length < 2) {
-            // TODO Aquí hay que colocar un mensaje de error
+            this.toaster.warning(
+                'Se debe tener al menos una entrada para el formulario del proceso.',
+                this.processesTitle
+            );
             return;
         }
 
@@ -137,7 +146,7 @@ export class NewProcessComponent implements OnInit {
 
     removeStage = (index: number): void => {
         if (this.stageContainerRef.length < 2) {
-            // TODO Aquí hay que colocar un mensaje de error
+            this.toaster.warning('Se debe tener al menos una etapa para el proceso.', this.processesTitle);
             return;
         }
 
@@ -193,8 +202,12 @@ export class NewProcessComponent implements OnInit {
         };
         this.processService.createProcess(completeProcessRequest)
             .subscribe((response) => {
+                const message: string = response.message;
                 if (response.success) {
+                    this.toaster.success(message, this.processesTitle);
                     this.router.navigate(['processes']);
+                } else {
+                    this.toaster.error(message, this.processesTitle);
                 }
             });
     }

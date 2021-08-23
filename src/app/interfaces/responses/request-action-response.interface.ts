@@ -1,10 +1,10 @@
-import {ExecuteAction} from '../../shared/types/execute-action.type';
+import {ExecutedAction} from '../../shared/types/executed-action.type';
 
 export interface RequestActionResponse {
 
     id: number;
     executionTimestamp: string;
-    executedAction: ExecuteAction;
+    executedAction: ExecutedAction;
     commentary: string;
     requestId: number;
     stageAnalystId: number;

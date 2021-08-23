@@ -1,4 +1,4 @@
-export type ExecuteAction =
+export type ExecutedAction =
     | 'APPROVE'
     | 'REJECT'
     | 'COMMENT';

@@ -6,9 +6,9 @@ import {RequestService} from '../../../../../services/request-service.service';
 
 
 @Component({
-    selector: 'tap-salver-request',
-    templateUrl: './tap-salver-request.component.html',
-    styleUrls: ['./tap-salver-request.component.scss'],
+    selector: 'request-inbox',
+    templateUrl: './request-inbox.component.html',
+    styleUrls: ['./request-inbox.component.scss'],
     animations: [
         trigger('detailExpand', [
             state('collapsed', style({height: '0px', minHeight: '0'})),
@@ -17,30 +17,30 @@ import {RequestService} from '../../../../../services/request-service.service';
         ]),
     ],
 })
-export class TapSalverRequestComponent implements OnInit {
+export class RequestInboxComponent implements OnInit {
 
-    requestsPending: RequestResponse[];
-    requestsFinish: RequestResponse[];
+    pendingRequests: RequestResponse[];
+    finishedRequests: RequestResponse[];
 
 
     constructor(private requestsService: RequestService) {
-        this.requestsPending = [];
-        this.requestsFinish = [];
+        this.pendingRequests = [];
+        this.finishedRequests = [];
     }
 
     ngOnInit(): void {
         this.requestsService.getPendingRequestsForCurrentAnalyst()
             .subscribe((response) => {
                 if (response.success) {
-                    this.requestsPending = response.data;
+                    this.pendingRequests = response.data;
                 }
             });
         this.requestsService.getFinishedRequestsForCurrentAnalyst()
             .subscribe((response) => {
                 if (response.success) {
-                    this.requestsFinish = response.data;
+                    this.finishedRequests = response.data;
                     console.log('paso po requestsPending');
-                    console.log(this.requestsFinish);
+                    console.log(this.finishedRequests);
                 }
             });
     }
