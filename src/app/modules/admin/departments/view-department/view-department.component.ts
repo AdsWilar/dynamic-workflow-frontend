@@ -11,7 +11,6 @@ import {EditDepartmentMemberComponent} from '../edit-department-member/edit-depa
 import {CompleteDepartmentResponse} from '../../../../interfaces/responses/complete-department-response.interface';
 import {DepartmentMember} from '../../../../interfaces/department-member.interface';
 
-
 @Component({
     selector: 'view-department',
     templateUrl: './view-department.component.html',

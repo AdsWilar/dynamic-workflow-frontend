@@ -65,10 +65,10 @@ export const MyRequestsItem: FuseNavigationItem = {
 };
 
 export const SalverRequestsItem: FuseNavigationItem = {
-    id: 'salver-requests',
+    id: 'request-tray',
     title: 'Bandeja',
     type: 'basic',
-    link: '/requests/salver-requests'
+    link: '/requests/request-tray'
 };
 
 export const MainRoles: string[] = [

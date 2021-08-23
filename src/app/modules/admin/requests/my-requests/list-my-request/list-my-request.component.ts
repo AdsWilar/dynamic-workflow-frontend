@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {RequestResponse} from '../../../../../interfaces/responses/request-response.interface';
 import {RequestService} from "../../../../../services/request-service.service";
 import {FileDownloadService} from "../../../../../services/file-download-service.service";
+import {RequestUtility} from "../../../../../shared/utilities/request-utility";
 
 @Component({
     selector: 'list-my-requests',
@@ -14,23 +15,14 @@ export class ListMyRequestComponent implements OnInit {
     @Input()
     requests: RequestResponse[];
 
-    constructor(private requestService: RequestService, private fileDownloadService: FileDownloadService) {
+    constructor(private requestUtility: RequestUtility) {
     }
 
     ngOnInit(): void {
     }
 
     downloadRequestForm(requestId: number): void {
-        this.requestService.downloadRequestFormByRequestId(requestId)
-            .subscribe((response) => {
-                if (response.success) {
-                    this.fileDownloadService.downloadFile(response.data);
-                    console.log(response.message);
-                    console.log(response.data);
-                    return;
-                }
-                console.log('Error al descargar el formulario de solicitud, ' + response.message);
-            });
+        this.requestUtility.downloadRequestForm(requestId);
     }
 
 }

@@ -12,9 +12,10 @@ import {Subscription} from 'rxjs';
 import {ProcessInputsResponse} from '../../../../../interfaces/responses/process-inputs-response.interface';
 import {ProcessService} from '../../../../../services/process-service.service';
 import {FormInputComponent} from './form-input/form-input.component';
-import {NewRequestRequest} from "../../../../../interfaces/requests/new-request-request.interface";
-import {RequestInputValueRequest} from "../../../../../interfaces/requests/request-input-value-request.interface";
-import {RequestService} from "../../../../../services/request-service.service";
+import {NewRequestRequest} from '../../../../../interfaces/requests/new-request-request.interface';
+import {RequestInputValueRequest} from '../../../../../interfaces/requests/request-input-value-request.interface';
+import {RequestService} from '../../../../../services/request-service.service';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
     selector: 'new-process-request',
@@ -33,7 +34,7 @@ export class NewProcessRequestComponent implements OnInit {
 
     constructor(private activatedRoute: ActivatedRoute, private processService: ProcessService,
                 private componentFactoryResolver: ComponentFactoryResolver, private requestService: RequestService,
-                private router: Router) {
+                private router: Router, private toaster: ToastrService) {
     }
 
     ngOnInit(): void {
@@ -76,12 +77,15 @@ export class NewProcessRequestComponent implements OnInit {
             processId: this.processId,
             inputValues: inputValues
         };
+        const requestsTitle: string = 'Solicitudes';
         this.requestService.registerRequest(newRequestRequest)
             .subscribe((response) => {
+                const message: string = response.message;
                 if (response.success) {
+                    this.toaster.success(message, requestsTitle);
                     this.router.navigate(['requests/my-requests']);
                 } else {
-                    console.log(response.message);
+                    this.toaster.error(message, requestsTitle);
                 }
             });
     }

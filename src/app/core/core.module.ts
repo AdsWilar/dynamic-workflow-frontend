@@ -4,10 +4,19 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {MatIconRegistry} from '@angular/material/icon';
 import {AuthManager} from 'app/core/auth/auth-manager';
 import {AuthInterceptor} from 'app/core/auth/auth.interceptor';
+import {LoadingComponent} from './loading/loading.component';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
+    declarations: [
+        LoadingComponent
+    ],
     imports: [
-        HttpClientModule
+        HttpClientModule,
+        SharedModule
+    ],
+    exports: [
+        LoadingComponent
     ],
     providers: [
         AuthManager,
@@ -18,6 +27,7 @@ import {AuthInterceptor} from 'app/core/auth/auth.interceptor';
         }
     ]
 })
+
 export class CoreModule {
 
     constructor(private domSanitizer: DomSanitizer, private matIconRegistry: MatIconRegistry,

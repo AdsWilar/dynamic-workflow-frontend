@@ -7,8 +7,8 @@ import {RequestResponse} from '../interfaces/responses/request-response.interfac
 import {RequestActionRequest} from '../interfaces/requests/request-action-request.interface';
 import {RequestActionResponse} from '../interfaces/responses/request-action-response.interface';
 import {NewRequestRequest} from '../interfaces/requests/new-request-request.interface';
-import {FileResponse} from "../interfaces/responses/file-response.interface";
-import {RequestDetailResponse} from "../interfaces/responses/request-detail-response.interface";
+import {FileResponse} from '../interfaces/responses/file-response.interface';
+import {RequestDetailResponse} from '../interfaces/responses/request-detail-response.interface';
 
 @Injectable({
     providedIn: 'root'

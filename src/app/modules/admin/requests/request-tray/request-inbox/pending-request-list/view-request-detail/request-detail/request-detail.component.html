@@ -129,13 +129,12 @@
         </div>
 
         <div class="mt-4 sm:mt-0" align="center" *ngIf="requestId">
-            <button mat-flat-button [color]="'accent'" (click)="rejectRequestDialog()"
+            <button mat-flat-button [color]="'accent'" (click)="openRequestActionDialog('REJECT')"
                     style="margin: 16px;">
                 <mat-icon svgIcon="close"></mat-icon>
                 <span class="ml-2 mr-1">Rechazar</span>
             </button>
-            <!-- New department button -->
-            <button mat-flat-button [color]="'primary'" (click)="approveRequestDialog()"
+            <button mat-flat-button [color]="'primary'" (click)="openRequestActionDialog('APPROVE')"
                     style="margin: 16px;">
                 <mat-icon class="icon-size-5" svgIcon="check"></mat-icon>
                 <span class="ml-2 mr-1">Aprobar</span>

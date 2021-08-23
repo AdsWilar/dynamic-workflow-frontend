@@ -13,8 +13,8 @@ import {RoleResponse} from '../../../../interfaces/responses/role-response.inter
 import {RoleService} from '../../../../services/role-service.service';
 import {MatSelectChange} from '@angular/material/select';
 import {DataActionChecked} from '../../../../interfaces/data/data-action-checked.interface';
-import {Toaster} from '../../../../shared/toaster';
 import {UserActionResponse} from '../../../../interfaces/responses/user-action-response.interface';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
     selector: 'new-user',
@@ -36,9 +36,10 @@ export class NewUserComponent implements OnInit {
     actionsChecked: DataActionChecked[] = [];
 
 
-    constructor(private formBuilder: FormBuilder, private actionService: ActionService, private userService: UserService,
-                @Inject(MAT_DIALOG_DATA) private data: any, private dialogRef: MatDialogRef<NewUserComponent>,
-                private roleService: RoleService, private toaster: Toaster) {
+    constructor(private formBuilder: FormBuilder, private actionService: ActionService,
+                private userService: UserService, @Inject(MAT_DIALOG_DATA) private data: any,
+                private dialogRef: MatDialogRef<NewUserComponent>, private roleService: RoleService,
+                private toaster: ToastrService) {
     }
 
     ngOnInit(): void {
@@ -92,7 +93,7 @@ export class NewUserComponent implements OnInit {
             const message: string = response.message;
             const data: UserActionResponse = response.data;
             if (response.success) {
-                // this.toaster.success(message, data, 'Usuarios');
+                this.toaster.success(message, 'Usuarios');
                 this.data.onUserCreated();
                 this.dialogRef.close();
                 // return;

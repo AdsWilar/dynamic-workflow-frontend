@@ -57,4 +57,8 @@ export class DepartmentService {
         return this.baseService.get<DepartmentResponse>(this.DEPARTMENTS_PATH + 'root');
     }
 
+    public getDepartmentById(departmentId: number): Observable<GeneralResponse<DepartmentResponse>> {
+        return this.baseService.get<DepartmentResponse>(this.DEPARTMENTS_PATH + departmentId);
+    }
+
 }
